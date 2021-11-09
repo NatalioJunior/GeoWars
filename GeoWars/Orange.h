@@ -27,12 +27,12 @@ class Orange : public Object
 private:
     Sprite * sprite;                    // sprite do objeto
     Vector * speed;                     // velocidade e direção
-    Player * player;                    // ponteiro para jogador
+    //Player * player;                    // ponteiro para jogador
     Particles * tail;                   // calda da nave laranja
     float multiplier;                   // multiplicador da velocidade
     
 public:
-    Orange(Player * p);                 // construtor
+    Orange(float pX, float pY, float ang);                // construtor
     ~Orange();                          // destrutor
     
     void OnCollision(Object* obj);      // resolução da colisão
