@@ -1,7 +1,6 @@
-#include "Guns.h"
+#include "Guns.h" 
+#include "Missile.h"
 #include "GeoWars.h"
-
-Player*& Guns::player = GeoWars::player;
 
 Guns::Guns(uint GunType) {
 	switch (GunType)
@@ -11,14 +10,14 @@ Guns::Guns(uint GunType) {
 		break;
 	}
 	
-	speed = new Vector(180.0f, 0.0f);
+	speed = new Vector(0.0f, 0.0f);
 
 	uint left[1] = { 1 };
 	uint right[1] = { 2 };
 
 	anim->Add(INVERTED, right, 1);
 	anim->Add(NORMAL, left, 1);
-	MoveTo(player->X(), player->Y());
+	MoveTo(GeoWars::player->X(), GeoWars::player->Y());
 }
 
 Guns::~Guns() {
@@ -27,29 +26,34 @@ Guns::~Guns() {
 }
 
 void Guns::Update() {
+	MoveTo(GeoWars::player->X(), GeoWars::player->Y());
+
 	float delta = 240.0f * gameTime;
 
 	if (window->KeyDown('O'))
-		Rotate(0.5f * delta);
+		speed->Rotate(delta);
 	if (window->KeyDown('P'))
-		Rotate(-0.5f * delta);
-	if (window->KeyPress('K'))
-		float xpx = Rotation();
+		speed->Rotate(-delta);
+	if (window->KeyPress('K')) {
+		float ypy = speed->Angle();
+	}
 
-	if (Rotation() > 90.0f && Rotation() < 270.0f)
+	if (speed->Angle() > 90.0f && speed->Angle() < 270.0f)
 		anim->Select(INVERTED);
-	if (Rotation() <= 90.0f || Rotation() >= 270.0f)
+	if (speed->Angle() <= 90.0f || speed->Angle() >= 270.0f)
 		anim->Select(NORMAL);
 
-	if (Rotation() > 360.0f)
-		RotateTo(Rotation() - 360.0f);
-	if (Rotation() < 0)
-		RotateTo(Rotation() + 360.0f);
+	// dispara míssil
+	if (window->KeyPress(VK_SPACE))
+	{
+		GeoWars::audio->Play(FIRE);
+		GeoWars::scene->Add(new Missile(), STATIC);
+	}
 }
 
 inline void Guns::Draw()
 {
-	anim->Draw(player->X(), player->Y(), Layer::UPPER, scale, rotation);
+	anim->Draw(x, y, Layer::UPPER, scale, speed->Angle());
 }
 
 // ------------------------------------------------------------------------------

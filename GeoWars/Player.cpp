@@ -9,8 +9,7 @@
 //
 **********************************************************************************/
 
-#include "Player.h" 
-#include "Missile.h"
+#include "Player.h"
 #include "GeoWars.h"
 
 // -------------------------------------------------------------------------------
@@ -98,13 +97,6 @@ void Player::Update()
     
     // movimenta objeto pelo seu vetor velocidade
     Translate(speed->XComponent() * 50.0f * gameTime, -speed->YComponent() * 50.0f * gameTime);
-
-    // dispara míssil
-    if (window->KeyPress(VK_SPACE))
-    {
-        GeoWars::audio->Play(FIRE);
-        GeoWars::scene->Add(new Missile(), STATIC);
-    }
 
     // atualiza calda do jogador
     tail->Config().angle = speed->Angle() + 180;

@@ -18,6 +18,7 @@
 #include "Sprite.h"                        // desenho de sprites
 #include "Vector.h"                        // representação de vetores
 #include "Particles.h"                    // sistema de partículas
+#include "Guns.h"
 
 // ---------------------------------------------------------------------------------
 
@@ -28,6 +29,7 @@ private:
     Particles * tail;                   // calda do jogador
 
 public:
+    Guns * gun = nullptr;               // referência à arma atual do player
     Vector * speed;                     // velocidade e direção
 
     Player();                           // construtor

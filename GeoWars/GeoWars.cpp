@@ -17,6 +17,7 @@
 #include "Green.h"
 #include "Orange.h"
 #include "Delay.h"
+#include "Guns.h"
 
 // ------------------------------------------------------------------------------
 
@@ -45,12 +46,15 @@ void GeoWars::Init()
     backg   = new Background("Resources/Space.jpg");
     player  = new Player();
     scene   = new Scene();
+    Guns * gun = new Guns(HANDGUN);
+    player->gun = gun;
 
     // cria o painel de informações
     hud = new Hud();
 
     // adiciona objetos na cena
     scene->Add(player, MOVING);
+    scene->Add(gun, STATIC);
     scene->Add(new Magenta(player), MOVING);
     scene->Add(new Blue(player), MOVING);
     scene->Add(new Green(player), MOVING);

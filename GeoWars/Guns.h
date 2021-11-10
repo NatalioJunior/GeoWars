@@ -6,7 +6,6 @@
 #include "Vector.h"
 #include "Object.h"
 #include "Sprite.h"
-#include "Player.h" 
 #include "Animation.h"
 
 // --------------------------------------------------------------------------------
@@ -17,9 +16,8 @@ enum DIRECTIONGUN {NORMAL, INVERTED};
 class Guns : public Object
 {
 private:
-    static Player*& player;         // referência para o player
-    TileSet* tileset;               // folha de sprites da arma
-    Animation* anim;                // animação da arma
+    TileSet* tileset = nullptr;               // folha de sprites da arma
+    Animation* anim = nullptr;                // animação da arma
 
 public:
     Vector * speed;
