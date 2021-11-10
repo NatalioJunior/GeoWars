@@ -33,17 +33,17 @@ void GeoWars::Init()
     // cria sistema de áudio
     audio = new Audio();
     audio->Add(THEME, "Resources/Theme.wav");
-    audio->Add(FIRE, "Resources/Fire.wav");
+    audio->Add(FIRE, "Resources/Fire.wav", 18);
     audio->Add(HITWALL, "Resources/Hitwall.wav");
     audio->Add(EXPLODE, "Resources/Explode.wav");
     audio->Add(START, "Resources/Start.wav");
 
     // ajusta volumes
-    audio->Volume(FIRE, 0.2f);
+    audio->Volume(FIRE, 0.8f);
     audio->Volume(START, 0.8f);
 
     // carrega/incializa objetos
-    backg   = new Background("Resources/Space.jpg");
+    backg   = new Background("Resources/Dung.jpg");
     player  = new Player();
     scene   = new Scene();
     Guns * gun = new Guns(HANDGUN);

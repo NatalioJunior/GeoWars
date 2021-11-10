@@ -41,21 +41,21 @@ WallHit::WallHit(float pX, float pY)
     }
 
     // número aleatório entre 0 e 1
-    RandF color{ 0, 1 };
+    RandF color{ 0.64f, 1 };
     
     // configura emissor de partículas
     Generator explosion;
     explosion.imgFile   = "Resources/Spark.png";    // arquivo de imagem
     explosion.angle     = base;                     // direção da explosão
-    explosion.spread    = 160.0f;                   // espalhamento em graus
-    explosion.lifetime  = 1.0f;                     // tempo de vida em segundos
+    explosion.spread    = 90.0f;                    // espalhamento em graus
+    explosion.lifetime  = 0.7f;                     // tempo de vida em segundos
     explosion.frequency = 0.000f;                   // tempo entre geração de novas partículas
     explosion.percentToDim = 0.6f;                  // desaparece após 60% da vida
     explosion.minSpeed  = 25.0f;                    // velocidade mínima das partículas
     explosion.maxSpeed  = 250.0f;                   // velocidade máxima das partículas
-    explosion.color.r   = color.Rand();             // cor da partícula entre 0 e 1
-    explosion.color.g   = color.Rand();             // cor da partícula entre 0 e 1
-    explosion.color.b   = color.Rand();             // cor da partícula entre 0 e 1
+    explosion.color.r   = 1.0f;                     // cor da partícula entre 0 e 1
+    explosion.color.g   = color.Rand();             // cor da partícula entre 0.64 e 1
+    explosion.color.b   = 0.0f;                     // cor da partícula entre 0 e 1
     explosion.color.a   = 1.0f;                     // transparência da partícula
 
     // cria sistema de partículas

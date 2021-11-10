@@ -56,6 +56,7 @@ void Missile::Update()
     // remove míssil da cena se ele sair da área de jogo
     if (x > game->Width() - 50 || x < 50 || y > game->Height() - 50 || y < 50)
     {  
+        GeoWars::audio->Play(HITWALL);
         // adiciona explosão na cena
         GeoWars::scene->Add(new WallHit(x,y), STATIC);
 
