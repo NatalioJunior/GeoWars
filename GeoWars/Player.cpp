@@ -120,6 +120,9 @@ void Player::Update()
         MoveTo(game->Width() - 85, y);
     if (y > game->Height() - 85)
         MoveTo(x, game->Height() - 85);
+
+    //Rotaciona o object para que seu bbox use o angulo calculado
+    RotateTo(-speed->Angle() + 90.0f);
 }
 
 // ---------------------------------------------------------------------------------
