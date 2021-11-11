@@ -15,10 +15,12 @@
 
 // ---------------------------------------------------------------------------------
 
-Magenta::Magenta(Player * p) : player (p)
+Magenta::Magenta(Player * p) : magnitude(1, 4), angle(0, 359), secs(0.3f, 1.5f)
 {
+    player = p;
     sprite = new Sprite("Resources/Magenta.png");
     speed  = new Vector(0, 2.0f);
+    NewDirection();
     BBox(new Circle(18.0f));
     
     // move para uma posição aleatória (canto inferior esquerdo)
@@ -38,6 +40,19 @@ Magenta::~Magenta()
 }
 
 // -------------------------------------------------------------------------------
+void Magenta::NewDirection()
+{
+    // nova direção aleatória
+    speed->ScaleTo(magnitude.Rand());
+    speed->RotateTo(angle.Rand());
+
+    // tempo aleatório
+    delay = secs.Rand();
+
+    // inicia medição do tempo
+    timer.Start();
+}
+// -------------------------------------------------------------------------------
 
 void Magenta::OnCollision(Object * obj)
 {
@@ -50,11 +65,41 @@ void Magenta::OnCollision(Object * obj)
 void Magenta::Update()
 {
     // ajusta ângulo do vetor 
-    speed->RotateTo(Line::Angle(Point(x, y), Point(player->X(), player->Y())));
+    //speed->RotateTo(Line::Angle(Point(x, y), Point(player->X(), player->Y())));
     Rotate(200 * gameTime);
 
+    // deslocamento padrão
+    float delta = 100 * gameTime;
+
+    if (timer.Elapsed(delay))
+        NewDirection();
+
+    Translate(speed->XComponent() * delta, -speed->YComponent() * delta);
+
+    if (x < 50)
+    {
+        MoveTo(51, y);
+        speed->RotateTo(0);
+    }
+    if (y < 50)
+    {
+        MoveTo(x, 51);
+        speed->RotateTo(270);
+    }
+    if (x > window->Width() - 50)
+    {
+        MoveTo(window->Width() -51, y);
+        speed->RotateTo(180);
+    }
+    if (y > window->Height())
+    {
+        MoveTo(x, window->Height()-51);
+        speed->RotateTo(90);
+    }
+
+
     // movimenta objeto pelo seu vetor velocidade
-    Translate(speed->XComponent() * 50.0f * gameTime, -speed->YComponent() * 50.0f * gameTime);
+    //Translate(speed->XComponent() * 50.0f * gameTime, -speed->YComponent() * 50.0f * gameTime);
 }
 
 // -------------------------------------------------------------------------------
