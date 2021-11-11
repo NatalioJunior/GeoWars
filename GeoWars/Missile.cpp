@@ -32,7 +32,7 @@ Missile::Missile()
     speed.ScaleTo(15.0f);
     
     // move para posição
-    MoveTo(player->gun->X() + (30 * cos(speed.Radians())), player->gun->Y() - (45 * sin(speed.Radians())));
+    MoveTo(player->gun->X() + (45 * cos(speed.Radians())), player->gun->Y() - (45 * sin(speed.Radians())));
     RotateTo(player->gun->speed->Angle() - 180.0f);
 
     // define tipo
@@ -56,6 +56,7 @@ void Missile::Update()
     // remove míssil da cena se ele sair da área de jogo
     if (x > game->Width() - 50 || x < 50 || y > game->Height() - 50 || y < 50)
     {  
+        GeoWars::audio->Volume(HITWALL, 0.7f);
         GeoWars::audio->Play(HITWALL);
         // adiciona explosão na cena
         GeoWars::scene->Add(new WallHit(x,y), STATIC);

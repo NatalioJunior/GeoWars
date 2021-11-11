@@ -20,6 +20,7 @@ public:
     Guns();                         // construtor
     ~Guns();                        // destrutor
 
+    void Move(Vector&& v);
     void Update();                  // atualização
     void Draw();                    // desenho
 };

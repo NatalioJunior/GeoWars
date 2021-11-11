@@ -11,11 +11,19 @@
 
 #include "Player.h"
 #include "GeoWars.h"
+#include "Missile.h"
 
 // -------------------------------------------------------------------------------
 
+Controller* Player::gamepad = nullptr;
+bool Player::ControllerOn = false;
+
 Player::Player()
 {
+    // Inicializa um controler
+    gamepad = new Controller();
+    ControllerOn = gamepad->Initialize();
+
     // configuração do objeto
     sprite = new Sprite("Resources/Player.png");
     speed  = new Vector(90.0f, 0.0f);
@@ -76,30 +84,67 @@ void Player::Update()
     // magnitude do vetor aceleração
     float accel = 40.0f * gameTime;
 
-    // modifica vetor velocidade do player
-    if (window->KeyDown(VK_RIGHT) && window->KeyDown(VK_UP))
-        Move(Vector(45.0f, accel));
-    else if (window->KeyDown(VK_LEFT) && window->KeyDown(VK_UP))
-        Move(Vector(135.0f, accel));
-    else if (window->KeyDown(VK_LEFT) && window->KeyDown(VK_DOWN))
-        Move(Vector(225.0f, accel));
-    else if (window->KeyDown(VK_RIGHT) && window->KeyDown(VK_DOWN))
-        Move(Vector(315.0f, accel));
-    else if (window->KeyDown(VK_RIGHT))
-        Move(Vector(0.0f, accel));
-    else if (window->KeyDown(VK_LEFT))
-        Move(Vector(180.0f, accel));
-    else if (window->KeyDown(VK_UP))
-        Move(Vector(90.0f, accel));
-    else if (window->KeyDown(VK_DOWN))
-        Move(Vector(270.0f, accel));
-    else
-        // se nenhuma tecla está pressionada comece a frear
-        if (speed->Magnitude() > 0.1f)
-            Move(Vector(speed->Angle() + 180.0f, 5.0f * gameTime));
+    if (ControllerOn) {
+        gamepad->UpdateState();
+
+        float ang = Line::Angle(Point(0, 0), Point(gamepad->Axis(AxisX) / 25.0f, gamepad->Axis(AxisY) / 25.0f));
+        float mag = Point::Distance(Point(0, 0), Point(gamepad->Axis(AxisX) / 25.0f, gamepad->Axis(AxisY) / 25.0f));
+
+        // nenhuma direção selecionada
+        if (mag == 0)
+        {
+            // se a velocidade estiver muita baixa
+            if (speed->Magnitude() < 0.1)
+            {
+                // apenas pare
+                speed->ScaleTo(0.0f);
+            }
+            else
+            {
+                // comece a frear
+                Move(Vector(speed->Angle() + 180.0f, 5.0f * gameTime));
+            }
+        }
         else
-            // velocidade muita baixa, não use soma vetorial, apenas pare
-            speed->ScaleTo(0.0f);
+        {
+            // ande na direção selecionada
+            Move(Vector(ang, mag * gameTime));
+        }
+
+        // dispara míssil
+        if (gamepad->ButtonPress(0))
+        {
+            GeoWars::audio->Play(FIRE);
+            GeoWars::scene->Add(new Missile(), STATIC);
+        }
+
+    }
+    else {
+        // modifica vetor velocidade do player
+        if (window->KeyDown(VK_RIGHT) && window->KeyDown(VK_UP))
+            Move(Vector(45.0f, accel));
+        else if (window->KeyDown(VK_LEFT) && window->KeyDown(VK_UP))
+            Move(Vector(135.0f, accel));
+        else if (window->KeyDown(VK_LEFT) && window->KeyDown(VK_DOWN))
+            Move(Vector(225.0f, accel));
+        else if (window->KeyDown(VK_RIGHT) && window->KeyDown(VK_DOWN))
+            Move(Vector(315.0f, accel));
+        else if (window->KeyDown(VK_RIGHT))
+            Move(Vector(0.0f, accel));
+        else if (window->KeyDown(VK_LEFT))
+            Move(Vector(180.0f, accel));
+        else if (window->KeyDown(VK_UP))
+            Move(Vector(90.0f, accel));
+        else if (window->KeyDown(VK_DOWN))
+            Move(Vector(270.0f, accel));
+        else
+            // se nenhuma tecla está pressionada comece a frear
+            if (speed->Magnitude() > 0.1f)
+                Move(Vector(speed->Angle() + 180.0f, 5.0f * gameTime));
+            else
+                // velocidade muita baixa, não use soma vetorial, apenas pare
+                speed->ScaleTo(0.0f);
+    }
     
     // movimenta objeto pelo seu vetor velocidade
     Translate(speed->XComponent() * 50.0f * gameTime, -speed->YComponent() * 50.0f * gameTime);
@@ -129,7 +174,7 @@ void Player::Update()
 
 void Player::Draw()
 {
-    sprite->Draw(x, y, Layer::MIDDLE, 1.0f, -speed->Angle() + 90.0f);
+    sprite->Draw(x, y, Layer::UPPER, 1.0f, -speed->Angle() + 90.0f);
     tail->Draw(Layer::LOWER);
 }
 

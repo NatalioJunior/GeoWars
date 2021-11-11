@@ -1,5 +1,4 @@
-#include "Guns.h" 
-#include "Missile.h"
+#include "Guns.h"
 #include "GeoWars.h"
 
 Guns::Guns() {
@@ -11,30 +10,34 @@ Guns::~Guns() {
 	delete sprite;
 }
 
+void Guns::Move(Vector&& v)
+{
+	speed->Add(v);
+}
+
 void Guns::Update() {
 	MoveTo(GeoWars::player->X(), GeoWars::player->Y());
 
 	float delta = 240.0f * gameTime;
 
-	if (window->KeyDown('O'))
-		speed->Rotate(delta);
-	if (window->KeyDown('P'))
-		speed->Rotate(-delta);
-	if (window->KeyPress('K')) {
-		float ypy = speed->Angle();
+	if (Player::ControllerOn) {
+		Player::gamepad->UpdateState();
+		float ang = Line::Angle(Point(0, 0), Point(-Player::gamepad->Axis(AxisRX) / 25.0f, Player::gamepad->Axis(AxisRY) / 25.0f));
+		float mag = Point::Distance(Point(0, 0), Point(Player::gamepad->Axis(AxisRX) / 25.0f, Player::gamepad->Axis(AxisRY) / 25.0f));
+		if (mag != 0)
+			Move(Vector(ang, 0));
 	}
-
-	// dispara míssil
-	if (window->KeyPress(VK_SPACE))
-	{
-		GeoWars::audio->Play(FIRE);
-		GeoWars::scene->Add(new Missile(), STATIC);
+	else {
+		if (window->KeyDown('W'))
+			speed->Rotate(delta);
+		if (window->KeyDown('S'))
+			speed->Rotate(-delta);
 	}
 }
 
 inline void Guns::Draw()
 {
-	sprite->Draw(GeoWars::player->X(), GeoWars::player->Y(), Layer::UPPER, scale, speed->Angle());
+	sprite->Draw(GeoWars::player->X(), GeoWars::player->Y(), Layer::FRONT, scale, speed->Angle());
 }
 
 // ------------------------------------------------------------------------------

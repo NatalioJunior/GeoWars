@@ -19,6 +19,7 @@
 #include "Vector.h"                        // representação de vetores
 #include "Particles.h"                    // sistema de partículas
 #include "Guns.h"
+#include "Controller.h"
 
 // ---------------------------------------------------------------------------------
 
@@ -28,7 +29,11 @@ private:
     Sprite * sprite;                    // sprite do objeto
     Particles * tail;                   // calda do jogador
 
+
 public:
+    static Controller* gamepad;                // controle de jogo
+    static bool ControllerOn;
+
     Guns * gun = nullptr;               // referência à arma atual do player
     Vector * speed;                     // velocidade e direção
 

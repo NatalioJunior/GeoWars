@@ -46,7 +46,7 @@ inline Vector& Missile::Speed()
 { return speed; }
 
 inline void Missile::Draw()
-{ sprite->Draw(x, y, Layer::UPPER, scale, rotation); }
+{ sprite->Draw(x, y, Layer::MIDDLE, scale, rotation); }
 
 // ------------------------------------------------------------------------------
 
