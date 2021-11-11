@@ -19,20 +19,26 @@ Player::Player()
     // configuração do objeto
     sprite = new Sprite("Resources/Player.png");
     speed  = new Vector(90.0f, 0.0f);
-    BBox(new Circle(18.0f));
+
+    Point vertex[4] =
+    {
+        Point(-37.5f,-35.0f), Point(37.5f,-35.0f), Point(37.5f,35.0f), Point(-37.0f, 35.0f)
+    };
+    BBox(new Poly(vertex, 4));
+
     MoveTo(game->CenterX(), game->CenterY());
     type = PLAYER;
 
     // configuração do gerador de partículas
     Generator emitter;
-    emitter.imgFile = "Resources/Spark.png";    // arquivo de imagem
+    emitter.imgFile = "Resources/Tracks.png";    // arquivo de imagem
     emitter.angle = 270.0f;                     // ângulo base do emissor
-    emitter.spread = 50;                        // espalhamento em graus
-    emitter.lifetime = 0.3f;                    // tempo de vida em segundos
-    emitter.frequency = 0.010f;                 // tempo entre geração de novas partículas
-    emitter.percentToDim = 0.6f;                // desaparece após 60% da vida
-    emitter.minSpeed = 50.0f;                   // velocidade mínima das partículas
-    emitter.maxSpeed = 100.0f;                  // velocidade máxima das partículas
+    emitter.spread = 0;                        // espalhamento em graus
+    emitter.lifetime = 3.0f;                    // tempo de vida em segundos
+    emitter.frequency = 0.08f;                 // tempo entre geração de novas partículas
+    emitter.percentToDim = 1.8f;                // desaparece após 60% da vida
+    emitter.minSpeed = 0.0f;                   // velocidade mínima das partículas
+    emitter.maxSpeed = 0.0f;                  // velocidade máxima das partículas
     emitter.color.r = 1.0f;                     // componente Red da partícula 
     emitter.color.g = 1.0f;                     // componente Green da partícula 
     emitter.color.b = 1.0f;                     // componente Blue da partícula 
@@ -99,19 +105,21 @@ void Player::Update()
     Translate(speed->XComponent() * 50.0f * gameTime, -speed->YComponent() * 50.0f * gameTime);
 
     // atualiza calda do jogador
+    if (speed->Magnitude() != 0.0f) 
+        tail->Generate(x - 10 * cos(speed->Radians()), y + 45 * sin(speed->Radians()));
+ 
     tail->Config().angle = speed->Angle() + 180;
-    tail->Generate(x - 10 * cos(speed->Radians()), y + 10 * sin(speed->Radians()));
     tail->Update(gameTime);
 
     // restringe a área do jogo
-    if (x < 50)
-        MoveTo(50, y);
-    if (y < 50)
-        MoveTo(x, 50);
-    if (x > game->Width() - 50)
-        MoveTo(game->Width() - 50, y);
-    if (y > game->Height() - 50)
-        MoveTo(x, game->Height() - 50);
+    if (x < 85)
+        MoveTo(85, y);
+    if (y < 85)
+        MoveTo(x, 85);
+    if (x > game->Width() - 85)
+        MoveTo(game->Width() - 85, y);
+    if (y > game->Height() - 85)
+        MoveTo(x, game->Height() - 85);
 }
 
 // ---------------------------------------------------------------------------------
@@ -119,7 +127,7 @@ void Player::Update()
 void Player::Draw()
 {
     sprite->Draw(x, y, Layer::MIDDLE, 1.0f, -speed->Angle() + 90.0f);
-    tail->Draw(Layer::LOWER, 1.0f);
+    tail->Draw(Layer::LOWER);
 }
 
 

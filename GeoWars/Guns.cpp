@@ -2,27 +2,13 @@
 #include "Missile.h"
 #include "GeoWars.h"
 
-Guns::Guns(uint GunType) {
-	switch (GunType)
-	{
-	case HANDGUN: tileset = new TileSet("Resources/HandGun.png", 55, 43, 2, 2);
-		anim = new Animation(tileset, 1.0f, true);
-		break;
-	}
-	
+Guns::Guns() {
+	sprite = new Sprite("Resources/Turret.png");
 	speed = new Vector(0.0f, 0.0f);
-
-	uint left[1] = { 1 };
-	uint right[1] = { 2 };
-
-	anim->Add(INVERTED, right, 1);
-	anim->Add(NORMAL, left, 1);
-	MoveTo(GeoWars::player->X(), GeoWars::player->Y());
 }
 
 Guns::~Guns() {
-	delete anim;
-	delete tileset;
+	delete sprite;
 }
 
 void Guns::Update() {
@@ -38,11 +24,6 @@ void Guns::Update() {
 		float ypy = speed->Angle();
 	}
 
-	if (speed->Angle() > 90.0f && speed->Angle() < 270.0f)
-		anim->Select(INVERTED);
-	if (speed->Angle() <= 90.0f || speed->Angle() >= 270.0f)
-		anim->Select(NORMAL);
-
 	// dispara míssil
 	if (window->KeyPress(VK_SPACE))
 	{
@@ -53,7 +34,7 @@ void Guns::Update() {
 
 inline void Guns::Draw()
 {
-	anim->Draw(x, y, Layer::UPPER, scale, speed->Angle());
+	sprite->Draw(GeoWars::player->X(), GeoWars::player->Y(), Layer::UPPER, scale, speed->Angle());
 }
 
 // ------------------------------------------------------------------------------

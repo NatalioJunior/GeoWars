@@ -43,10 +43,10 @@ void GeoWars::Init()
     audio->Volume(START, 0.8f);
 
     // carrega/incializa objetos
-    backg   = new Background("Resources/Dung.jpg");
+    backg   = new Background("Resources/Arena.jpg");
     player  = new Player();
     scene   = new Scene();
-    Guns * gun = new Guns(HANDGUN);
+    Guns * gun = new Guns();
     player->gun = gun;
 
     // cria o painel de informações
