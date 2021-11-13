@@ -17,7 +17,7 @@
 #include "Green.h"
 #include "Orange.h"
 #include "Delay.h"
-
+#include "Soldier.h"
 // ------------------------------------------------------------------------------
 
 Player * GeoWars::player  = nullptr;
@@ -58,6 +58,8 @@ void GeoWars::Init()
     scene->Add(new Orange(150,150,90), MOVING);
     scene->Add(new Orange(2200,1500,45), MOVING);
     scene->Add(new Orange(2300,1500,45), MOVING);
+    scene->Add(new Orange(2400,1500,45), MOVING);
+    scene->Add(new Orange(2400,1500,45), MOVING);
     scene->Add(new Orange(2400,1500,45), MOVING);
     //scene->Add(new Orange(2400,1500,179), MOVING);
     scene->Add(new Delay(), STATIC);
