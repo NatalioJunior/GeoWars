@@ -87,7 +87,8 @@ void Orange::Update()
 			if (speed->Angle() == 135) {
 				Rotate(-90);
 				speed->Rotate(-90);
-			}else if (speed->Angle() == 225) {
+			}
+			else if (speed->Angle() == 225) {
 				Rotate(90);
 				speed->Rotate(90);
 			}
@@ -113,18 +114,18 @@ void Orange::Update()
 				Rotate(-90);
 				speed->Rotate(-90);
 			}
-			
+
 			else if (speed->Angle() == 135) {
 				Rotate(90);
 				speed->Rotate(90);
 			}
-			
+
 		}
 		else if (y > game->Height() - 50) {
 
 			MoveTo(x, game->Height() - 55);
 
-			
+
 			if (speed->Angle() == 225) {
 				Rotate(-90);
 				speed->Rotate(-90);

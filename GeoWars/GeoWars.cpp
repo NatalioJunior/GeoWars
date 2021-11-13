@@ -52,6 +52,11 @@ void GeoWars::Init()
     // adiciona objetos na cena
     scene->Add(player, MOVING);
     scene->Add(new Magenta(player), MOVING);
+    scene->Add(new Magenta(player), MOVING);
+    scene->Add(new Magenta(player), MOVING);
+    scene->Add(new Magenta(player), MOVING);
+    scene->Add(new Magenta(player), MOVING);
+    scene->Add(new Magenta(player), MOVING);
     scene->Add(new Blue(player), MOVING);
     scene->Add(new Green(player), MOVING);
     scene->Add(new Orange(150,150,180), MOVING);
