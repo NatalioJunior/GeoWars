@@ -31,7 +31,7 @@ private:
     float factor;                       // fator de escala
     
 public:
-    Blue(Player * p);                   // construtor
+    Blue(float pX, float pY, Player * p);                   // construtor
     ~Blue();                            // destrutor
     
     void OnCollision(Object* obj);      // resolução da colisão

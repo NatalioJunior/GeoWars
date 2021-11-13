@@ -15,8 +15,9 @@
 
 // ---------------------------------------------------------------------------------
 
-Blue::Blue(Player * p) : player(p)
+Blue::Blue(float pX, float pY, Player * p)
 {
+    player = p;
     sprite = new Sprite("Resources/Blue.png");
     speed  = new Vector(0, 2.0f);
     BBox(new Circle(20.0f));
@@ -24,7 +25,8 @@ Blue::Blue(Player * p) : player(p)
     // move para uma posição aleatória (canto superior direito)
     RandF posX { game->Width() - 400, game->Width() - 300 };
     RandF posY { 300, 400 };
-    MoveTo(posX.Rand(), posY.Rand());
+    //MoveTo(posX.Rand(), posY.Rand());
+    MoveTo(pX, pY);
     
     factor = -0.25f;
     type = BLUE;
