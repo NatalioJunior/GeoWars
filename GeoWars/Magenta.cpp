@@ -25,6 +25,7 @@ Magenta::Magenta(Player * p) : player (p)
     RandF posX{ 300, 400 };
     RandF posY{ game->Height() - 400, game->Height() - 300 };
     MoveTo(posX.Rand(), posY.Rand());
+    ScaleTo(0.25f);
 
     type = MAGENTA;
 }
