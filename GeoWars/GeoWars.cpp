@@ -17,7 +17,8 @@
 #include "Green.h"
 #include "Orange.h"
 #include "Delay.h"
-#include "Soldier.h"
+#include "Guns.h"
+
 // ------------------------------------------------------------------------------
 
 Player * GeoWars::player  = nullptr;
@@ -32,43 +33,36 @@ void GeoWars::Init()
     // cria sistema de áudio
     audio = new Audio();
     audio->Add(THEME, "Resources/Theme.wav");
-    audio->Add(FIRE, "Resources/Fire.wav");
+    audio->Add(FIRE, "Resources/Fire.wav", 18);
     audio->Add(HITWALL, "Resources/Hitwall.wav");
     audio->Add(EXPLODE, "Resources/Explode.wav");
     audio->Add(START, "Resources/Start.wav");
 
     // ajusta volumes
-    audio->Volume(FIRE, 0.2f);
+    audio->Volume(FIRE, 0.8f);
     audio->Volume(START, 0.8f);
 
     // carrega/incializa objetos
-    backg   = new Background("Resources/Space.jpg");
+    backg   = new Background("Resources/Arena.jpg");
     player  = new Player();
     scene   = new Scene();
+    Guns * gun = new Guns();
+    player->gun = gun;
 
     // cria o painel de informações
     hud = new Hud();
 
     // adiciona objetos na cena
     scene->Add(player, MOVING);
+    scene->Add(gun, STATIC);
     scene->Add(new Magenta(player), MOVING);
-    scene->Add(new Magenta(player), MOVING);
-    scene->Add(new Magenta(player), MOVING);
-    scene->Add(new Magenta(player), MOVING);
-    scene->Add(new Magenta(player), MOVING);
-    scene->Add(new Magenta(player), MOVING);
-    scene->Add(new Blue(1000,1000,player), MOVING);
-    scene->Add(new Blue(1000,1000,player), MOVING);
-    scene->Add(new Blue(1000,1000,player), MOVING);
+    scene->Add(new Blue(player), MOVING);
     scene->Add(new Green(player), MOVING);
     scene->Add(new Orange(150,150,180), MOVING);
     scene->Add(new Orange(150,150,90), MOVING);
     scene->Add(new Orange(2200,1500,45), MOVING);
     scene->Add(new Orange(2300,1500,45), MOVING);
     scene->Add(new Orange(2400,1500,45), MOVING);
-    scene->Add(new Soldier(2500,1700,player), MOVING);
-    scene->Add(new Soldier(2600,1700,player), MOVING);
-    scene->Add(new Soldier(2700,1700,player), MOVING);
     //scene->Add(new Orange(2400,1500,179), MOVING);
     scene->Add(new Delay(), STATIC);
 
