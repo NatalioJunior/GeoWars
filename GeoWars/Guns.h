@@ -6,6 +6,7 @@
 #include "Vector.h"
 #include "Object.h"
 #include "Sprite.h"
+#include "Timer.h"
 
 // --------------------------------------------------------------------------------
 
@@ -14,8 +15,14 @@ class Guns : public Object
 private:
     Sprite* sprite;
 
+    Timer timer;                        // controla tempo dos disparos
+    llong start;                        // marcação de início do disparo
+    bool axisCtrl;                      // habilita leitura de disparos
+
 public:
     Vector * speed;
+
+    bool AxisTimed(int axisX, int axisY, float time);
 
     Guns();                         // construtor
     ~Guns();                        // destrutor

@@ -19,15 +19,17 @@
 #include "Sprite.h"
 #include "Vector.h"
 #include "Player.h"
+#include "Animation.h"
 
 // ---------------------------------------------------------------------------------
 
 class Orange : public Object
 {
 private:
-    Sprite * sprite;                    // sprite do objeto
+    TileSet* tileset;
+    Animation* anim;
     Vector * speed;                     // velocidade e direção
-    //Player * player;                    // ponteiro para jogador
+    //Player * player;                   // ponteiro para jogador
     Particles * tail;                   // calda da nave laranja
     float multiplier;                   // multiplicador da velocidade
     

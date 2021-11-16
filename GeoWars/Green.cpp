@@ -17,7 +17,7 @@
 
 Green::Green(Player * p): player(p)
 {
-    sprite = new Sprite("Resources/Green.png");
+    sprite = new Sprite("Resources/Drone.png");
     speed  = new Vector(0, 2.0f);
     BBox(new Circle(20.0f));
 
@@ -63,7 +63,7 @@ void Green::Update()
     if (Point::Distance(Point(x, y), Point(player->X(), player->Y())) < distance)
     {
         target.Rotate(180.0f);
-        target.ScaleTo(20.0f * gameTime);
+        target.ScaleTo(30.0f * gameTime);
     }
 
     // ajusta velocidade atual na direção do alvo
@@ -71,8 +71,8 @@ void Green::Update()
     
     // limita a magnitude da velocidade para impedir 
     // seu crescimento indefinido na soma vetorial
-    if (speed->Magnitude() > 3)
-        speed->ScaleTo(3.0f);
+    if (speed->Magnitude() > 9)
+        speed->ScaleTo(9.0f);
 
 
     // move o objeto pelo seu vetor velocidade

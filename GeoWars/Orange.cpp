@@ -17,7 +17,8 @@
 
 Orange::Orange(float pX, float pY, float ang)
 {
-	sprite = new Sprite("Resources/Orange.png");
+	tileset = new TileSet("Resources/Missile.png", 1, 5);
+	anim = new Animation(tileset, 0.250f, true);
 	speed = new Vector();
 	speed->RotateTo(ang);
 	speed->ScaleTo(400);
@@ -37,12 +38,12 @@ Orange::Orange(float pX, float pY, float ang)
 	Generator emitter;
 	emitter.imgFile = "Resources/Spark.png";    // arquivo de imagem
 	emitter.angle = speed->Angle() + 180;       // ângulo base do emissor
-	emitter.spread = 10;                        // espalhamento em graus
+	emitter.spread = 20;                        // espalhamento em graus
 	emitter.lifetime = 0.2f;                    // tempo de vida em segundos
 	emitter.frequency = 0.010f;                 // tempo entre geração de novas partículas
 	emitter.percentToDim = 0.7f;                // desaparece após 60% da vida
-	emitter.minSpeed = 50.0f;                   // velocidade mínima das partículas
-	emitter.maxSpeed = 100.0f;                  // velocidade máxima das partículas
+	emitter.minSpeed = 60.0f;                   // velocidade mínima das partículas
+	emitter.maxSpeed = 60.0f;                  // velocidade máxima das partículas
 	emitter.color.r = 1.0f;                     // componente Red da partícula 
 	emitter.color.g = 0.5;                      // componente Green da partícula 
 	emitter.color.b = 0.0f;                     // componente Blue da partícula 
@@ -56,7 +57,8 @@ Orange::Orange(float pX, float pY, float ang)
 
 Orange::~Orange()
 {
-	delete sprite;
+	delete tileset;
+	delete anim;
 	delete speed;
 	delete tail;
 }
@@ -80,8 +82,8 @@ void Orange::Update()
 	if (x < 50 || y < 50 || x > game->Width() - 50 || y > game->Height() - 50)
 	{
 
-		if (x < 50) {
-			MoveTo(55, y);
+		if (x < 75) {
+			MoveTo(80, y);
 
 
 			if (speed->Angle() == 135) {
@@ -94,8 +96,8 @@ void Orange::Update()
 			}
 
 		}
-		else if (x > game->Width() - 50) {
-			MoveTo(game->Width() - 55, y);
+		else if (x > game->Width() - 75) {
+			MoveTo(game->Width() - 80, y);
 
 			if (speed->Angle() == 45) {
 				Rotate(90);
@@ -107,8 +109,8 @@ void Orange::Update()
 			}
 
 		}
-		else if (y < 50) {
-			MoveTo(x, 55);
+		else if (y < 75) {
+			MoveTo(x, 80);
 
 			if (speed->Angle() == 45) {
 				Rotate(-90);
@@ -121,9 +123,9 @@ void Orange::Update()
 			}
 
 		}
-		else if (y > game->Height() - 50) {
+		else if (y > game->Height() - 75) {
 
-			MoveTo(x, game->Height() - 55);
+			MoveTo(x, game->Height() - 80);
 
 
 			if (speed->Angle() == 225) {
@@ -156,15 +158,16 @@ void Orange::Update()
 
 	// atualiza calda da nave
 	tail->Config().angle = speed->Angle();
-	tail->Generate(x - 10 * cos(speed->Radians()), y + 10 * sin(speed->Radians()));
+	tail->Generate(x - 45 * cos(speed->Radians()), y + 45 * sin(speed->Radians()));
 	tail->Update(gameTime);
+	anim->NextFrame();
 }
 
 // ---------------------------------------------------------------------------------
 
 void Orange::Draw()
 {
-	sprite->Draw(x, y, Layer::LOWER, scale, rotation);
+	anim->Draw(x, y, Layer::LOWER, scale, rotation - 90.0f);
 	tail->Draw(Layer::LOWER, 1.0f);
 }
 

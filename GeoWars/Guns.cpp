@@ -1,9 +1,14 @@
 #include "Guns.h"
 #include "GeoWars.h"
+#include "Missile.h"
 
 Guns::Guns() {
 	sprite = new Sprite("Resources/Turret.png");
 	speed = new Vector(0.0f, 0.0f);
+
+	axisCtrl = true;
+	start = 0;
+	timer.Start();
 }
 
 Guns::~Guns() {
@@ -15,6 +20,32 @@ void Guns::Move(Vector&& v)
 	speed->Add(v);
 }
 
+bool Guns::AxisTimed(int axisX, int axisY, float time)
+{
+	// se já passou o tempo para o próximo disparo
+	if (axisCtrl)
+	{
+		// a magnitude é a distância do eixo para o seu centro
+		float magnitude = Point::Distance(Point(0, 0), Point(float(Player::gamepad->Axis(axisX)), float(Player::gamepad->Axis(axisY))));
+
+		// se há qualquer movimento no eixo
+		if (magnitude > 0.1f)
+		{
+			axisCtrl = false;
+			start = timer.Stamp();
+			return true;
+		}
+	}
+	// senão aguarda o momento certo para testar
+	else if (timer.Elapsed(start, time))
+	{
+		axisCtrl = true;
+	}
+
+	// eixo não acionado ou tempo não atingido
+	return false;
+}
+
 void Guns::Update() {
 	MoveTo(GeoWars::player->X(), GeoWars::player->Y());
 
@@ -22,10 +53,19 @@ void Guns::Update() {
 
 	if (Player::ControllerOn) {
 		Player::gamepad->UpdateState();
-		float ang = Line::Angle(Point(0, 0), Point(-Player::gamepad->Axis(AxisRX) / 25.0f, Player::gamepad->Axis(AxisRY) / 25.0f));
-		float mag = Point::Distance(Point(0, 0), Point(Player::gamepad->Axis(AxisRX) / 25.0f, Player::gamepad->Axis(AxisRY) / 25.0f));
-		if (mag != 0)
+
+		//Controla a movimentação do canhão
+		float ang = Line::Angle(Point(0, 0), Point(float(-Player::gamepad->Axis(AxisZ)), float(Player::gamepad->Axis(AxisRZ))));
+		float mag = Point::Distance(Point(0, 0), Point(Player::gamepad->Axis(AxisZ) / 25.0f, Player::gamepad->Axis(AxisRZ) / 25.0f));
+		if (mag > 0.1f)
 			Move(Vector(ang, 0));
+
+		//Controla a frequência de disparos
+		if (AxisTimed(AxisZ, AxisRZ, 0.5f))
+		{
+			GeoWars::audio->Play(FIRE);
+			GeoWars::scene->Add(new Missile(), STATIC);
+		}
 	}
 	else {
 		if (window->KeyDown('W'))
