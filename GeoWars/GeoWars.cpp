@@ -56,7 +56,7 @@ void GeoWars::Init()
     scene->Add(player, MOVING);
     scene->Add(gun, STATIC);
     scene->Add(new Magenta(player), MOVING);
-    scene->Add(new Blue(player), MOVING);
+    scene->Add(new Blue(150.0f,150.0f,player), MOVING);
     scene->Add(new Green(player), MOVING);
     scene->Add(new Orange(150,150,180), MOVING);
     scene->Add(new Orange(150,150,90), MOVING);
