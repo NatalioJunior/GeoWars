@@ -19,6 +19,7 @@
 #include "Delay.h"
 #include "Guns.h"
 #include "Soldier.h"
+#include "MiniBossLarryTank.h"
 
 // ------------------------------------------------------------------------------
 
@@ -67,6 +68,25 @@ void GeoWars::Init()
     scene->Add(new Soldier(2400,1500,player), MOVING);
     scene->Add(new Soldier(2400,1500,player), MOVING);
     //scene->Add(new Orange(2400,1500,179), MOVING);
+
+    const int size1 = 9;
+    Instruction larryScriptTest1[size1] =
+    {
+    { MOVETO, 340.0f, 0.0f, 5.0f },
+    { MOVETO, 50.0f, 320.0f, 5.0f },
+    { ROTATE, 5.0f, 8.0f, 0.8f },
+    { MOVE, 90.0f, 5.0f, 0.5f },
+    { MOVETO, 300.0f, 100.0f, 5.0f },
+    { MOVE, 270.0f, 0.0f, 1.0f },
+    { SLIDE, 180.0f, 0.5f, 5.0f },
+    { SLIDE, 0.0f, 0.5f, 5.0f },
+    { JUMP, 6.0f, 0.0f, 0.0f }
+    };
+    scene->Add(new MiniBossLarryTank(larryScriptTest1,size1,1500,1500),MOVING);
+
+
+
+
     scene->Add(new Delay(), STATIC);
 
     // ----------------------
@@ -184,8 +204,8 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     engine->window->Title("GeoWars");
     engine->window->Icon(IDI_ICON);
     engine->window->Cursor(IDC_CURSOR);
-    engine->window->HideCursor(true);
-    engine->graphics->VSync(true);
+    engine->window->HideCursor(false);
+    engine->graphics->VSync(false);
 
     // cria o jogo
     Game * game = new GeoWars();

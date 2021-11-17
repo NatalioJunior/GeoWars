@@ -69,10 +69,11 @@ void Guns::Update() {
 		}
 	}
 	else {
-		if (window->KeyDown('W'))
+		speed->RotateTo(Line::Angle(Point(x, y), Point(window->MouseX(), window->MouseY())));
+		/*if (window->KeyDown('W'))
 			speed->Rotate(delta);
 		if (window->KeyDown('S'))
-			speed->Rotate(-delta);
+			speed->Rotate(-delta);*/
 	}
 }
 

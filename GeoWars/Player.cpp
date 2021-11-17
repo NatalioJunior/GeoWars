@@ -140,7 +140,7 @@ void Player::Update()
                 speed->ScaleTo(0.0f);
 
         // dispara míssil
-        if (window->KeyPress(VK_SPACE))
+        if (window->KeyPress(VK_SPACE)||window->KeyPress(VK_LBUTTON))
         {
             GeoWars::audio->Play(FIRE);
             GeoWars::scene->Add(new Missile(), STATIC);
