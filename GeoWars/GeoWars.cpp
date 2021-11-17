@@ -18,6 +18,7 @@
 #include "Orange.h"
 #include "Delay.h"
 #include "Guns.h"
+#include "Soldier.h"
 
 // ------------------------------------------------------------------------------
 
@@ -63,6 +64,8 @@ void GeoWars::Init()
     scene->Add(new Orange(2200,1500,45), MOVING);
     scene->Add(new Orange(2300,1500,45), MOVING);
     scene->Add(new Orange(2400,1500,45), MOVING);
+    scene->Add(new Soldier(2400,1500,player), MOVING);
+    scene->Add(new Soldier(2400,1500,player), MOVING);
     //scene->Add(new Orange(2400,1500,179), MOVING);
     scene->Add(new Delay(), STATIC);
 
@@ -174,9 +177,9 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     Engine * engine = new Engine();
 
     // configura motor
-    //engine->window->Mode(WINDOWED);
-    //engine->window->Size(1152, 648);
-    engine->window->Mode(BORDERLESS);
+    engine->window->Mode(WINDOWED);
+    engine->window->Size(1152, 648);
+    //engine->window->Mode(BORDERLESS);
     engine->window->Color(0, 0, 0);
     engine->window->Title("GeoWars");
     engine->window->Icon(IDI_ICON);
