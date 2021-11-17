@@ -17,12 +17,13 @@
 
 Controller* Player::gamepad = nullptr;
 bool Player::ControllerOn = false;
+uint Player::XboxPlayer = PLAYER1;
 
 Player::Player()
 {
     // Inicializa um controler
     gamepad = new Controller();
-    ControllerOn = gamepad->Initialize();
+    ControllerOn = gamepad->XboxInitialize(XboxPlayer);
 
     // configuração do objeto
     sprite = new Sprite("Resources/Player.png");
@@ -85,10 +86,10 @@ void Player::Update()
     float accel = 40.0f * gameTime;
 
     if (ControllerOn) {
-        gamepad->UpdateState();
+        gamepad->XboxUpdateState(XboxPlayer);
 
-        float ang = Line::Angle(Point(0, 0), Point(gamepad->Axis(AxisX) / 25.0f, gamepad->Axis(AxisY) / 25.0f));
-        float mag = Point::Distance(Point(0, 0), Point(gamepad->Axis(AxisX) / 25.0f, gamepad->Axis(AxisY) / 25.0f));
+        float ang = Line::Angle(Point(0, 0), Point(gamepad->XboxAnalog(ThumbLX) / 327.67f, -gamepad->XboxAnalog(ThumbLY) / 327.67f));
+        float mag = Point::Distance(Point(0, 0), Point(gamepad->XboxAnalog(ThumbLX) / 327.67f, -gamepad->XboxAnalog(ThumbLY) / 327.67f));
 
         // nenhuma direção selecionada
         if (mag == 0)

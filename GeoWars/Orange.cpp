@@ -43,7 +43,7 @@ Orange::Orange(float pX, float pY, float ang)
 	emitter.frequency = 0.010f;                 // tempo entre geração de novas partículas
 	emitter.percentToDim = 0.7f;                // desaparece após 60% da vida
 	emitter.minSpeed = 60.0f;                   // velocidade mínima das partículas
-	emitter.maxSpeed = 60.0f;                  // velocidade máxima das partículas
+	emitter.maxSpeed = 60.0f;					// velocidade máxima das partículas
 	emitter.color.r = 1.0f;                     // componente Red da partícula 
 	emitter.color.g = 0.5;                      // componente Green da partícula 
 	emitter.color.b = 0.0f;                     // componente Blue da partícula 
