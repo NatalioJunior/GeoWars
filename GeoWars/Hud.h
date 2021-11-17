@@ -29,6 +29,8 @@ private:
     Font * bold = nullptr;              // fonte para exibição negrito
     Sprite * infoBox = nullptr;         // área de informações do jogo
     Sprite * keyMap = nullptr;          // área para teclas de comando
+    Sprite* ammoSprite = nullptr;
+    Sprite* infinity = nullptr;
     stringstream text;                  // texto temporário
 
     float posY;
