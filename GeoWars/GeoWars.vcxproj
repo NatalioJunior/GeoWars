@@ -178,6 +178,7 @@
     <ClCompile Include="Hud.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="Magenta.cpp" />
+    <ClCompile Include="MiniBossLarryTank.cpp" />
     <ClCompile Include="Missile.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Orange.cpp" />
@@ -214,6 +215,7 @@
     <ClInclude Include="Hud.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Magenta.h" />
+    <ClInclude Include="MiniBossLarryTank.h" />
     <ClInclude Include="Missile.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Orange.h" />
