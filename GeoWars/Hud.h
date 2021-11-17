@@ -31,6 +31,9 @@ private:
     Sprite * keyMap = nullptr;          // área para teclas de comando
     stringstream text;                  // texto temporário
 
+    float posY;
+    bool showHud = true;
+
 public:
     Hud();                              // construtor
     ~Hud();                             // destrutor

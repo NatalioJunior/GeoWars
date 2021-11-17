@@ -2,12 +2,15 @@
 #include "GeoWars.h"
 #include "Missile.h"
 
+int Guns::ammo = -1;
+
 Guns::Guns() {
 	sprite = new Sprite("Resources/Turret.png");
 	speed = new Vector(0.0f, 0.0f);
 
 	xboxPlayer = Player::XboxPlayer;
 	axisCtrl = true;
+	keysCtrl = true;
 	start = 0;
 	timer.Start();
 }
@@ -47,6 +50,25 @@ bool Guns::AxisTimed(int axisX, int axisY, float time)
 	return false;
 }
 
+bool Guns::KeysTimed(float time)
+{
+	// se já passou o tempo para o próximo disparo
+	if (keysCtrl)
+	{
+		keysCtrl = false;
+		start = timer.Stamp();
+		return true;
+	}
+	// senão aguarda o momento certo
+	else if (timer.Elapsed(start, time))
+	{
+		keysCtrl = true;
+	}
+
+	// teclas não pressionadas ou tempo não atingido
+	return false;
+}
+
 void Guns::Update() {
 	MoveTo(GeoWars::player->X(), GeoWars::player->Y());
 
@@ -70,9 +92,19 @@ void Guns::Update() {
 	}
 	else {
 		if (window->KeyDown('W'))
-			speed->Rotate(delta);
-		if (window->KeyDown('S'))
 			speed->Rotate(-delta);
+		if (window->KeyDown('S'))
+			speed->Rotate(delta);
+
+		// dispara míssil
+		if (window->KeyDown(VK_SPACE))
+		{
+			if (KeysTimed(0.5f)) {
+				GeoWars::audio->Play(FIRE);
+				GeoWars::scene->Add(new Missile(), STATIC);
+			}
+		}
+		
 	}
 }
 

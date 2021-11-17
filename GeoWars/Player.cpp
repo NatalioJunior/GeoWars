@@ -138,13 +138,6 @@ void Player::Update()
             else
                 // velocidade muita baixa, não use soma vetorial, apenas pare
                 speed->ScaleTo(0.0f);
-
-        // dispara míssil
-        if (window->KeyPress(VK_SPACE))
-        {
-            GeoWars::audio->Play(FIRE);
-            GeoWars::scene->Add(new Missile(), STATIC);
-        }
     }
     
     // movimenta objeto pelo seu vetor velocidade

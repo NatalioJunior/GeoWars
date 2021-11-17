@@ -11,6 +11,8 @@
 
 #include "Hud.h"
 #include "GeoWars.h"
+#include "Player.h"
+#include "Guns.h"
 
 // ------------------------------------------------------------------------------
 
@@ -19,12 +21,14 @@ Hud::Hud()
     // cria fonte para exibição de texto
     font = new Font("Resources/Tahoma14.png");
     font->Spacing("Resources/Tahoma14.dat");
-    bold = new Font("Resources/Tahoma14b.png");
-    bold->Spacing("Resources/Tahoma14b.dat");
+    bold = new Font("Resources/Rubik15.png");
+    bold->Spacing("Resources/Rubik15.dat");
 
     // carrega sprites
     infoBox = new Sprite("Resources/InfoBox.png");
-    keyMap = new Sprite("Resources/Keymap.png");
+    keyMap = new Sprite("Resources/Msg13.png");
+
+    posY = 64.0f;
 }
 
 // ------------------------------------------------------------------------------
@@ -41,23 +45,47 @@ Hud::~Hud()
 
 void Hud::Update()
 {
+    if (Player::ControllerOn) {
+        Player::gamepad->XboxUpdateState(Player::XboxPlayer);
 
+        if (Player::gamepad->XboxButton(ButtonB))
+            showHud = !showHud;
+    }
+    else {
+        if (window->KeyPress('A'))
+            showHud = !showHud;
+    }
+
+    if (showHud) {
+        posY += 130.0f * gameTime;
+        if (posY > 64.0f) posY = 64.0f;
+    }
+    else {
+        posY -= 130.0f * gameTime;
+        if (posY < -30.0f) posY = -30.0f;
+    }
 }
 
 // -------------------------------------------------------------------------------
 
 void Hud::Draw()
 {
+    // define cor do texto
+    Color textColor{ 0.66f, 0.65f, 0.58f, 1.0f };
+
     // desenha elementos da interface
     infoBox->Draw(game->viewport.left + 140, game->viewport.top + 100, Layer::FRONT);
-    keyMap->Draw(game->viewport.left + window->CenterX(), game->viewport.top + window->Height() - 16.0f, Layer::FRONT);
+    keyMap->Draw(game->viewport.left + window->CenterX(), game->viewport.top + window->Height() - posY, Layer::FRONT);
 
-    // define cor do texto
-    Color textColor{ 0.7f, 0.7f, 0.7f, 1.0f };
+    //if (Guns::ammo == -1) {
+    //    text.str("");
+    //    text << "Infinity";
+    //    bold->Draw(540, 540, text.str(), textColor);
+    //}
 
     // desenha texto
     text.str("");
-    text << "Geometry Wars";
+    text << "Tank Wars";
     bold->Draw(40, 62, text.str(), textColor);
 
     text.str("");
@@ -75,14 +103,6 @@ void Hud::Draw()
     text.str("");
     text << "Mísseis: " << GeoWars::scene->Size() - 5;
     font->Draw(40, 152, text.str(), textColor);
-
-    text.str("");
-    text << "Movimento";
-    bold->Draw(window->CenterX() - 84.0f, window->Height() - 7.0f, text.str(), textColor);
-
-    text.str("");
-    text << "Disparo";
-    bold->Draw(window->CenterX() + 115.0f, window->Height() - 7.0f, text.str(), textColor);
 }
 
 // -------------------------------------------------------------------------------
