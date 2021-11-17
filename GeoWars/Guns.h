@@ -18,6 +18,7 @@ private:
     Timer timer;                        // controla tempo dos disparos
     llong start;                        // marcação de início do disparo
     bool axisCtrl;                      // habilita leitura de disparos
+    uint xboxPlayer;
 
 public:
     Vector * speed;

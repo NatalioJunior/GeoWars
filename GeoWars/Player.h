@@ -33,6 +33,7 @@ private:
 public:
     static Controller* gamepad;                // controle de jogo
     static bool ControllerOn;
+    static uint XboxPlayer;
 
     Guns * gun = nullptr;               // referência à arma atual do player
     Vector * speed;                     // velocidade e direção

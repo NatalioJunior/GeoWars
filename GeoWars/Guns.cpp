@@ -6,6 +6,7 @@ Guns::Guns() {
 	sprite = new Sprite("Resources/Turret.png");
 	speed = new Vector(0.0f, 0.0f);
 
+	xboxPlayer = Player::XboxPlayer;
 	axisCtrl = true;
 	start = 0;
 	timer.Start();
@@ -26,7 +27,7 @@ bool Guns::AxisTimed(int axisX, int axisY, float time)
 	if (axisCtrl)
 	{
 		// a magnitude é a distância do eixo para o seu centro
-		float magnitude = Point::Distance(Point(0, 0), Point(float(Player::gamepad->Axis(axisX)), float(Player::gamepad->Axis(axisY))));
+		float magnitude = Point::Distance(Point(0, 0), Point(float(Player::gamepad->XboxAnalog(axisX)), float(Player::gamepad->XboxAnalog(axisY))));
 
 		// se há qualquer movimento no eixo
 		if (magnitude > 0.1f)
@@ -52,16 +53,16 @@ void Guns::Update() {
 	float delta = 240.0f * gameTime;
 
 	if (Player::ControllerOn) {
-		Player::gamepad->UpdateState();
+		Player::gamepad->XboxUpdateState(xboxPlayer);
 
 		//Controla a movimentação do canhão
-		float ang = Line::Angle(Point(0, 0), Point(float(-Player::gamepad->Axis(AxisZ)), float(Player::gamepad->Axis(AxisRZ))));
-		float mag = Point::Distance(Point(0, 0), Point(Player::gamepad->Axis(AxisZ) / 25.0f, Player::gamepad->Axis(AxisRZ) / 25.0f));
+		float ang = Line::Angle(Point(0, 0), Point(float(-Player::gamepad->XboxAnalog(ThumbRX)) / 327.67f, float(-Player::gamepad->XboxAnalog(ThumbRY)) / 327.67f));
+		float mag = Point::Distance(Point(0, 0), Point(Player::gamepad->XboxAnalog(ThumbRX) / 327.67f, Player::gamepad->XboxAnalog(ThumbRY) / 327.67f));
 		if (mag > 0.1f)
 			Move(Vector(ang, 0));
 
 		//Controla a frequência de disparos
-		if (AxisTimed(AxisZ, AxisRZ, 0.5f))
+		if (AxisTimed(ThumbRX, ThumbRY, 0.5f))
 		{
 			GeoWars::audio->Play(FIRE);
 			GeoWars::scene->Add(new Missile(), STATIC);
