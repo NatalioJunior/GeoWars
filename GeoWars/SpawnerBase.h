@@ -1,6 +1,6 @@
 
-#ifndef _BASICAI_WAVEB_H_
-#define _BASICAI_WAVEB_H_
+#ifndef SPAWNERBASE_H_
+#define SPAWNERBASE_H_
 
 // --------------------------------------------------------------------------------
 

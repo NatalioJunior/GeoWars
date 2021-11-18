@@ -12,7 +12,7 @@
 #include "Missile.h"
 #include "WallHit.h"
 #include "GeoWars.h"
-
+#include "Light.h"
 // ------------------------------------------------------------------------------
 
 Player* & Missile::player = GeoWars::player;        // referência para o player
@@ -60,6 +60,7 @@ void Missile::Update()
         GeoWars::audio->Play(HITWALL);
         // adiciona explosão na cena
         GeoWars::scene->Add(new WallHit(x,y), STATIC);
+        GeoWars::scene->Add(new Light(x,y), STATIC);
 
         // remove míssil da cena
         GeoWars::scene->Delete();

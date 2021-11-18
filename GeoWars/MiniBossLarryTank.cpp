@@ -67,7 +67,7 @@ MiniBossLarryTank::~MiniBossLarryTank()
 void MiniBossLarryTank::OnCollision(Object* obj)
 {
 	if (obj->Type() == MISSILE) {
-
+		GeoWars::scene->Delete(obj, STATIC);
 		currentLife -= 10;
 		if (currentLife <= 0) {
 			GeoWars::scene->Delete(this, MOVING);

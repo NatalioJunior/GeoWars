@@ -72,7 +72,7 @@ void SpawnerBase::Update()
 // -------------------------------------------------------------------------------
 void SpawnerBase::OnCollision(Object* obj) {
 	if (obj->Type() == MISSILE) {
-		GeoWars::scene->Delete(obj,MOVING);
+		GeoWars::scene->Delete(obj, STATIC);
 		currentLife -= 10;
 		if (currentLife <= 0) {
 			GeoWars::scene->Delete(this, MOVING);
