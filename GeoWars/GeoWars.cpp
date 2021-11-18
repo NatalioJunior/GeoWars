@@ -20,6 +20,7 @@
 #include "Guns.h"
 #include "Soldier.h"
 #include "MiniBossLarryTank.h"
+#include "SpawnerBase.h"
 
 // ------------------------------------------------------------------------------
 
@@ -67,6 +68,9 @@ void GeoWars::Init()
     scene->Add(new Orange(2400,1500,45), MOVING);
     scene->Add(new Soldier(2400,1500,player), MOVING);
     scene->Add(new Soldier(2400,1500,player), MOVING);
+
+
+    scene->Add(new SpawnerBase(), MOVING);
     //scene->Add(new Orange(2400,1500,179), MOVING);
 
     const int size1 = 9;

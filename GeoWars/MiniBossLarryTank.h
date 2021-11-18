@@ -68,7 +68,7 @@ public:
     ~MiniBossLarryTank();
 
     int life = 100;
-
+    int currentLife = life;
     void OnCollision(Object* obj);     // resolução da colisão
     void Update();                      // atualização
     void Draw();                        // desenho

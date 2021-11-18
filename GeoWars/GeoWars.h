@@ -23,7 +23,7 @@
 
 // ------------------------------------------------------------------------------
 
-enum ObjectIds { PLAYER, MISSILE, BLUE, GREEN, MAGENTA, ORANGE, WALLHIT,SOLDIER,MINI_BOSS };
+enum ObjectIds { PLAYER, MISSILE, BLUE, GREEN, MAGENTA, ORANGE, WALLHIT,SOLDIER,MINI_BOSS,SPAWNER };
 
 // ------------------------------------------------------------------------------
 

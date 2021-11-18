@@ -189,6 +189,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="SpawnerBase.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TileSet.cpp" />
@@ -227,6 +228,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Soldier.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="SpawnerBase.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TileSet.h" />
