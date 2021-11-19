@@ -180,7 +180,7 @@ void MiniBossLarryTank::Update()
 }
 void MiniBossLarryTank::Draw()
 {
-	sprite->Draw(x, y, Layer::UPPER, 1.0f, -speed->Angle() + 90.0f, Color(0.6, 1, 0.6, 1));
+	sprite->Draw(x, y, Layer::UPPER, 1.0f, -speed->Angle() + 90.0f, Color(0.6f, 1.0f, 0.6f, 1.0f));
 	//tail->Draw(Layer::LOWER);
 }
 

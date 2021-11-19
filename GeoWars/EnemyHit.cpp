@@ -23,18 +23,18 @@ EnemyHit::EnemyHit(float pX, float pY)
 
      // configura emissor de partículas
     Generator explosion2;
-    explosion.imgFile = "Resources/particle_min.png";   
-    explosion.angle = 0;                    
-    explosion.spread = 360.0f;              
-    explosion.lifetime = 0.7f;              
-    explosion.frequency = 0.000f;           
-    explosion.percentToDim = 0.5f;          
-    explosion.minSpeed = 25.0f;             
-    explosion.maxSpeed = 250.0f;            
-    explosion.color.r = 1.0f;               
-    explosion.color.g = 0.2;       
-    explosion.color.b = 0.0f;               
-    explosion.color.a = 1.0f;               
+    explosion2.imgFile = "Resources/particle_min.png";   
+    explosion2.angle = 0;                    
+    explosion2.spread = 360.0f;              
+    explosion2.lifetime = 0.7f;              
+    explosion2.frequency = 0.000f;           
+    explosion2.percentToDim = 0.5f;          
+    explosion2.minSpeed = 25.0f;             
+    explosion2.maxSpeed = 250.0f;            
+    explosion2.color.r = 1.0f;               
+    explosion2.color.g = 0.2f;       
+    explosion2.color.b = 0.0f;               
+    explosion2.color.a = 1.0f;               
 
     // cria sistema de partículas
     particle1 = new Particles(explosion);
@@ -51,7 +51,7 @@ EnemyHit::EnemyHit(float pX, float pY)
 EnemyHit::~EnemyHit()
 {
     delete particle1;
-   delete particle2;
+    delete particle2;
 }
 
 // -------------------------------------------------------------------------------

@@ -44,9 +44,10 @@ Blue::~Blue()
 
 void Blue::OnCollision(Object * obj)
 {
-      if (obj->Type() == MISSILE)
+    if (obj->Type() == MISSILE) {
         GeoWars::scene->Delete(this, MOVING);
         GeoWars::scene->Add(new EnemyHit(x,y), STATIC);
+      }
 }
 
 // -------------------------------------------------------------------------------

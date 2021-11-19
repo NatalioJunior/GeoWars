@@ -18,5 +18,5 @@ void Light::Update() {
 		GeoWars::scene->Delete(this, STATIC);
 }
 void Light::Draw() {
-	sprite->Draw(x, y, Layer::LOWER,time/2,0.0f,Color(1,1,.7,time));
+	sprite->Draw(x, y, Layer::LOWER,time/2,0.0f,Color(1.0f,1.0f,0.7f,time));
 }
