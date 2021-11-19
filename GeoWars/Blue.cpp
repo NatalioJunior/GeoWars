@@ -12,7 +12,7 @@
 #include "GeoWars.h"
 #include "Blue.h"
 #include "Random.h" 
-
+#include "EnemyHit.h"
 // ---------------------------------------------------------------------------------
 
 Blue::Blue(float pX, float pY, Player * p)
@@ -46,6 +46,7 @@ void Blue::OnCollision(Object * obj)
 {
       if (obj->Type() == MISSILE)
         GeoWars::scene->Delete(this, MOVING);
+        GeoWars::scene->Add(new EnemyHit(x,y), STATIC);
 }
 
 // -------------------------------------------------------------------------------
