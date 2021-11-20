@@ -35,6 +35,7 @@ void GeoWars::Init()
     audio->Add(EXPLODE, "Resources/Explode.wav");
     audio->Add(START, "Resources/Start.wav");
     audio->Add(CURSOR, "Resources/CursorMove.wav", 7);
+    audio->Add(CONFIRM, "Resources/Confirm.wav", 7);
 
     // ajusta volumes
     audio->Volume(FIRE, 0.8f);
@@ -43,7 +44,7 @@ void GeoWars::Init()
     // carrega/incializa objetos
     backg   = new Background("Resources/Arena.jpg");
     player  = new Player();
-    gun = new Guns();
+    gun     = new Guns();
     scene   = new Scene();
     player->gun = gun;
 
@@ -88,7 +89,7 @@ void GeoWars::Init()
 void GeoWars::Update()
 {
     // sai com o pressionamento da tecla ESC
-    if (window->KeyDown(VK_ESCAPE))
+    if (window->KeyDown(VK_ESCAPE)) 
         window->Close();
 
     // atualiza cena e calcula colisões
@@ -157,8 +158,12 @@ void GeoWars::Draw()
 void GeoWars::Finalize()
 {
     delete audio;
-    delete scene;
     delete backg;
+    scene->Remove(player, MOVING);
+    scene->Remove(gun, STATIC);
+    delete player;
+    delete gun;
+    delete scene;
 }
 
 

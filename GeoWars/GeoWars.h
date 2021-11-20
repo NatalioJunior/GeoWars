@@ -28,7 +28,7 @@ enum ObjectIds { PLAYER, MISSILE, BLUE, GREEN, MAGENTA, ORANGE, WALLHIT, SOLDIER
 
 // ------------------------------------------------------------------------------
 
-enum SoundIds { THEME, START, FIRE, EXPLODE, HITWALL, CURSOR };
+enum SoundIds { THEME, START, FIRE, EXPLODE, HITWALL, CURSOR, CONFIRM };
 
 // ------------------------------------------------------------------------------
 
