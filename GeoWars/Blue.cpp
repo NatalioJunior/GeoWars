@@ -87,7 +87,7 @@ void Blue::Update()
 	//RotateTo(speed->Angle() +90);
 	//rotation = speed->Angle();
 	//Rotate(200 * gameTime);
-	if (Point::Distance(Point(x, y), Point(player->X(), player->Y())) < 900 && Point::Distance(Point(x, y), Point(player->X(), player->Y())) > 200) {
+	if (Point::Distance(Point(x, y), Point(player->X(), player->Y())) > 200) {
 		// movimenta objeto pelo seu vetor velocidade
 		Translate(speed->XComponent() * 50.0f * gameTime, -speed->YComponent() * 50.0f * gameTime);
 	}

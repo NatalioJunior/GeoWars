@@ -15,6 +15,7 @@
 #include "Hud.h"
 #include "Light.h"
 #include "EnemyProjectile.h"
+#include "EnemyHit.h"
 
 // ---------------------------------------------------------------------------------
 
@@ -25,7 +26,7 @@ Soldier::Soldier(float pX, float pY, Player* p)
 	BBox(new Circle(18.0f));
 
 	speed.RotateTo(0);
-	speed.ScaleTo(2.0f);
+	speed.ScaleTo(1.0f);
 
 	MoveTo(pX, pY);
 	type = SOLDIER;
@@ -47,8 +48,11 @@ void Soldier::OnCollision(Object* obj)
 {
 	if (obj->Type() == MISSILE)
 	{
-		GeoWars::scene->Delete(obj, STATIC);
 		GeoWars::scene->Delete(this, MOVING);
+		GeoWars::scene->Delete(obj, STATIC);
+		GeoWars::scene->Add(new EnemyHit(x, y), STATIC);
+		//GeoWars::scene->Delete(obj, STATIC);
+		//GeoWars::scene->Delete(this, MOVING);
 		//GeoWars::scene->Play(EXPLODE);
 	}
 	else {
@@ -63,19 +67,15 @@ void Soldier::OnCollision(Object* obj)
 		if (angleB > 360)
 			angleB -= 360.0f;
 
-		Vector impactA{ angleA, -0.1f * speed.Magnitude() };
+		Vector impactA{ angleA, 0.1f * speed.Magnitude() };
 		//Vector impactB{ angleB, 0.1f * obj->speed->Magnitude() };
 
 		// adiciona vetor impacto à velocidade das rochas
 		speed.Add(impactA);
 		//greenB->speed.Add(impactA);
 
-		// limita velocidade das rochas
-		//if (greenB->speed.Magnitude() > 15.0f)
-			//greenB->speed.ScaleTo(15.0f);
-
-		if (speed.Magnitude() > 15.0f)
-			speed.ScaleTo(15.0f);
+		if (speed.Magnitude() > 10.0f)
+			speed.ScaleTo(10.0f);
 	}
 }
 

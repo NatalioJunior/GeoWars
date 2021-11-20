@@ -42,7 +42,7 @@ public:
 
 inline void Soldier::Draw()
 {
-    sprite->Draw(x, y, Layer::LOWER, 0.3f, rotation);
+    sprite->Draw(x, y, Layer::LOWER, 0.2f, -rotation);
 }
 
 // ---------------------------------------------------------------------------------
