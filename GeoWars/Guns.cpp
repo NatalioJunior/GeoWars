@@ -92,13 +92,14 @@ void Guns::Update() {
 		}
 	}
 	else {
+		speed->RotateTo(-Line::Angle(Point(x, y), Point(window->MouseX(), window->MouseY()))-180);
 		if (window->KeyDown('W'))
 			speed->Rotate(-delta);
 		if (window->KeyDown('S'))
 			speed->Rotate(delta);
 
 		// dispara míssil
-		if (window->KeyDown(VK_SPACE))
+		if (window->KeyDown(VK_SPACE)|| window->KeyDown(VK_LBUTTON))
 		{
 			if (KeysTimed(0.5f)) {
 				GeoWars::audio->Play(FIRE);

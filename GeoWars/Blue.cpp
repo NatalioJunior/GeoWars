@@ -53,6 +53,11 @@ void Blue::OnCollision(Object* obj)
 		GeoWars::scene->Delete(obj, STATIC);
 		GeoWars::scene->Add(new EnemyHit(x, y), STATIC);
 	}
+	else {
+		Vector target = Vector(Line::Angle(Point(x, y), Point(obj->X(), obj->Y())), 120.0f * gameTime);
+		target.Rotate(180.0f);
+		speed->Add(target);
+	}
 }
 
 // -------------------------------------------------------------------------------
@@ -76,9 +81,9 @@ void Blue::Update()
 	// move o objeto pelo seu vetor velocidade
 	//Translate(speed->XComponent() * 50.0f * gameTime, -speed->YComponent() * 50.0f * gameTime);
 
-	
 
-	
+
+
 	//RotateTo(speed->Angle() +90);
 	//rotation = speed->Angle();
 	//Rotate(200 * gameTime);
@@ -107,7 +112,7 @@ void Blue::Update()
 		MoveTo(x, game->Height() - 50);
 
 	if (timer.Elapsed() >= 9.0f) {
-		
+
 		GeoWars::scene->Add(new EnemyProjectile(x, y), STATIC);
 		GeoWars::scene->Add(new Light(x + (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians()))), STATIC);
 		timer.Reset();
@@ -115,7 +120,7 @@ void Blue::Update()
 }
 void Blue::Draw()
 {
-	sprite->Draw(x, y, Layer::LOWER, .2f, -speed->Angle(), Color(0.5f, 0.5f, 1.0f, 1.0f));
+	sprite->Draw(x, y, Layer::LOWER, .2f, -Line::Angle(Point(x,y),Point(player->X(),player->Y())), Color(0.5f, 0.5f, 1.0f, 1.0f));
 }
 
 
