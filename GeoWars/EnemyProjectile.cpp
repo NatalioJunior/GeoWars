@@ -19,14 +19,14 @@ EnemyProjectile::EnemyProjectile(float pX, float pY)
 	// inicializa velocidade
 
    // speed.RotateTo(-player->gun->speed->Angle() - 180.0f);
-	speed.RotateTo(Line::Angle(Point(x, y), Point(player->X(), player->Y())) - 180.0f);
+	speed.RotateTo(Line::Angle(Point(pX, pY), Point(player->X(), player->Y())));
 	speed.ScaleTo(15.0f);
 
 	// move para posição
 	MoveTo(pX + (45 * cos(speed.Radians())), pY - (45 * sin(speed.Radians())));
 
 	//RotateTo(player->gun->speed->Angle() - 180.0f);
-	RotateTo(Line::Angle(Point(x, y), Point(player->X(), player->Y())) - 180.0f);
+	RotateTo(-Line::Angle(Point(pX, pY), Point(player->X(), player->Y())));
 
 	// define tipo
 	type = ENMEY_PROJECTILE;
