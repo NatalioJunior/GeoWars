@@ -12,6 +12,7 @@
 #include "GeoWars.h"
 #include "Orange.h"
 #include "Random.h" 
+#include "Explosion.h"
 
 // ---------------------------------------------------------------------------------
 
@@ -67,8 +68,11 @@ Orange::~Orange()
 
 void Orange::OnCollision(Object* obj)
 {
-	if (obj->Type() == MISSILE)
+	if (obj->Type() == MISSILE) {
+		GeoWars::scene->Add(new Explosion(x, y), STATIC);
 		GeoWars::scene->Delete(this, MOVING);
+	}
+		//GeoWars::scene->Delete(this, MOVING);
 }
 
 // -------------------------------------------------------------------------------

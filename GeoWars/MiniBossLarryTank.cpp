@@ -13,6 +13,7 @@
 
 #include "GeoWars.h"
 #include <cmath>
+#include "Explosion.h"
 
 // ---------------------------------------------------------------------------------
 
@@ -70,6 +71,7 @@ void MiniBossLarryTank::OnCollision(Object* obj)
 		GeoWars::scene->Delete(obj, STATIC);
 		currentLife -= 10;
 		if (currentLife <= 0) {
+			GeoWars::scene->Add(new Explosion(x,y),STATIC);
 			GeoWars::scene->Delete(this, MOVING);
 		}
 	}
