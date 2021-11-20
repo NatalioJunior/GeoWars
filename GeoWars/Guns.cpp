@@ -3,6 +3,7 @@
 #include "Missile.h"
 
 int Guns::ammo = -1;
+bool Guns::mouseOn = true;
 
 Guns::Guns() {
 	sprite = new Sprite("Resources/Turret.png");
@@ -92,20 +93,33 @@ void Guns::Update() {
 		}
 	}
 	else {
-		speed->RotateTo(-Line::Angle(Point(x - game->viewport.left , y - game->viewport.top), Point(window->MouseX(), window->MouseY())) - 180.0f);
-		if (window->KeyDown('W'))
-			speed->Rotate(-delta);
-		if (window->KeyDown('S'))
-			speed->Rotate(delta);
+		if (mouseOn) {
+			speed->RotateTo(-Line::Angle(Point(x - game->viewport.left, y - game->viewport.top), Point(window->MouseX(), window->MouseY())) - 180.0f);
 
-		// dispara míssil
-		if (window->KeyDown(VK_SPACE)|| window->KeyDown(VK_LBUTTON))
-		{
-			if (KeysTimed(0.5f)) {
-				GeoWars::audio->Play(FIRE);
-				GeoWars::scene->Add(new Missile(), STATIC);
+			// dispara míssil
+			if (window->KeyDown(VK_LBUTTON))
+			{
+				if (KeysTimed(0.5f)) {
+					GeoWars::audio->Play(FIRE);
+					GeoWars::scene->Add(new Missile(), STATIC);
+				}
 			}
 		}
+		else {
+			if (window->KeyDown('W'))
+				speed->Rotate(-delta);
+			if (window->KeyDown('S'))
+				speed->Rotate(delta);
+
+			// dispara míssil
+			if (window->KeyDown(VK_SPACE))
+			{
+				if (KeysTimed(0.5f)) {
+					GeoWars::audio->Play(FIRE);
+					GeoWars::scene->Add(new Missile(), STATIC);
+				}
+			}
+		}		
 	}
 }
 

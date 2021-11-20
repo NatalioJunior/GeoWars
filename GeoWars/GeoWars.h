@@ -28,7 +28,7 @@ enum ObjectIds { PLAYER, MISSILE, BLUE, GREEN, MAGENTA, ORANGE, WALLHIT, SOLDIER
 
 // ------------------------------------------------------------------------------
 
-enum SoundIds { THEME, START, FIRE, EXPLODE, HITWALL, CURSOR, CONFIRM };
+enum SoundIds { THEME, START, FIRE, EXPLODE, HITWALL, CURSOR, CONFIRM, CANCEL, APPLY };
 
 // ------------------------------------------------------------------------------
 
@@ -45,7 +45,6 @@ public:
 	static Player	* player;			// nave controlada pela jogador
 	static Audio	* audio;			// sitema de áudio
 	static Scene	* scene;			// cena do jogo
-	static bool		viewHUD;			// visualização do painel
 
 	void Init();                    // inicialização
 	void Update();                  // atualização

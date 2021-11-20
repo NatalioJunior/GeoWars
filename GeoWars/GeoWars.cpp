@@ -21,7 +21,6 @@ Player * GeoWars::player  = nullptr;
 Audio  * GeoWars::audio   = nullptr;
 Scene  * GeoWars::scene   = nullptr;
 Guns * GeoWars::gun       = nullptr;
-bool     GeoWars::viewHUD = false;
 
 // ------------------------------------------------------------------------------
 
@@ -35,11 +34,9 @@ void GeoWars::Init()
     audio->Add(EXPLODE, "Resources/Explode.wav");
     audio->Add(START, "Resources/Start.wav");
     audio->Add(CURSOR, "Resources/CursorMove.wav", 7);
-    audio->Add(CONFIRM, "Resources/Confirm.wav", 7);
-
-    // ajusta volumes
-    audio->Volume(FIRE, 0.8f);
-    audio->Volume(START, 0.8f);
+    audio->Add(CONFIRM, "Resources/Confirm.wav");
+    audio->Add(CANCEL, "Resources/Cancel.wav");
+    audio->Add(APPLY, "Resources/Apply.wav");
 
     // carrega/incializa objetos
     backg   = new Background("Resources/Arena.jpg");
@@ -100,10 +97,6 @@ void GeoWars::Update()
     if (window->KeyPress('B'))
         viewBBox = !viewBBox;
 
-    // ativa ou desativa o heads up display
-    if (window->KeyPress('H'))
-        viewHUD = !viewHUD;
-
     // --------------------
     // atualiza a viewport
     // --------------------
@@ -134,8 +127,6 @@ void GeoWars::Update()
         viewport.top = game->Height() - window->Height();
         viewport.bottom = game->Height();
     }
-
-    hud->Update();
 } 
 
 // ------------------------------------------------------------------------------
@@ -185,7 +176,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     engine->window->Title("GeoWars");
     engine->window->Icon(IDI_ICON);
     engine->window->Cursor(IDC_CURSOR);
-    engine->window->HideCursor(false);
+    //engine->window->HideCursor(false);
     engine->graphics->VSync(false);
 
     // cria o jogo
