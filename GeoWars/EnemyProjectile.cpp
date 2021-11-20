@@ -12,7 +12,8 @@ EnemyProjectile::EnemyProjectile(float pX, float pY)
 {
 	// inicializa sprite
 	sprite = new Sprite("Resources/Bullet.png");
-
+	tileset = new TileSet("Resources/plasmaball_pixelart.png",2,1);
+	anim = new Animation(tileset, 0.5f, true);
 	// cria bounding box
 	BBox(new Circle(8));
 
@@ -20,7 +21,7 @@ EnemyProjectile::EnemyProjectile(float pX, float pY)
 
    // speed.RotateTo(-player->gun->speed->Angle() - 180.0f);
 	speed.RotateTo(Line::Angle(Point(pX, pY), Point(player->X(), player->Y())));
-	speed.ScaleTo(7.0f);
+	speed.ScaleTo(3.0f);
 
 	// move para posição
 	MoveTo(pX + (45 * cos(speed.Radians())), pY - (45 * sin(speed.Radians())));
@@ -37,6 +38,8 @@ EnemyProjectile::EnemyProjectile(float pX, float pY)
 EnemyProjectile::~EnemyProjectile()
 {
 	delete sprite;
+	delete tileset;
+	delete anim;
 }
 
 // -------------------------------------------------------------------------------
@@ -52,12 +55,13 @@ void EnemyProjectile::Update()
 		GeoWars::audio->Volume(HITWALL, 0.7f);
 		GeoWars::audio->Play(HITWALL);
 		// adiciona explosão na cena
-		GeoWars::scene->Add(new WallHit(x, y), STATIC);
+		//GeoWars::scene->Add(new WallHit(x, y), STATIC);
 		GeoWars::scene->Add(new Light(x, y), STATIC);
 
 		// remove míssil da cena
 		GeoWars::scene->Delete();
 	}
+	anim->NextFrame();
 }
 
 // -------------------------------------------------------------------------------

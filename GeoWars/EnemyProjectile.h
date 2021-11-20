@@ -7,6 +7,8 @@
 #include "Object.h"
 #include "Sprite.h"
 #include "Player.h" 
+#include "TileSet.h"
+#include "Animation.h"
 
 // --------------------------------------------------------------------------------
 
@@ -18,6 +20,8 @@ private:
 
 	static Player*& player;        // referência para o player
 	Sprite* sprite;                // sprite do míssil
+	TileSet* tileset;
+	Animation* anim;
 	Vector speed;                   // velocidade do míssil    
 
 public:
@@ -38,7 +42,9 @@ inline Vector& EnemyProjectile::Speed()
 
 inline void EnemyProjectile::Draw()
 {
-	sprite->Draw(x, y, Layer::MIDDLE, scale, rotation);
+	//sprite->Draw(x, y, Layer::MIDDLE, scale, rotation);
+	anim->Draw(x, y, Layer::MIDDLE, scale, rotation);
+	
 }
 
 // ------------------------------------------------------------------------------

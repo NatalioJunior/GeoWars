@@ -51,7 +51,7 @@ void SpawnerBase::Update()
 
 			// adiciona nova inimigo
 			GeoWars::scene->Add(new Blue(pX, pY, GeoWars::player), MOVING);
-			GeoWars::scene->Add(new Soldier(pX, pY, GeoWars::player), MOVING);
+			GeoWars::scene->Add(new Soldier(pX+ 30, pY, GeoWars::player), MOVING);
 
 			delay = 0.850f;
 			timer.Start();
