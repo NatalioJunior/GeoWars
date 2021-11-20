@@ -85,7 +85,7 @@ void SpawnerBase::OnCollision(Object* obj) {
 
 void SpawnerBase::Draw()
 {
-	sprite->Draw(x, y, Layer::UPPER, 2, 0, Color(1, 1, 1, 1));
+	sprite->Draw(x, y, Layer::UPPER, 2* scale, 0, Color(1, 1, 1, 1));
 }
 
 // -------------------------------------------------------------------------------

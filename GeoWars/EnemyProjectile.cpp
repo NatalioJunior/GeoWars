@@ -8,14 +8,15 @@ Player*& EnemyProjectile::player = GeoWars::player;        // referência para o 
 
 // ------------------------------------------------------------------------------
 
-EnemyProjectile::EnemyProjectile(float pX, float pY)
+EnemyProjectile::EnemyProjectile(float pX, float pY, float scale)
 {
+	scaleF = scale;
 	// inicializa sprite
 	sprite = new Sprite("Resources/Bullet.png");
 	tileset = new TileSet("Resources/plasmaball_pixelart.png",2,1);
 	anim = new Animation(tileset, 0.5f, true);
 	// cria bounding box
-	BBox(new Circle(8));
+	BBox(new Circle(8*scaleF));
 
 	// inicializa velocidade
 

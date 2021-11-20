@@ -23,9 +23,9 @@ private:
 	TileSet* tileset;
 	Animation* anim;
 	Vector speed;                   // velocidade do míssil    
-
+	float scaleF;
 public:
-	EnemyProjectile(float pX, float pY);                      // construtor
+	EnemyProjectile(float pX, float pY,float scale= 1.0f);                      // construtor
 	~EnemyProjectile();                     // destrutor
 
 	Vector& Speed();                // retona vetor velocidade
@@ -43,7 +43,7 @@ inline Vector& EnemyProjectile::Speed()
 inline void EnemyProjectile::Draw()
 {
 	//sprite->Draw(x, y, Layer::MIDDLE, scale, rotation);
-	anim->Draw(x, y, Layer::MIDDLE, scale, rotation);
+	anim->Draw(x, y, Layer::MIDDLE, scale * EnemyProjectile::scaleF, rotation);
 	
 }
 

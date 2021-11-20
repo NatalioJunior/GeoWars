@@ -120,7 +120,7 @@ void Blue::Update()
 }
 void Blue::Draw()
 {
-	sprite->Draw(x, y, Layer::LOWER, .2f, -Line::Angle(Point(x,y),Point(player->X(),player->Y())), Color(0.5f, 0.5f, 1.0f, 1.0f));
+	sprite->Draw(x, y, Layer::LOWER, .2f* scale, -Line::Angle(Point(x,y),Point(player->X(),player->Y())), Color(0.5f, 0.5f, 1.0f, 1.0f));
 }
 
 

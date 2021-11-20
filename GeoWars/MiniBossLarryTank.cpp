@@ -14,7 +14,7 @@
 #include "GeoWars.h"
 #include <cmath>
 #include "Explosion.h"
-
+#include "EnemyProjectile.h"
 // ---------------------------------------------------------------------------------
 
 MiniBossLarryTank::MiniBossLarryTank(Instruction* vet, int tam, float pX, float pY)
@@ -71,7 +71,7 @@ void MiniBossLarryTank::OnCollision(Object* obj)
 		GeoWars::scene->Delete(obj, STATIC);
 		currentLife -= 10;
 		if (currentLife <= 0) {
-			GeoWars::scene->Add(new Explosion(x,y),STATIC);
+			GeoWars::scene->Add(new Explosion(x, y), STATIC);
 			GeoWars::scene->Delete(this, MOVING);
 		}
 	}
@@ -175,7 +175,17 @@ void MiniBossLarryTank::Update()
 		speed->ScaleTo(magnitude.Rand());
 		RotateTo(-speed->Angle() + 90);
 		break;
+	case SHOOT_THREE: 
+
+		GeoWars::scene->Add(new EnemyProjectile(x + (35 * cos(speed->Radians())), y - (35 * sin(speed->Radians())),2.0f), STATIC);
+		
+		GeoWars::scene->Add(new EnemyProjectile(x + (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),2.0f), STATIC);
+		
+		GeoWars::scene->Add(new EnemyProjectile(x + (55 * cos(speed->Radians())), y - (55 * sin(speed->Radians())), 2.0f), STATIC);
+
+		break;
 	}
+
 
 	// desloca objeto pelo seu vetor velocidade
 	Translate(speed->XComponent() * delta, -speed->YComponent() * delta);

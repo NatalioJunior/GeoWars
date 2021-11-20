@@ -42,7 +42,8 @@ enum InstructionTypes
     TURN,           // indica a direção que o objeto deve seguir
     ROTATE,         // rotaciona a direção do objeto por um tempo
     RANDOM,         // move em uma direção aleatória por um tempo
-    JUMP            // pula para uma instrução podendo fazer um loop
+    JUMP,           // pula para uma instrução podendo fazer um loop
+    SHOOT_THREE
 };
 
 // ---------------------------------------------------------------------------------
