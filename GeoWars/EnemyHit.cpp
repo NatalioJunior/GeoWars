@@ -13,7 +13,7 @@ EnemyHit::EnemyHit(float pX, float pY)
     explosion.spread = 360.0f;                    // espalhamento em graus
     explosion.lifetime = 0.7f;                     // tempo de vida em segundos
     explosion.frequency = 0.000f;                   // tempo entre geração de novas partículas
-    explosion.percentToDim = 0.6f;                  // desaparece após 60% da vida
+    explosion.percentToDim = 0.3f;                  // desaparece após 60% da vida
     explosion.minSpeed = 25.0f;                    // velocidade mínima das partículas
     explosion.maxSpeed = 250.0f;                   // velocidade máxima das partículas
     explosion.color.r = 1.0f;                     // cor da partícula entre 0 e 1
@@ -26,11 +26,11 @@ EnemyHit::EnemyHit(float pX, float pY)
     explosion2.imgFile = "Resources/particle_min.png";   
     explosion2.angle = 0;                    
     explosion2.spread = 360.0f;              
-    explosion2.lifetime = 0.7f;              
+    explosion2.lifetime = 0.4f;              
     explosion2.frequency = 0.000f;           
-    explosion2.percentToDim = 0.5f;          
+    explosion2.percentToDim = 0.3f;          
     explosion2.minSpeed = 25.0f;             
-    explosion2.maxSpeed = 250.0f;            
+    explosion2.maxSpeed = 100.0f;            
     explosion2.color.r = 1.0f;               
     explosion2.color.g = 0.2f;       
     explosion2.color.b = 0.0f;               

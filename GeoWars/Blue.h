@@ -19,6 +19,7 @@
 #include "Sprite.h"
 #include "Vector.h"
 #include "Player.h"
+#include "Timer.h"
 
 // ---------------------------------------------------------------------------------
 
@@ -29,6 +30,7 @@ private:
     Vector * speed;                     // velocidade e direção
     Player * player;                    // ponteiro para jogador
     float factor;                       // fator de escala
+    Timer timer;
     
 public:
     Blue(float pX, float pY, Player * p);                   // construtor

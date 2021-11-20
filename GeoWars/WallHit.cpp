@@ -1,6 +1,6 @@
 /**********************************************************************************
 // WallHit (Código Fonte)
-// 
+//
 // Criação:     03 Ago 2019
 // Atualização: 01 Nov 2021
 // Compilador:  Visual C++ 2019
@@ -17,72 +17,72 @@
 
 WallHit::WallHit(float pX, float pY)
 {
-    // calcula ângulo base e ajusta coordenadas da explosão
-    float base;
-    if (pX < 50)
-    {
-        base = 0.0f;
-        pX = 50;
-    }
-    else if (pX > game->Width() - 50)
-    {
-        base = 180.0f;
-        pX = game->Width() - 50;
-    }
-    else if (pY < 50)
-    {
-        base = 270.0f;
-        pY = 50;
-    }
-    else
-    {
-        base = 90.0f;
-        pY = game->Height() - 50;
-    }
+	// calcula ângulo base e ajusta coordenadas da explosão
+	float base;
+	if (pX < 50)
+	{
+		base = 0.0f;
+		pX = 50;
+	}
+	else if (pX > game->Width() - 50)
+	{
+		base = 180.0f;
+		pX = game->Width() - 50;
+	}
+	else if (pY < 50)
+	{
+		base = 270.0f;
+		pY = 50;
+	}
+	else
+	{
+		base = 90.0f;
+		pY = game->Height() - 50;
+	}
 
-    // número aleatório entre 0 e 1
-    RandF color{ 0.64f, 1 };
-    
-    // configura emissor de partículas
-    Generator explosion;
-    explosion.imgFile   = "Resources/particle_min.png";    // arquivo de imagem
-    explosion.angle     = base;                     // direção da explosão
-    explosion.spread    = 90.0f;                    // espalhamento em graus
-    explosion.lifetime  = 0.7f;                     // tempo de vida em segundos
-    explosion.frequency = 0.000f;                   // tempo entre geração de novas partículas
-    explosion.percentToDim = 0.6f;                  // desaparece após 60% da vida
-    explosion.minSpeed  = 25.0f;                    // velocidade mínima das partículas
-    explosion.maxSpeed  = 250.0f;                   // velocidade máxima das partículas
-    explosion.color.r   = 1.0f;                     // cor da partícula entre 0 e 1
-    explosion.color.g   = color.Rand();             // cor da partícula entre 0.64 e 1
-    explosion.color.b   = 0.0f;                     // cor da partícula entre 0 e 1
-    explosion.color.a   = 1.0f;                     // transparência da partícula
+	// número aleatório entre 0 e 1
+	RandF color{ 0.64f, 1 };
 
-    // cria sistema de partículas
-    sparks = new Particles(explosion);
+	// configura emissor de partículas
+	Generator explosion;
+	explosion.imgFile = "Resources/particle_min.png";    // arquivo de imagem
+	explosion.angle = base;                     // direção da explosão
+	explosion.spread = 90.0f;                    // espalhamento em graus
+	explosion.lifetime = 0.7f;                     // tempo de vida em segundos
+	explosion.frequency = 0.000f;                   // tempo entre geração de novas partículas
+	explosion.percentToDim = 0.6f;                  // desaparece após 60% da vida
+	explosion.minSpeed = 25.0f;                    // velocidade mínima das partículas
+	explosion.maxSpeed = 250.0f;                   // velocidade máxima das partículas
+	explosion.color.r = 1.0f;                     // cor da partícula entre 0 e 1
+	explosion.color.g = color.Rand();             // cor da partícula entre 0.64 e 1
+	explosion.color.b = 0.0f;                     // cor da partícula entre 0 e 1
+	explosion.color.a = 1.0f;                     // transparência da partícula
 
-    // gera 25 partículas na posição de contato
-    sparks->Generate(pX, pY, 25);
-    type = WALLHIT;
+	// cria sistema de partículas
+	sparks = new Particles(explosion);
+
+	// gera 25 partículas na posição de contato
+	sparks->Generate(pX, pY, 25);
+	type = WALLHIT;
 }
 
 // ---------------------------------------------------------------------------------
 
 WallHit::~WallHit()
 {
-    delete sparks;
+	delete sparks;
 }
 
 // -------------------------------------------------------------------------------
 
 void WallHit::Update()
 {
-    // atualiza posição de cada partícula
-    sparks->Update(gameTime);
+	// atualiza posição de cada partícula
+	sparks->Update(gameTime);
 
-    // remove da cena quando todas as partículas estão inativas
-    if (sparks->Inactive())
-        GeoWars::scene->Delete();
+	// remove da cena quando todas as partículas estão inativas
+	if (sparks->Inactive())
+		GeoWars::scene->Delete();
 }
 
 // -------------------------------------------------------------------------------
