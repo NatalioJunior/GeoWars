@@ -53,7 +53,6 @@ void Delay::Update()
     {
         // toca música do jogo
         GeoWars::audio->Play(THEME, true);
-        GeoWars::viewHUD = true;
 
         //adiciona objetos na cena
         GeoWars::scene->Add(new Magenta(GeoWars::player), MOVING);

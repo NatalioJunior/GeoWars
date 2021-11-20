@@ -24,6 +24,7 @@ private:
 public:
     Vector * speed;
     static int ammo;
+    static bool mouseOn;
 
     bool AxisTimed(int axisX, int axisY, float time);
     bool KeysTimed(float time);
