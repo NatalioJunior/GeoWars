@@ -12,6 +12,12 @@
 #include "Delay.h"
 #include "GeoWars.h"
 #include "Hud.h"
+#include "SpawnerBase.h"
+#include "Soldier.h"
+#include "Magenta.h"
+#include "Blue.h"    
+#include "Green.h"
+#include "Orange.h"
 
 // ------------------------------------------------------------------------------
 
@@ -20,6 +26,9 @@ Delay::Delay()
     logo = new Sprite("Resources/Logo.png");
     timer.Start();
     notPlayed = true;
+
+    GeoWars::scene->Add(GeoWars::player, MOVING);
+    GeoWars::scene->Add(GeoWars::gun, STATIC);
 }
 
 // ------------------------------------------------------------------------------
@@ -45,6 +54,20 @@ void Delay::Update()
         // toca música do jogo
         GeoWars::audio->Play(THEME, true);
         GeoWars::viewHUD = true;
+
+        //adiciona objetos na cena
+        GeoWars::scene->Add(new Magenta(GeoWars::player), MOVING);
+        GeoWars::scene->Add(new Blue(150.0f,150.0f, GeoWars::player), MOVING);
+        GeoWars::scene->Add(new Green(GeoWars::player), MOVING);
+        GeoWars::scene->Add(new Orange(150,150,180), MOVING);
+        GeoWars::scene->Add(new Orange(150,150,90), MOVING);
+        GeoWars::scene->Add(new Orange(2200,1500,45), MOVING);
+        GeoWars::scene->Add(new Orange(2300,1500,45), MOVING);
+        GeoWars::scene->Add(new Orange(2400,1500,45), MOVING);
+        GeoWars::scene->Add(new Soldier(2400,1500, GeoWars::player), MOVING);
+        GeoWars::scene->Add(new Soldier(2400,1500, GeoWars::player), MOVING);
+        GeoWars::scene->Add(new SpawnerBase(), MOVING);
+        GeoWars::scene->Add(new Orange(2400,1500,179), MOVING);
         GeoWars::scene->Delete();
     }
 }

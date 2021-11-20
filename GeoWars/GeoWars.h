@@ -20,6 +20,7 @@
 #include "Background.h"
 #include "Player.h"
 #include "Hud.h"
+#include "Guns.h"
 
 // ------------------------------------------------------------------------------
 
@@ -27,7 +28,7 @@ enum ObjectIds { PLAYER, MISSILE, BLUE, GREEN, MAGENTA, ORANGE, WALLHIT, SOLDIER
 
 // ------------------------------------------------------------------------------
 
-enum SoundIds { THEME, START, FIRE, EXPLODE, HITWALL };
+enum SoundIds { THEME, START, FIRE, EXPLODE, HITWALL, CURSOR };
 
 // ------------------------------------------------------------------------------
 
@@ -36,13 +37,15 @@ class GeoWars : public Game
 private:
 	Background* backg = nullptr;   // pano de fundo
 	Hud* hud = nullptr;            // painel de informações
-	bool viewBBox = false;          // visualização das bouding boxes
+	bool viewBBox = false;         // visualização das bouding boxes
+
 
 public:
-	static Player* player;         // nave controlada pela jogador
-	static Audio* audio;           // sitema de áudio
-	static Scene* scene;           // cena do jogo
-	static bool viewHUD;            // visualização do painel
+	static Guns		* gun;
+	static Player	* player;			// nave controlada pela jogador
+	static Audio	* audio;			// sitema de áudio
+	static Scene	* scene;			// cena do jogo
+	static bool		viewHUD;			// visualização do painel
 
 	void Init();                    // inicialização
 	void Update();                  // atualização
