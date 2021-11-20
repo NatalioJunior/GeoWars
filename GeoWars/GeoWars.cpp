@@ -11,22 +11,16 @@
 
 #include "Resources.h"
 #include "GeoWars.h"
-#include "Engine.h"    
-#include "Magenta.h"
-#include "Blue.h"    
-#include "Green.h"
-#include "Orange.h"
+#include "Engine.h"
 #include "Delay.h"
-#include "Guns.h"
-#include "Soldier.h"
 #include "MiniBossLarryTank.h"
-#include "SpawnerBase.h"
 
 // ------------------------------------------------------------------------------
 
 Player * GeoWars::player  = nullptr;
 Audio  * GeoWars::audio   = nullptr;
 Scene  * GeoWars::scene   = nullptr;
+Guns * GeoWars::gun       = nullptr;
 bool     GeoWars::viewHUD = false;
 
 // ------------------------------------------------------------------------------
@@ -40,6 +34,7 @@ void GeoWars::Init()
     audio->Add(HITWALL, "Resources/Hitwall.wav");
     audio->Add(EXPLODE, "Resources/Explode.wav");
     audio->Add(START, "Resources/Start.wav");
+    audio->Add(CURSOR, "Resources/CursorMove.wav", 7);
 
     // ajusta volumes
     audio->Volume(FIRE, 0.8f);
@@ -48,30 +43,13 @@ void GeoWars::Init()
     // carrega/incializa objetos
     backg   = new Background("Resources/Arena.jpg");
     player  = new Player();
+    gun = new Guns();
     scene   = new Scene();
-    Guns * gun = new Guns();
     player->gun = gun;
 
     // cria o painel de informações
     hud = new Hud();
-
-    // adiciona objetos na cena
-    scene->Add(player, MOVING);
-    scene->Add(gun, STATIC);
-    scene->Add(new Magenta(player), MOVING);
-    scene->Add(new Blue(150.0f,150.0f,player), MOVING);
-    scene->Add(new Green(player), MOVING);
-    scene->Add(new Orange(150,150,180), MOVING);
-    scene->Add(new Orange(150,150,90), MOVING);
-    scene->Add(new Orange(2200,1500,45), MOVING);
-    scene->Add(new Orange(2300,1500,45), MOVING);
-    scene->Add(new Orange(2400,1500,45), MOVING);
-    scene->Add(new Soldier(2400,1500,player), MOVING);
-    scene->Add(new Soldier(2400,1500,player), MOVING);
-
-
-    scene->Add(new SpawnerBase(), MOVING);
-    //scene->Add(new Orange(2400,1500,179), MOVING);
+    scene->Add(hud, STATIC);
 
     const int size1 = 9;
     Instruction larryScriptTest1[size1] =
@@ -86,12 +64,9 @@ void GeoWars::Init()
     { SLIDE, 0.0f, 0.5f, 5.0f },
     { JUMP, 6.0f, 0.0f, 0.0f }
     };
-    scene->Add(new MiniBossLarryTank(larryScriptTest1,size1,1500,1500),MOVING);
+    //scene->Add(new MiniBossLarryTank(larryScriptTest1,size1,1500,1500),MOVING);
 
-
-
-
-    scene->Add(new Delay(), STATIC);
+    //scene->Add(new Delay(), STATIC);
 
     // ----------------------
     // inicializa a viewport
@@ -158,6 +133,8 @@ void GeoWars::Update()
         viewport.top = game->Height() - window->Height();
         viewport.bottom = game->Height();
     }
+
+    hud->Update();
 } 
 
 // ------------------------------------------------------------------------------
@@ -170,10 +147,6 @@ void GeoWars::Draw()
     // desenha a cena
     scene->Draw();
 
-    // desenha painel de informações
-    if (viewHUD)
-        hud->Draw();
-
     // desenha bounding box
     if (viewBBox)
         scene->DrawBBox();
@@ -184,7 +157,6 @@ void GeoWars::Draw()
 void GeoWars::Finalize()
 {
     delete audio;
-    delete hud;
     delete scene;
     delete backg;
 }

@@ -17,6 +17,7 @@
 #include "Object.h"
 #include "Sprite.h"
 #include "Font.h"
+#include "Animation.h"
 #include <sstream>
 using std::stringstream;
 
@@ -25,23 +26,39 @@ using std::stringstream;
 class Hud : public Object
 {
 private:
-    Font * font = nullptr;              // fonte para exibição normal
-    Font * bold = nullptr;              // fonte para exibição negrito
-    Sprite * infoBox = nullptr;         // área de informações do jogo
-    Sprite * keyMap = nullptr;          // área para teclas de comando
-    Sprite* ammoSprite = nullptr;
-    Sprite* infinity = nullptr;
-    stringstream text;                  // texto temporário
+    enum { START, OPTIONS, GAMEOVER, VICTORY, GAME};
+    enum { SELECTED, UNSELECTED };
+
+    Font * font = nullptr;                  // fonte para exibição normal
+    Font * bold = nullptr;                  // fonte para exibição negrito
+
+    Sprite * menuStart  = nullptr;          // pop-up do menu start
+    Sprite * infoBox    = nullptr;          // área para teclas de comando do teclado
+    Sprite * keyMap     = nullptr;          // área para teclas de comando do controle
+    Sprite * ammoSprite = nullptr;          // imagem da munição
+    Sprite * infinity   = nullptr;          // simbolo do infinito
+
+    TileSet * btnStart      = nullptr;
+    TileSet * btnOptions    = nullptr;
+    TileSet * btnExit       = nullptr;
+    Animation * anim1       = nullptr;
+    Animation * anim2       = nullptr;
+    Animation * anim3       = nullptr;
+
+    stringstream text;                      // texto temporário
+
+    uint tela;
+    uint button;
 
     float posY;
     bool showHud = true;
 
 public:
-    Hud();                              // construtor
-    ~Hud();                             // destrutor
+    Hud();                                  // construtor
+    ~Hud();                                 // destrutor
 
-    void Update();                      // atualização
-    void Draw();                        // desenho
+    void Update();                          // atualização
+    void Draw();                            // desenho
 };
 
 // ------------------------------------------------------------------------------
