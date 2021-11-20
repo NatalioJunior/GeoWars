@@ -92,7 +92,7 @@ void Guns::Update() {
 		}
 	}
 	else {
-		speed->RotateTo(-Line::Angle(Point(x, y), Point(window->MouseX(), window->MouseY()))-180);
+		speed->RotateTo(-Line::Angle(Point(x - game->viewport.left , y - game->viewport.top), Point(window->MouseX(), window->MouseY())) - 180.0f);
 		if (window->KeyDown('W'))
 			speed->Rotate(-delta);
 		if (window->KeyDown('S'))
@@ -106,7 +106,6 @@ void Guns::Update() {
 				GeoWars::scene->Add(new Missile(), STATIC);
 			}
 		}
-		
 	}
 }
 
