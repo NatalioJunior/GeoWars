@@ -19,7 +19,7 @@
 #include "Sprite.h"
 #include "Vector.h"
 #include "Player.h"
-
+#include "Timer.h"
 // ---------------------------------------------------------------------------------
 
 class Soldier : public Object
@@ -28,7 +28,7 @@ private:
     Sprite* sprite;                            // sprite do objeto
     Player* player;                            // ponteiro para jogador
     Vector speed;                               // velocidade e direção
-
+    Timer timer;
 public:
     Soldier(float pX, float pY, Player* p);    // construtor
     ~Soldier();                                 // destrutor
@@ -42,7 +42,7 @@ public:
 
 inline void Soldier::Draw()
 {
-    sprite->Draw(x, y, Layer::LOWER, scale, rotation);
+    sprite->Draw(x, y, Layer::LOWER, 0.3f, rotation);
 }
 
 // ---------------------------------------------------------------------------------

@@ -3,6 +3,7 @@
 #include "GeoWars.h"
 #include "Blue.h"
 #include "Hud.h"
+#include "Soldier.h"
 
 // ------------------------------------------------------------------------------
 
@@ -50,6 +51,7 @@ void SpawnerBase::Update()
 
 			// adiciona nova inimigo
 			GeoWars::scene->Add(new Blue(pX, pY, GeoWars::player), MOVING);
+			GeoWars::scene->Add(new Soldier(pX, pY, GeoWars::player), MOVING);
 
 			delay = 0.850f;
 			timer.Start();
