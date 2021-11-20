@@ -120,6 +120,7 @@ void Hud::Update()
 
             if (window->KeyPress(VK_RETURN)) {
                 tela = GAME;
+                GeoWars::audio->Play(CONFIRM);
                 GeoWars::scene->Add(new Delay(), STATIC);
             }
         }
