@@ -158,6 +158,8 @@ void GeoWars::Update()
         viewport.top = game->Height() - window->Height();
         viewport.bottom = game->Height();
     }
+
+    hud->Update();
 } 
 
 // ------------------------------------------------------------------------------

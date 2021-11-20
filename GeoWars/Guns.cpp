@@ -88,6 +88,7 @@ void Guns::Update() {
 		{
 			GeoWars::audio->Play(FIRE);
 			GeoWars::scene->Add(new Missile(), STATIC);
+			
 		}
 	}
 	else {

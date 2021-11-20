@@ -14,12 +14,13 @@
 #include "Random.h" 
 #include "EnemyHit.h"
 #include "EnemyProjectile.h"
+#include "Light.h"
 // ---------------------------------------------------------------------------------
 
 Blue::Blue(float pX, float pY, Player* p)
 {
 	player = p;
-	sprite = new Sprite("Resources/Blue.png");
+	sprite = new Sprite("Resources/Magenta.png");
 	speed = new Vector(0, 2.0f);
 	BBox(new Circle(20.0f));
 
@@ -73,7 +74,18 @@ void Blue::Update()
 		speed->ScaleTo(2.5f);
 
 	// move o objeto pelo seu vetor velocidade
-	Translate(speed->XComponent() * 50.0f * gameTime, -speed->YComponent() * 50.0f * gameTime);
+	//Translate(speed->XComponent() * 50.0f * gameTime, -speed->YComponent() * 50.0f * gameTime);
+
+	
+
+	
+	//RotateTo(speed->Angle() +90);
+	//rotation = speed->Angle();
+	//Rotate(200 * gameTime);
+	if (Point::Distance(Point(x, y), Point(player->X(), player->Y())) < 900 && Point::Distance(Point(x, y), Point(player->X(), player->Y())) > 200) {
+		// movimenta objeto pelo seu vetor velocidade
+		Translate(speed->XComponent() * 50.0f * gameTime, -speed->YComponent() * 50.0f * gameTime);
+	}
 
 	// aplica fator de escala
 	Scale(1.0f + factor * gameTime);
@@ -94,11 +106,17 @@ void Blue::Update()
 	if (y > game->Height() - 50)
 		MoveTo(x, game->Height() - 50);
 
-	if (timer.Elapsed() >= 5.0f) {
+	if (timer.Elapsed() >= 9.0f) {
+		
 		GeoWars::scene->Add(new EnemyProjectile(x, y), STATIC);
-
+		GeoWars::scene->Add(new Light(x + (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians()))), STATIC);
 		timer.Reset();
 	}
 }
+void Blue::Draw()
+{
+	sprite->Draw(x, y, Layer::LOWER, .2f, -speed->Angle(), Color(0.5f, 0.5f, 1.0f, 1.0f));
+}
+
 
 // -------------------------------------------------------------------------------

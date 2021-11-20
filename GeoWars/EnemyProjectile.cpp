@@ -20,7 +20,7 @@ EnemyProjectile::EnemyProjectile(float pX, float pY)
 
    // speed.RotateTo(-player->gun->speed->Angle() - 180.0f);
 	speed.RotateTo(Line::Angle(Point(pX, pY), Point(player->X(), player->Y())));
-	speed.ScaleTo(15.0f);
+	speed.ScaleTo(7.0f);
 
 	// move para posição
 	MoveTo(pX + (45 * cos(speed.Radians())), pY - (45 * sin(speed.Radians())));
