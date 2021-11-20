@@ -118,7 +118,7 @@ void Hud::Update()
             anim2->Select(UNSELECTED);
             anim3->Select(UNSELECTED);
 
-            if (window->KeyPress(VK_RETURN)) {
+            if (window->KeyPress(VK_SPACE)) {
                 tela = GAME;
                 GeoWars::audio->Play(CONFIRM);
                 GeoWars::scene->Add(new Delay(), STATIC);
@@ -129,12 +129,20 @@ void Hud::Update()
             anim1->Select(UNSELECTED);
             anim2->Select(SELECTED);
             anim3->Select(UNSELECTED);
+
+            if (window->KeyPress(VK_SPACE)) {
+                GeoWars::audio->Play(CONFIRM);
+            }
         }
         else {
             anim3->NextFrame();
             anim1->Select(UNSELECTED);
             anim2->Select(UNSELECTED);
             anim3->Select(SELECTED);
+
+            if (window->KeyPress(VK_SPACE)) {
+                window->Close();
+            }
         }
         break;
     default:
