@@ -19,7 +19,10 @@
 #include "Green.h"
 #include "Orange.h"
 #include "MiniBossLarryTank.h"
-
+#include "SpawnerA.h"
+#include "SpawnerB.h"
+#include "SpawnerC.h"
+#include "SpawnerD.h"
 // ------------------------------------------------------------------------------
 
 Delay::Delay()
@@ -68,7 +71,8 @@ void Delay::Update()
         GeoWars::scene->Add(new Orange(2400,1500,45), MOVING);
         GeoWars::scene->Add(new Soldier(2400,1500, GeoWars::player), MOVING);
         GeoWars::scene->Add(new Soldier(2400,1500, GeoWars::player), MOVING);
-        GeoWars::scene->Add(new SpawnerBase(130,130,0,2), MOVING);
+        GeoWars::scene->Add(new SpawnerA(230,230,0,2), MOVING);
+        GeoWars::scene->Add(new SpawnerD(2000,1500,180,2), MOVING);
         GeoWars::scene->Add(new Orange(2400,1500,179), MOVING);
 
         const int size1 = 11;

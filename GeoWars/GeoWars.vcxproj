@@ -194,7 +194,11 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Soldier.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="SpawnerA.cpp" />
+    <ClCompile Include="SpawnerB.cpp" />
     <ClCompile Include="SpawnerBase.cpp" />
+    <ClCompile Include="SpawnerC.cpp" />
+    <ClCompile Include="SpawnerD.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TileSet.cpp" />
@@ -238,7 +242,11 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Soldier.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="SpawnerA.h" />
+    <ClInclude Include="SpawnerB.h" />
     <ClInclude Include="SpawnerBase.h" />
+    <ClInclude Include="SpawnerC.h" />
+    <ClInclude Include="SpawnerD.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TileSet.h" />
