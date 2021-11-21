@@ -68,7 +68,10 @@ MiniBossLarryTank::~MiniBossLarryTank()
 void MiniBossLarryTank::OnCollision(Object* obj)
 {
 	if (obj->Type() == MISSILE) {
+		
 		GeoWars::scene->Delete(obj, STATIC);
+		GeoWars::scene->Add(new EnemyHit(obj->X(), obj->Y()), STATIC);
+		GeoWars::audio->Play(HITWALL);
 		currentLife -= 10;
 		if (currentLife <= 0) {
 			GeoWars::scene->Add(new Explosion(x, y), STATIC);

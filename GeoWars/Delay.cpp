@@ -68,7 +68,7 @@ void Delay::Update()
         GeoWars::scene->Add(new Orange(2400,1500,45), MOVING);
         GeoWars::scene->Add(new Soldier(2400,1500, GeoWars::player), MOVING);
         GeoWars::scene->Add(new Soldier(2400,1500, GeoWars::player), MOVING);
-        GeoWars::scene->Add(new SpawnerBase(), MOVING);
+        GeoWars::scene->Add(new SpawnerBase(130,130,0,2), MOVING);
         GeoWars::scene->Add(new Orange(2400,1500,179), MOVING);
 
         const int size1 = 11;
