@@ -20,12 +20,13 @@ private:
     RandF secs;             
     Timer timer;            
     float delay;            
-
+    float angle;
+    float scaleF;
 public:
-    SpawnerBase();
+    SpawnerBase(float posX, float posY, float angleSpawn = 0, float scale = 1);
     ~SpawnerBase();
 
-    int life = 400;
+    int life = 200;
     int currentLife = life;
     void OnCollision(Object* obj);
     void Update();          
