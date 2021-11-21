@@ -34,6 +34,8 @@ public:
     static Controller* gamepad;                // controle de jogo
     static bool ControllerOn;
     static uint XboxPlayer;
+    static bool defeat;
+    static int score;
 
     Guns * gun = nullptr;               // referência à arma atual do player
     Vector * speed;                     // velocidade e direção
@@ -41,6 +43,7 @@ public:
     Player();                           // construtor
     ~Player();                          // destrutor
     
+    void OnCollision(Object* obj);             // resolução da colisão
     void Move(Vector && v);             // movimenta jogador
     void Update();                      // atualização
     void Draw();                        // desenho

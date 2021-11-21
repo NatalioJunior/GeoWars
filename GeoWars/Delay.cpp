@@ -28,6 +28,8 @@ Delay::Delay()
     timer.Start();
     notPlayed = true;
 
+    GeoWars::player->defeat = false;
+    GeoWars::player->score = 0;
     GeoWars::scene->Add(GeoWars::player, MOVING);
     GeoWars::scene->Add(GeoWars::gun, STATIC);
 }

@@ -26,7 +26,7 @@ using std::stringstream;
 class Hud : public Object
 {
 private:
-    enum { MENUSTART, OPTIONS, GAMEOVER, VICTORY, GAME};
+    enum { MENUSTART, OPTIONS, DEFEAT, GAME};
     enum { SELECTED, UNSELECTED, CHECKSELECTED, UNCHECKSELECTED, CHECKUNSELECTED, UNCHECKUNSELECTED };
 
     Font * font = nullptr;                  // fonte para exibição normal
@@ -34,11 +34,13 @@ private:
 
     Sprite * menuStart  = nullptr;          // pop-up do menu start
     Sprite * menuOption = nullptr;          // pop-up do menu de opções
+    Sprite * menuDefeat = nullptr;          // pop-up do menu de derrota
     Sprite * infoBox    = nullptr;          // área para teclas de comando do teclado
     Sprite * keyMap     = nullptr;          // área para teclas de comando do controle
     Sprite * ammoSprite = nullptr;          // imagem da munição
     Sprite * infinity   = nullptr;          // simbolo do infinito
     Sprite * slider     = nullptr;          // slider do menu
+    Sprite * star       = nullptr;
 
     TileSet * btnStart      = nullptr;
     TileSet * btnOptions    = nullptr;
@@ -46,6 +48,7 @@ private:
     TileSet * btnApply      = nullptr;
     TileSet * btnCancel     = nullptr;
     TileSet * btnCheck      = nullptr;
+    TileSet * btnOk         = nullptr;
     Animation * anim1       = nullptr;
     Animation * anim2       = nullptr;
     Animation * anim3       = nullptr;
@@ -53,16 +56,20 @@ private:
     Animation * anim5       = nullptr;
     Animation * anim6       = nullptr;
     Animation * anim7       = nullptr;
+    Animation * anim8       = nullptr;
 
     stringstream text;                      // texto temporário
 
-    uint tela;
     uint button;
     bool check1, check2, pop, apply;
 
+    uint tela;
     float posY, posX, applyPos;
     bool showHud = true;
     bool viewHud = true;
+    bool keyControl[12] = {true};
+
+    bool KeysTimed(int key);
 
 public:
     Hud();                                  // construtor

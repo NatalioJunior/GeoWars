@@ -12,12 +12,15 @@
 #include "Player.h"
 #include "GeoWars.h"
 #include "Missile.h"
+#include "Hud.h"
 
 // -------------------------------------------------------------------------------
 
 Controller* Player::gamepad = nullptr;
 bool Player::ControllerOn = false;
 uint Player::XboxPlayer = PLAYER1;
+bool Player::defeat = false;
+int Player::score = 0;
 
 Player::Player()
 {
@@ -66,6 +69,12 @@ Player::~Player()
     delete tail;
 }
 
+
+void Player::OnCollision(Object* obj) {
+        if (obj->Type() == ORANGE) {
+            defeat = true;
+        }
+}
 // -------------------------------------------------------------------------------
 
 void Player::Move(Vector && v)

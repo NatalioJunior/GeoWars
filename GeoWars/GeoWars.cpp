@@ -47,7 +47,6 @@ void GeoWars::Init()
 
     // cria o painel de informações
     hud = new Hud();
-    scene->Add(hud, STATIC);
 
     const int size1 = 9;
     Instruction larryScriptTest1[size1] =
@@ -127,6 +126,16 @@ void GeoWars::Update()
         viewport.top = game->Height() - window->Height();
         viewport.bottom = game->Height();
     }
+
+    hud->Update();
+
+    if (player->defeat) {
+        scene->Remove(player, MOVING);
+        scene->Remove(gun, STATIC);
+        delete scene;
+        scene = new Scene();
+        audio->Stop(THEME);
+    }
 } 
 
 // ------------------------------------------------------------------------------
@@ -138,6 +147,8 @@ void GeoWars::Draw()
 
     // desenha a cena
     scene->Draw();
+
+    hud->Draw();
 
     // desenha bounding box
     if (viewBBox)
@@ -154,6 +165,7 @@ void GeoWars::Finalize()
     scene->Remove(gun, STATIC);
     delete player;
     delete gun;
+    delete hud;
     delete scene;
 }
 
