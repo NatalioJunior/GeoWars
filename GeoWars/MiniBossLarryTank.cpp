@@ -14,7 +14,7 @@
 #include "GeoWars.h"
 #include <cmath>
 #include "Explosion.h"
-#include "EnemyProjectile.h"
+#include "Projectile.h"
 // ---------------------------------------------------------------------------------
 
 MiniBossLarryTank::MiniBossLarryTank(Instruction* vet, int tam, float pX, float pY)
@@ -177,12 +177,21 @@ void MiniBossLarryTank::Update()
 		break;
 	case SHOOT_THREE: 
 
-		GeoWars::scene->Add(new EnemyProjectile(x + (35 * cos(speed->Radians())), y - (35 * sin(speed->Radians())),2.0f), STATIC);
+		GeoWars::scene->Add(
+			new Projectile(
+				x + (35 * cos(speed->Radians())), y - (35 * sin(speed->Radians())),
+				Line::Angle(Point(x, y), Point(GeoWars::player->X(), GeoWars::player->Y()))-5,2.0f),
+			STATIC);
+		GeoWars::scene->Add(
+			new Projectile(x + (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
+				Line::Angle(Point(x, y), Point(GeoWars::player->X(), GeoWars::player->Y())),2.0f),
+			STATIC);
+		GeoWars::scene->Add(
+			new Projectile(x + (55 * cos(speed->Radians())), y - (55 * sin(speed->Radians())),
+				Line::Angle(Point(x, y), Point(GeoWars::player->X(), GeoWars::player->Y()))+5,2.0f),
+			STATIC);
 		
-		GeoWars::scene->Add(new EnemyProjectile(x + (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),2.0f), STATIC);
 		
-		GeoWars::scene->Add(new EnemyProjectile(x + (55 * cos(speed->Radians())), y - (55 * sin(speed->Radians())), 2.0f), STATIC);
-
 		break;
 	}
 
