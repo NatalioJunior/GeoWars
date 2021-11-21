@@ -15,6 +15,7 @@
 #include <cmath>
 #include "Explosion.h"
 #include "Projectile.h"
+#include "EnemyHit.h"
 // ---------------------------------------------------------------------------------
 
 MiniBossLarryTank::MiniBossLarryTank(Instruction* vet, int tam, float pX, float pY)
