@@ -53,7 +53,7 @@ void SpawnerA::Update()
 			//BasicAI::audio->Play(BLUE);
 
 			// adiciona nova inimigo
-			GeoWars::scene->Add(new Blue(x + (130 * cos(speed.Radians())), y - (130 * sin(speed.Radians())), GeoWars::player), MOVING);
+			GeoWars::scene->Add(new Blue(x + (45 * cos(speed.Radians())), y - (45 * sin(speed.Radians())), GeoWars::player), MOVING);
 			//GeoWars::scene->Add(new Soldier(pX+ 30, pY, GeoWars::player), MOVING);
 			GeoWars::scene->Add(new Soldier(x + (100 * cos(speed.Radians())), y - (100 * sin(speed.Radians())), GeoWars::player), MOVING);
 

@@ -46,14 +46,19 @@ Soldier::~Soldier()
 
 void Soldier::OnCollision(Object* obj)
 {
-	if (obj->Type() == MISSILE)
+	if (obj->Type() == MISSILE )
 	{
-		GeoWars::scene->Delete(this, MOVING);
 		GeoWars::scene->Delete(obj, STATIC);
-		GeoWars::scene->Add(new EnemyHit(x, y), STATIC);
+		GeoWars::scene->Delete(this, MOVING);
+		GeoWars::scene->Add(new EnemyHit(x, y), STATIC);	
 		//GeoWars::scene->Delete(obj, STATIC);
 		//GeoWars::scene->Delete(this, MOVING);
 		//GeoWars::scene->Play(EXPLODE);
+	}
+	else if (obj->Type() == PLAYER) {
+		GeoWars::scene->Delete(this, MOVING);
+		GeoWars::scene->Add(new EnemyHit(x, y), STATIC);
+
 	}
 	else {
 		

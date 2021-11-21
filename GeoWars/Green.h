@@ -29,9 +29,9 @@ private:
     Vector * speed;                     // velocidade e direção
     Player * player;                    // ponteiro para jogador
     int distance;                       // mantém distância do jogador
-    
+    float pX, pY;
 public:
-    Green(Player * p);                  // construtor
+    Green(float poX,float poY,Player * p);                  // construtor
     ~Green();                           // destrutor
     
     void OnCollision(Object* obj);      // resolução da colisão

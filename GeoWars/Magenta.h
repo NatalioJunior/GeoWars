@@ -36,7 +36,7 @@ private:
     RandF secs;                     // valor de segundos aleatório
     float delay;
 public:
-    Magenta(Player * p);                // construtor
+    Magenta(float pX,float pY,Player * p);                // construtor
     ~Magenta();                         // destrutor
     
     void NewDirection();

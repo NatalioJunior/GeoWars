@@ -27,7 +27,7 @@ SpawnerD::SpawnerD(float poX, float poY, float angleSpawn, float scale) : positi
 	BBox(new Poly(vertex, 4));
 	MoveTo(pX, pY);
 	// não enviar nova onda agora
-	newWave = false;
+	newWave = true;
 	waveDelay = delay.Rand();
 }
 

@@ -73,7 +73,7 @@ void Orange::OnCollision(Object* obj)
 		GeoWars::scene->Add(new Explosion(x, y), STATIC);
 		GeoWars::scene->Delete(this, MOVING);
 	}
-		//GeoWars::scene->Delete(this, MOVING);
+	//GeoWars::scene->Delete(this, MOVING);
 }
 
 // -------------------------------------------------------------------------------

@@ -16,17 +16,29 @@
 
 // ------------------------------------------------------------------------------
 
-SpawnerB::SpawnerB() : secs(10.0f, 15.0f)
+SpawnerB::SpawnerB(float posX, float posY, float angleSpawn, float scale) : secs(10.0f, 15.0f)
 {
     // atraso para a próxima onda 
     delay = secs.Rand();
+    sprite = new Sprite("Resources/Player.png");
+    // posição dos inimigos
+
+    angle = angleSpawn;
+    scaleF = scale;
+    Point vertex[4] =
+    {
+        Point(-75.0f,-70.0f), Point(75.0f,-70.0f), Point(75.0f,70.0f), Point(-75.0f, 70.0f)
+    };
+    BBox(new Poly(vertex, 4));
+    MoveTo(posX, posY);
+    type = SPAWNER;
 }
 
 // ------------------------------------------------------------------------------
 
 SpawnerB::~SpawnerB()
 {
-
+    delete sprite;
 }
 
 // -------------------------------------------------------------------------------
@@ -34,7 +46,7 @@ SpawnerB::~SpawnerB()
 void SpawnerB::Update()
 {
     // contador de inimigos
-    static uint counter = 8;
+    static uint counter = 2;
 
     // se passou o tempo de atraso
     if (timer.Elapsed(delay))
@@ -45,11 +57,13 @@ void SpawnerB::Update()
             //BasicAI::audio->Play(GREEN);
 
             // adiciona nova inimigo
-            /*BasicAI::scene->Add(new Green(50, 50, BasicAI::player), MOVING);
-            BasicAI::scene->Add(new Green(game->Width() - 50, 50, BasicAI::player), MOVING);
-            BasicAI::scene->Add(new Green(game->Width() - 50, game->Height() - 50, BasicAI::player), MOVING);
-            BasicAI::scene->Add(new Green(50, game->Height() - 50, BasicAI::player), MOVING);
-            */
+
+            Vector speed = Vector(angle, 1);
+            //GeoWars::scene->Add(new Green(50, 50, GeoWars::player), MOVING);
+            GeoWars::scene->Add(new Green(x + (130 * cos(speed.Radians())), y - (130 * sin(speed.Radians())), GeoWars::player), MOVING);
+            //GeoWars::scene->Add(new Green(game->Width() - 50, game->Height() - 50, GeoWars::player), MOVING);
+            //GeoWars::scene->Add(new Green(50, game->Height() - 50, GeoWars::player), MOVING);
+            
             delay = 0.450f;
             timer.Start();
             --counter;
@@ -57,7 +71,7 @@ void SpawnerB::Update()
         else
         {
             // nova onda
-            counter = 8;
+            counter = 2;
             delay = secs.Rand();
             timer.Start();
         }
@@ -68,7 +82,7 @@ void SpawnerB::Update()
 
 void SpawnerB::Draw()
 {
-
+    sprite->Draw(x, y, Layer::UPPER, scaleF * scale, 0, Color(0.5f, 0.5f, 1, 1));
 }
 
 // -------------------------------------------------------------------------------

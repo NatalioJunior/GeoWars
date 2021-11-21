@@ -61,9 +61,9 @@ void Delay::Update()
         GeoWars::audio->Play(THEME, true);
 
         //adiciona objetos na cena
-        GeoWars::scene->Add(new Magenta(GeoWars::player), MOVING);
+        GeoWars::scene->Add(new Magenta(500,200,GeoWars::player), MOVING);
         GeoWars::scene->Add(new Blue(150.0f,150.0f, GeoWars::player), MOVING);
-        GeoWars::scene->Add(new Green(GeoWars::player), MOVING);
+        GeoWars::scene->Add(new Green(500,500,GeoWars::player), MOVING);
         GeoWars::scene->Add(new Orange(150,150,180), MOVING);
         GeoWars::scene->Add(new Orange(150,150,90), MOVING);
         GeoWars::scene->Add(new Orange(2200,1500,45), MOVING);
@@ -72,6 +72,8 @@ void Delay::Update()
         GeoWars::scene->Add(new Soldier(2400,1500, GeoWars::player), MOVING);
         GeoWars::scene->Add(new Soldier(2400,1500, GeoWars::player), MOVING);
         GeoWars::scene->Add(new SpawnerA(230,230,0,2), MOVING);
+        GeoWars::scene->Add(new SpawnerB(2000,230,180,2), MOVING);
+        GeoWars::scene->Add(new SpawnerB(230,1600,0,2), MOVING);
         GeoWars::scene->Add(new SpawnerD(2000,1500,180,2), MOVING);
         GeoWars::scene->Add(new Orange(2400,1500,179), MOVING);
 

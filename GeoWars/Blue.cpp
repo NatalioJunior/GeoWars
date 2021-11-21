@@ -48,10 +48,15 @@ Blue::~Blue()
 
 void Blue::OnCollision(Object* obj)
 {
-	if (obj->Type() == MISSILE) {
+	if (obj->Type() == MISSILE ){
 		GeoWars::scene->Delete(this, MOVING);
 		GeoWars::scene->Delete(obj, STATIC);
 		GeoWars::scene->Add(new EnemyHit(x, y), STATIC);
+	}
+	else if (obj->Type() == PLAYER) {
+		GeoWars::scene->Delete(this, MOVING);
+		GeoWars::scene->Add(new EnemyHit(x, y), STATIC);
+
 	}
 	else {
 		Vector target = Vector(Line::Angle(Point(x, y), Point(obj->X(), obj->Y())), 120.0f * gameTime);
@@ -120,7 +125,7 @@ void Blue::Update()
 }
 void Blue::Draw()
 {
-	sprite->Draw(x, y, Layer::LOWER, .2f* scale, -Line::Angle(Point(x,y),Point(player->X(),player->Y())), Color(0.5f, 0.5f, 1.0f, 1.0f));
+	sprite->Draw(x, y, Layer::LOWER, .2f * scale, -Line::Angle(Point(x, y), Point(player->X(), player->Y())), Color(0.5f, 0.5f, 1.0f, 1.0f));
 }
 
 

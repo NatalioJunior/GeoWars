@@ -15,7 +15,7 @@
 
 // ---------------------------------------------------------------------------------
 
-Magenta::Magenta(Player * p) : magnitude(1, 4), angle(0, 359), secs(0.3f, 1.5f)
+Magenta::Magenta(float pX,float pY,Player * p) : magnitude(1, 4), angle(0, 359), secs(0.3f, 1.5f)
 {
     player = p;
     sprite = new Sprite("Resources/Magenta.png");
@@ -26,7 +26,7 @@ Magenta::Magenta(Player * p) : magnitude(1, 4), angle(0, 359), secs(0.3f, 1.5f)
     // move para uma posição aleatória (canto inferior esquerdo)
     RandF posX{ 300, 400 };
     RandF posY{ game->Height() - 400, game->Height() - 300 };
-    MoveTo(posX.Rand(), posY.Rand());
+    MoveTo(pX, pY);
     ScaleTo(0.25f);
 
     type = MAGENTA;

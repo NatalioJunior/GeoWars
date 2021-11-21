@@ -1,13 +1,3 @@
-/**********************************************************************************
-// WaveG (Arquivo de Cabeçalho)
-//
-// Criação:     06 Ago 2019
-// Atualização: 11 Nov 2021
-// Compilador:  Visual C++ 2019
-//
-// Descrição:   Cria uma onda de inimigos Green
-//
-**********************************************************************************/
 
 #ifndef _PLATANK_SPAWNERB_H_
 #define _PLATANK_SPAWNERB_H_
@@ -17,7 +7,7 @@
 #include "Object.h"
 #include "Timer.h"
 #include "Random.h"
-
+#include "Sprite.h"
 // --------------------------------------------------------------------------------
 
 class SpawnerB : public Object
@@ -26,9 +16,11 @@ private:
     RandF secs;             // valor aleatório de segundos
     Timer timer;            // medidor de tempo
     float delay;            // atraso para a próxima onda
-
+    float angle;
+    float scaleF;
+    Sprite* sprite;
 public:
-    SpawnerB();                // construtor
+    SpawnerB(float posX, float posY, float angleSpawn = 0, float scale = 1);                // construtor
     ~SpawnerB();               // destrutor
 
     void Update();          // atualização
