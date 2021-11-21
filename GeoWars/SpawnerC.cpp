@@ -3,7 +3,8 @@
 #include "GeoWars.h"
 #include "Magenta.h"
 #include "Hud.h"
-
+#include "EnemyHit.h"
+#include "Explosion.h"
 // ------------------------------------------------------------------------------
 
 SpawnerC::SpawnerC(float poX, float poY, float angleSpawn, float scale) :secs(2.0f, 4.0f)
@@ -53,7 +54,23 @@ void SpawnerC::Update()
         timer.Start();
     }
 }
+void SpawnerC::OnCollision(Object* obj) {
+    if (obj->Type() == MISSILE) {
+        GeoWars::scene->Add(new EnemyHit(obj->X(), obj->Y()), STATIC);
+        GeoWars::audio->Play(HITWALL);
+        GeoWars::scene->Delete(obj, STATIC);
+        currentLife -= 10;
+        if (currentLife <= 0) {
+            Vector speed = Vector(angle, 1);
+            GeoWars::scene->Add(new Explosion(x - 10 + (130 * cos(speed.Radians())), y - 14 - (130 * sin(speed.Radians()))), STATIC);
+            GeoWars::scene->Add(new Explosion(x + 10, y), STATIC);
+            GeoWars::scene->Add(new Explosion(x - 24, y), STATIC);
+            GeoWars::scene->Add(new Explosion(x + (40 * cos(speed.Radians())), 14 + y - (15 * sin(speed.Radians()))), STATIC);
+            GeoWars::scene->Delete(this, MOVING);
 
+        }
+    }
+}
 // -------------------------------------------------------------------------------
 
 void SpawnerC::Draw()

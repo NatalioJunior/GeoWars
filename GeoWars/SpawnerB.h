@@ -23,6 +23,9 @@ public:
     SpawnerB(float posX, float posY, float angleSpawn = 0, float scale = 1);                // construtor
     ~SpawnerB();               // destrutor
 
+    int life = 200;
+    int currentLife = life;
+    void OnCollision(Object* obj);
     void Update();          // atualização
     void Draw();            // desenho
 };
