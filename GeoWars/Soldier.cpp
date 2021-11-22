@@ -20,7 +20,7 @@
 
 // ---------------------------------------------------------------------------------
 
-Soldier::Soldier(float pX, float pY, Player* p) : weapon(0.0f,100.0f)
+Soldier::Soldier(float pX, float pY, Player* p) : weapon(0.0f,1.0f)
 {
 	player = p;
 	sprite = new Sprite("Resources/Magenta.png");

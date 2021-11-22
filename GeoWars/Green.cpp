@@ -52,10 +52,10 @@ Green::~Green()
 
 void Green::OnCollision(Object* obj)
 {
-	RandF weapon = RandF(0, 100);
+	RandF weapon = RandF(0.0f, 1.0f);
 		
 	if (obj->Type() == MISSILE) {
-		if (weapon.Rand() < 0.35f) {
+		if (weapon.Rand() < 0.25f) {
 			GeoWars::scene->Add(new Itens(SHOTGUN, x, y), STATIC);
 		}
 		GeoWars::player->score += 25;
