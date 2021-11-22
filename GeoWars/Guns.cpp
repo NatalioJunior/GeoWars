@@ -133,6 +133,7 @@ void Guns::Update() {
 								x - (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
 								-speed->Angle() - 190, 2.0f),
 							STATIC);
+						ammo -= 3;
 
 					}
 					break;
@@ -146,6 +147,7 @@ void Guns::Update() {
 						GeoWars::scene->Add(new MachineGunProjectile(x - 10 - (45 * cos(speed->Radians())), y - (cos(-speed->Angle() - 180) * 10) - (45 * sin(speed->Radians())),
 							-speed->Angle() - 180, 0.3f),
 							STATIC);
+						ammo -= 2;
 					}
 					break;
 				default:
@@ -171,12 +173,17 @@ void Guns::Update() {
 		}
 		if (window->KeyPress(VK_NUMPAD1)) {
 			activeGun = 1;
+			ammo += 60;
 		}
 		if (window->KeyPress(VK_NUMPAD0)) {
 			activeGun = 0;
 		}
 		if (window->KeyPress(VK_NUMPAD2)) {
 			activeGun = 2;
+			ammo += 100;
+		}
+		if (ammo <= 0) {
+			activeGun = 0;
 		}
 	}
 
