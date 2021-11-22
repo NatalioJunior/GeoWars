@@ -90,7 +90,7 @@ Hud::Hud()
     button = 0;
 
     posY = 64.0f;
-    posX = game->viewport.left + window->CenterX();
+    posX = 360.0f;
     applyPos = posX;
 }
 
@@ -381,26 +381,26 @@ void Hud::Update()
 
                 if (KeysTimed(DpadLeft)) {
                     GeoWars::audio->Play(POP);
-                    posX -= 53.2f;
-                    if (posX < 1813.0f) posX = 1813.0f;
+                    posX -= 120.0f;
+                    if (posX < -600) posX = -600;
                 }
 
                 if (KeysTimed(DpadRight)) {
                     GeoWars::audio->Play(POP);
-                    posX += 53.2f;
-                    if (posX > 2026.0f) posX = 2026.0f;
+                    posX += 120.0f;
+                    if (posX > 600.0f) posX = 600.0f;
                 }
             }
             else {
                 if (window->KeyPress(VK_RIGHT)) {
                     GeoWars::audio->Play(POP);
-                    posX += 53.2f;
-                    if (posX > 2026.0f) posX = 2026.0f;
+                    posX += 120.0f;
+                    if (posX > 600.0f) posX = 600.0f;
                 }
                 if (window->KeyPress(VK_LEFT)) {
                     GeoWars::audio->Play(POP);
-                    posX -= 53.2f;
-                    if (posX < 1813.0f) posX = 1813.0f;
+                    posX -= 120.0f;
+                    if (posX < -600) posX = -600;
                 }
             }
         }
@@ -420,22 +420,22 @@ void Hud::Update()
                 if (KeysTimed(ButtonA)) {
                     GeoWars::audio->Play(APPLY);
                     applyPos = posX;
-                    GeoWars::audio->Volume(THEME, (posX - 1813.0f) / 216.0f);
-                    GeoWars::audio->Volume(FIRE, (posX - 1813.0f) / 216.0f);
-                    GeoWars::audio->Volume(HITWALL, ((posX - 1813.0f) / 216.0f) - 0.45f);
-                    GeoWars::audio->Volume(EXPLODE, (posX - 1813.0f) / 216.0f);
-                    GeoWars::audio->Volume(START, (posX - 1813.0f) / 216.0f);
+                    GeoWars::audio->Volume(THEME, (posX + 600) / 1200.0f);
+                    GeoWars::audio->Volume(FIRE, (posX + 600) / 1200.0f);
+                    GeoWars::audio->Volume(HITWALL, ((posX + 600) / 1200.0f) - 0.45f);
+                    GeoWars::audio->Volume(EXPLODE, (posX + 600) / 1200.0f);
+                    GeoWars::audio->Volume(START, (posX + 600) / 1200.0f);
                 }
             }
             else {
                 if (window->KeyPress(VK_SPACE)) {
                     GeoWars::audio->Play(APPLY);
                     applyPos = posX;
-                    GeoWars::audio->Volume(THEME, (posX - 1813.0f) / 216.0f);
-                    GeoWars::audio->Volume(FIRE, (posX - 1813.0f) / 216.0f);
-                    GeoWars::audio->Volume(HITWALL, (posX - 1813.0f) / 216.0f);
-                    GeoWars::audio->Volume(EXPLODE, (posX - 1813.0f) / 216.0f);
-                    GeoWars::audio->Volume(START, (posX - 1813.0f) / 216.0f);
+                    GeoWars::audio->Volume(THEME, (posX + 600) / 1200.0f);
+                    GeoWars::audio->Volume(FIRE, (posX + 600) / 1200.0f);
+                    GeoWars::audio->Volume(HITWALL, ((posX + 600) / 1200.0f) - 0.45f);
+                    GeoWars::audio->Volume(EXPLODE, (posX + 600) / 1200.0f);
+                    GeoWars::audio->Volume(START, (posX + 600) / 1200.0f);
                 }
             }
         }
@@ -511,8 +511,8 @@ void Hud::Draw()
         anim5->Draw(game->viewport.left + window->CenterX() + 185.0f, game->viewport.top + window->Height() / 2 - 145.0f);
         anim6->Draw(game->viewport.left + window->CenterX(), game->viewport.top + window->Height() / 2 - 80.0f);
         anim7->Draw(game->viewport.left + window->CenterX(), game->viewport.top + window->Height() / 2 + 35.0f);
-        if (pop) slider->Draw(posX, game->viewport.top + window->Height() / 2 + 155.0f);
-        else slider->Draw(posX, game->viewport.top + window->Height() / 2 + 155.0f, Layer::MIDDLE, 1.0f, 0, Color{ 0.416f, 1.0f, 0.322f, 1.0f });
+        if (pop) slider->Draw(game->viewport.left + window->CenterX() + posX/5, game->viewport.top + window->Height() / 2 + 155.0f);
+        else slider->Draw(game->viewport.left + window->CenterX() + posX/5, game->viewport.top + window->Height() / 2 + 155.0f, Layer::MIDDLE, 1.0f, 0, Color{ 0.416f, 1.0f, 0.322f, 1.0f });
         break;
 
     case DEFEAT:
