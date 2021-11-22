@@ -8,12 +8,22 @@
 #include "Animation.h"
 #include "TileSet.h"
 #include "Timer.h"
+#include "Random.h"
 // ---------------------------------------------------------------------------------
 
 class LevelControll : public Object
 {
 private:
 	Timer timer;
+
+	RandI spawnerApX;
+	RandI spawnerApY;
+	RandI spawnerBpX;
+	RandI spawnerBpY;
+	RandI spawnerCpX;
+	RandI spawnerCpY;
+	RandI spawnerDpX;
+	RandI spawnerDpY;
 public:
 	LevelControll();        // construtor
 	~LevelControll();                         // destrutor

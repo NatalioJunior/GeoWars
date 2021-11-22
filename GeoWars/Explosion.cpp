@@ -25,6 +25,9 @@ Explosion::~Explosion()
 void Explosion::Update()
 {
 	anim->NextFrame();
+	if (anim->Inactive()) {
+		GeoWars::scene->Delete();
+	}
 }
 
 void Explosion::Draw() {

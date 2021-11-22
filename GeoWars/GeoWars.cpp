@@ -196,7 +196,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 
 	// configura motor
 	engine->window->Mode(WINDOWED);
-	engine->window->Size(1152, 648);
+	engine->window->Size(1880,1000);
 	//engine->window->Mode(BORDERLESS);
 	engine->window->Color(0, 0, 0);
 	engine->window->Title("GeoWars");

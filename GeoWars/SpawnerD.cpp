@@ -94,7 +94,7 @@ void SpawnerD::Update()
 				posY = game->Height() - 100;
 				for (int i = 0; i < numY; ++i)
 				{
-					GeoWars::scene->Add(new Orange(game->Width() - 50, posY, 180), MOVING);
+					GeoWars::scene->Add(new Orange(game->Width() - 50, posY, 45), MOVING);
 					posY -= 50;
 				}
 				break;

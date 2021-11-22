@@ -7,9 +7,16 @@
 #include "SpawnerD.h"
 // ------------------------------------------------------------------------------
 
-LevelControll::LevelControll()
+LevelControll::LevelControll() :spawnerApX(230, 799), spawnerApY(230,500), spawnerBpX(1800,2300), spawnerBpY(230,500), spawnerCpX(230,799), spawnerCpY(1400,1600), spawnerDpX(1800,2300), spawnerDpY(1400,1600)
 {
-	
+	//spawnerApX
+	//spawnerApY
+	//spawnerBpX
+	//spawnerBpY
+	//spawnerCpX
+	//spawnerCpY
+	//spawnerDpX
+	//spawnerDpY
 }
 
 // ------------------------------------------------------------------------------
@@ -23,6 +30,7 @@ LevelControll::~LevelControll()
 void LevelControll::Update()
 {
 	if (GeoWars::nMiniboss == 0) {
+
 	}
 
 	if (GeoWars::nSpawners <= 0) {
@@ -47,12 +55,12 @@ void LevelControll::Update()
 		};
 		GeoWars::scene->Add(new MiniBossLarryTank(larryScriptTest1, size1, 1500, 1500), MOVING);
 		*/
-		GeoWars::worldDifficulty += 10;
+		GeoWars::worldDifficulty += 1;
 
-		GeoWars::scene->Add(new SpawnerA(230, 230, 0, 2), MOVING);
-		GeoWars::scene->Add(new SpawnerB(2000, 230, 180, 2), MOVING);
-		GeoWars::scene->Add(new SpawnerC(230, 1600, 0, 2), MOVING);
-		GeoWars::scene->Add(new SpawnerD(2000, 1500, 180, 2), MOVING);
+		GeoWars::scene->Add(new SpawnerA(spawnerApX.Rand(), spawnerApY.Rand(), 0, 2), MOVING);
+		GeoWars::scene->Add(new SpawnerB(spawnerBpX.Rand(), spawnerBpY.Rand(), 180, 2), MOVING);
+		GeoWars::scene->Add(new SpawnerC(spawnerCpX.Rand(), spawnerCpY.Rand(), 0, 2), MOVING);
+		GeoWars::scene->Add(new SpawnerD(spawnerDpX.Rand(), spawnerDpY.Rand(), 180, 2), MOVING);
 		timer.Reset();
 		timer.Stop();
 		

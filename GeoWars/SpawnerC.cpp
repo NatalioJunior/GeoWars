@@ -7,7 +7,7 @@
 #include "Explosion.h"
 // ------------------------------------------------------------------------------
 
-SpawnerC::SpawnerC(float poX, float poY, float angleSpawn, float scale) :secs(2.0f, 4.0f)
+SpawnerC::SpawnerC(float poX, float poY, float angleSpawn, float scale) :secs(10.0f, 20.0f)
 {
 	sprite = new Sprite("Resources/SpawnerD.png");
 	// posição dos inimigos
