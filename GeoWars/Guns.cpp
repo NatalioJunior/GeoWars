@@ -120,17 +120,17 @@ void Guns::Update() {
 						GeoWars::scene->Add(new Light(x, y), STATIC);
 						GeoWars::scene->Add(
 							new PlasmaBall(
-								x + (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
+								x - (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
 								-speed->Angle() - 170, 2.0f),
 							STATIC);
 						GeoWars::scene->Add(
 							new PlasmaBall(
-								x + (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
+								x - (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
 								-speed->Angle() - 180, 2.0f),
 							STATIC);
 						GeoWars::scene->Add(
 							new PlasmaBall(
-								x + (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
+								x - (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
 								-speed->Angle() - 190, 2.0f),
 							STATIC);
 
@@ -140,12 +140,11 @@ void Guns::Update() {
 					if (KeysTimed(0.13f)) {
 						GeoWars::scene->Add(new Light(x, y), STATIC);
 						GeoWars::audio->Play(FIRE);
-						GeoWars::scene->Add(new MachineGunProjectile(x + 10 + (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
-							-speed->Angle() - 180, .3f),
+						GeoWars::scene->Add(new MachineGunProjectile(x + 10 - (45 * cos(speed->Radians())), y + (cos(-speed->Angle() - 180) * 10) - (45 * sin(speed->Radians())),
+							-speed->Angle() - 180, 0.3f),
 							STATIC);
-						//GeoWars::audio->Play(FIRE);
-						GeoWars::scene->Add(new MachineGunProjectile(x - 10 + (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
-							-speed->Angle() - 180, .3f),
+						GeoWars::scene->Add(new MachineGunProjectile(x - 10 - (45 * cos(speed->Radians())), y - (cos(-speed->Angle() - 180) * 10) - (45 * sin(speed->Radians())),
+							-speed->Angle() - 180, 0.3f),
 							STATIC);
 					}
 					break;
