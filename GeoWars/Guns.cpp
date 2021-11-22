@@ -140,14 +140,6 @@ void Guns::Update() {
 			}
 			break;
 		}
-
-		//Controla a frequência de disparos
-		if (AxisTimed(ThumbRX, ThumbRY, 0.5f))
-		{
-			GeoWars::audio->Play(FIRE);
-			GeoWars::scene->Add(new Missile(), STATIC);
-
-		}
 	}
 	else {
 
@@ -263,12 +255,12 @@ void Guns::Update() {
 				}
 			}
 		}
-		if (ammo <= 0) {
-			activeGun = 0;
-			ammo = -1;
-		}
 	}
 
+	if (ammo <= 0) {
+		activeGun = 0;
+		ammo = -1;
+	}
 }
 
 inline void Guns::Draw()

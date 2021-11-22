@@ -104,7 +104,7 @@ void Player::OnCollision(Object* obj) {
         if (obj->Type() == SHOTGUNITEM) {
             GeoWars::audio->Play(SHOTGUN);
             gun->activeGun = 1;
-            gun->ammo = 90;
+            gun->ammo = 21;
             GeoWars::scene->Delete(obj, STATIC);
         }
 
