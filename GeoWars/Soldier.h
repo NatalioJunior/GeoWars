@@ -27,7 +27,7 @@ class Soldier : public Object
 private:
     Sprite* sprite;                            // sprite do objeto
     Player* player;                            // ponteiro para jogador
-    Vector speed;                               // velocidade e direção
+    Vector * speed;                               // velocidade e direção
     Timer timer;
 public:
     Soldier(float pX, float pY, Player* p);    // construtor
@@ -42,7 +42,7 @@ public:
 
 inline void Soldier::Draw()
 {
-    sprite->Draw(x, y, Layer::LOWER, 0.2f* scale, -rotation);
+    sprite->Draw(x, y, Layer::LOWER, 0.2f* scale, -Line::Angle(Point(x, y), Point(player->X(), player->Y())));
 }
 
 // ---------------------------------------------------------------------------------

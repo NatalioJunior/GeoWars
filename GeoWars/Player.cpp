@@ -36,7 +36,7 @@ Player::Player()
     {
         Point(-37.5f,-35.0f), Point(37.5f,-35.0f), Point(37.5f,35.0f), Point(-37.0f, 35.0f)
     };
-    BBox(new Poly(vertex, 4));
+    BBox(new Rect(-37.5f, -35.0f, 37.5f, 35.0f));
 
     MoveTo(game->CenterX(), game->CenterY());
     type = PLAYER;
@@ -71,8 +71,14 @@ Player::~Player()
 
 
 void Player::OnCollision(Object* obj) {
-        if (obj->Type() == ORANGE) {
-            defeat = true;
+        //if (obj->Type() == ORANGE) {
+        //    defeat = true;
+        //}
+        if (obj->Type() == SPAWNER) {
+            motor = false;
+            speed->RotateTo(speed->Angle() + 180);
+            speed->ScaleTo(10.0f);
+            timer.Start();
         }
 }
 // -------------------------------------------------------------------------------
@@ -94,61 +100,65 @@ void Player::Update()
     // magnitude do vetor aceleração
     float accel = 40.0f * gameTime;
 
-    if (ControllerOn) {
-        gamepad->XboxUpdateState(XboxPlayer);
+    if (!motor && timer.Elapsed(0.25f)) motor = true;
 
-        float ang = Line::Angle(Point(0, 0), Point(gamepad->XboxAnalog(ThumbLX) / 327.67f, -gamepad->XboxAnalog(ThumbLY) / 327.67f));
-        float mag = Point::Distance(Point(0, 0), Point(gamepad->XboxAnalog(ThumbLX) / 327.67f, -gamepad->XboxAnalog(ThumbLY) / 327.67f));
+    if (motor) {
+        if (ControllerOn) {
+            gamepad->XboxUpdateState(XboxPlayer);
 
-        // nenhuma direção selecionada
-        if (mag == 0)
-        {
-            // se a velocidade estiver muita baixa
-            if (speed->Magnitude() < 0.1)
+            float ang = Line::Angle(Point(0, 0), Point(gamepad->XboxAnalog(ThumbLX) / 327.67f, -gamepad->XboxAnalog(ThumbLY) / 327.67f));
+            float mag = Point::Distance(Point(0, 0), Point(gamepad->XboxAnalog(ThumbLX) / 327.67f, -gamepad->XboxAnalog(ThumbLY) / 327.67f));
+
+            // nenhuma direção selecionada
+            if (mag == 0)
             {
-                // apenas pare
-                speed->ScaleTo(0.0f);
+                // se a velocidade estiver muita baixa
+                if (speed->Magnitude() < 0.1)
+                {
+                    // apenas pare
+                    speed->ScaleTo(0.0f);
+                }
+                else
+                {
+                    // comece a frear
+                    Move(Vector(speed->Angle() + 180.0f, 5.0f * gameTime));
+                }
             }
             else
             {
-                // comece a frear
-                Move(Vector(speed->Angle() + 180.0f, 5.0f * gameTime));
+                // ande na direção selecionada
+                Move(Vector(ang, mag * gameTime));
             }
-        }
-        else
-        {
-            // ande na direção selecionada
-            Move(Vector(ang, mag * gameTime));
-        }
 
-    }
-    else {
-        // modifica vetor velocidade do player
-        if (window->KeyDown(VK_RIGHT) && window->KeyDown(VK_UP))
-            Move(Vector(45.0f, accel));
-        else if (window->KeyDown(VK_LEFT) && window->KeyDown(VK_UP))
-            Move(Vector(135.0f, accel));
-        else if (window->KeyDown(VK_LEFT) && window->KeyDown(VK_DOWN))
-            Move(Vector(225.0f, accel));
-        else if (window->KeyDown(VK_RIGHT) && window->KeyDown(VK_DOWN))
-            Move(Vector(315.0f, accel));
-        else if (window->KeyDown(VK_RIGHT))
-            Move(Vector(0.0f, accel));
-        else if (window->KeyDown(VK_LEFT))
-            Move(Vector(180.0f, accel));
-        else if (window->KeyDown(VK_UP))
-            Move(Vector(90.0f, accel));
-        else if (window->KeyDown(VK_DOWN))
-            Move(Vector(270.0f, accel));
-        else
-            // se nenhuma tecla está pressionada comece a frear
-            if (speed->Magnitude() > 0.1f)
-                Move(Vector(speed->Angle() + 180.0f, 5.0f * gameTime));
+        }
+        else {
+            // modifica vetor velocidade do player
+            if (window->KeyDown(VK_RIGHT) && window->KeyDown(VK_UP))
+                Move(Vector(45.0f, accel));
+            else if (window->KeyDown(VK_LEFT) && window->KeyDown(VK_UP))
+                Move(Vector(135.0f, accel));
+            else if (window->KeyDown(VK_LEFT) && window->KeyDown(VK_DOWN))
+                Move(Vector(225.0f, accel));
+            else if (window->KeyDown(VK_RIGHT) && window->KeyDown(VK_DOWN))
+                Move(Vector(315.0f, accel));
+            else if (window->KeyDown(VK_RIGHT))
+                Move(Vector(0.0f, accel));
+            else if (window->KeyDown(VK_LEFT))
+                Move(Vector(180.0f, accel));
+            else if (window->KeyDown(VK_UP))
+                Move(Vector(90.0f, accel));
+            else if (window->KeyDown(VK_DOWN))
+                Move(Vector(270.0f, accel));
             else
-                // velocidade muita baixa, não use soma vetorial, apenas pare
-                speed->ScaleTo(0.0f);
+                // se nenhuma tecla está pressionada comece a frear
+                if (speed->Magnitude() > 0.1f)
+                    Move(Vector(speed->Angle() + 180.0f, 5.0f * gameTime));
+                else
+                    // velocidade muita baixa, não use soma vetorial, apenas pare
+                    speed->ScaleTo(0.0f);
+        }
     }
-    
+      
     // movimenta objeto pelo seu vetor velocidade
     Translate(speed->XComponent() * 50.0f * gameTime, -speed->YComponent() * 50.0f * gameTime);
 

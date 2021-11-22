@@ -42,7 +42,7 @@ public:
 // ---------------------------------------------------------------------------------
 
 inline void Green::Draw()
-{ sprite->Draw(x, y, Layer::LOWER, scale, rotation); }
+{ sprite->Draw(x, y, Layer::UPPER, scale, rotation); }
 
 // ---------------------------------------------------------------------------------
 

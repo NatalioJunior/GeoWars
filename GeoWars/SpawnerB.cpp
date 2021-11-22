@@ -26,11 +26,7 @@ SpawnerB::SpawnerB(float posX, float posY, float angleSpawn, float scale) : secs
 
     angle = angleSpawn;
     scaleF = scale;
-    Point vertex[4] =
-    {
-        Point(-75.0f,-70.0f), Point(75.0f,-70.0f), Point(75.0f,70.0f), Point(-75.0f, 70.0f)
-    };
-    BBox(new Poly(vertex, 4));
+    BBox(new Rect(-75.0f, -70.0f, 75.0f, 70.0f));
     MoveTo(posX, posY);
     type = SPAWNER;
 }
@@ -99,7 +95,7 @@ void SpawnerB::OnCollision(Object* obj) {
 
 void SpawnerB::Draw()
 {
-    sprite->Draw(x, y, Layer::UPPER, scaleF * scale, 0, Color(0.5f, 0.5f, 1, 1));
+    sprite->Draw(x, y, Layer::LOWER, scaleF * scale, 0, Color(0.5f, 0.5f, 1, 1));
 }
 
 // -------------------------------------------------------------------------------

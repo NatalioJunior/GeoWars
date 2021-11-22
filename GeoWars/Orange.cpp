@@ -172,8 +172,8 @@ void Orange::Update()
 
 void Orange::Draw()
 {
-	anim->Draw(x, y, Layer::LOWER, scale, rotation - 90.0f);
-	tail->Draw(Layer::LOWER, 1.0f);
+	anim->Draw(x, y, Layer::UPPER, scale, rotation - 90.0f);
+	tail->Draw(Layer::UPPER, 1.0f);
 }
 
 // -------------------------------------------------------------------------------

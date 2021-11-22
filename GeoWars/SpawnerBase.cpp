@@ -18,11 +18,7 @@ SpawnerBase::SpawnerBase(float posX, float posY, float angleSpawn,float scale) :
 	scaleF = scale;
 	// atraso para a próxima onda 
 	delay = secs.Rand();
-	Point vertex[4] =
-	{
-		Point(-75.0f,-70.0f), Point(75.0f,-70.0f), Point(75.0f,70.0f), Point(-75.0f, 70.0f)
-	};
-	BBox(new Poly(vertex, 4));
+	BBox(new Rect(-75.0f, -70.0f, 75.0f, 70.0f));
 	MoveTo(pX, pY);
 	type = SPAWNER;
 }
@@ -97,7 +93,7 @@ void SpawnerBase::OnCollision(Object* obj) {
 
 void SpawnerBase::Draw()
 {
-	sprite->Draw(x, y, Layer::UPPER, scaleF* scale, 0, Color(1, 1, 1, 1));
+	sprite->Draw(x, y, Layer::LOWER, scaleF* scale, 0, Color(1, 1, 1, 1));
 }
 
 // -------------------------------------------------------------------------------
