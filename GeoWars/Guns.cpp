@@ -1,7 +1,9 @@
 #include "Guns.h"
 #include "GeoWars.h"
 #include "Missile.h"
-
+#include "Projectile.h"
+#include "PlasmaBall.h"
+#include "Light.h"
 int Guns::ammo = -1;
 bool Guns::mouseOn = true;
 
@@ -14,6 +16,8 @@ Guns::Guns() {
 	keysCtrl = true;
 	start = 0;
 	timer.Start();
+
+	activeGun = 0;
 }
 
 Guns::~Guns() {
@@ -89,21 +93,62 @@ void Guns::Update() {
 		{
 			GeoWars::audio->Play(FIRE);
 			GeoWars::scene->Add(new Missile(), STATIC);
-			
+
 		}
 	}
 	else {
+
 		if (mouseOn) {
 			speed->RotateTo(-Line::Angle(Point(x - game->viewport.left, y - game->viewport.top), Point(window->MouseX(), window->MouseY())) - 180.0f);
 
 			// dispara míssil
 			if (window->KeyDown(VK_LBUTTON))
 			{
-				if (KeysTimed(0.5f)) {
-					GeoWars::audio->Play(FIRE);
-					GeoWars::scene->Add(new Missile(), STATIC);
+				switch (activeGun)
+				{
+				case 0:
+					if (KeysTimed(0.5f)) {
+						GeoWars::scene->Add(new Light(x, y), STATIC);
+						GeoWars::audio->Play(FIRE);
+						GeoWars::scene->Add(new Missile(), STATIC);
+					}
+					break;
+				case 1:
+					if (KeysTimed(0.9f)) {
+						GeoWars::audio->Play(FIRE);
+						GeoWars::scene->Add(new Light(x, y), STATIC);
+						GeoWars::scene->Add(
+							new PlasmaBall(
+								x + (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
+								-speed->Angle() - 170, 2.0f),
+							STATIC);
+						GeoWars::scene->Add(
+							new PlasmaBall(
+								x + (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
+								-speed->Angle() - 180, 2.0f),
+							STATIC);
+						GeoWars::scene->Add(
+							new PlasmaBall(
+								x + (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
+								-speed->Angle() - 190, 2.0f),
+							STATIC);
+
+
+
+					}
+					break;
+				case 2:
+					if (KeysTimed(0.25f)) {
+						GeoWars::scene->Add(new Light(x, y), STATIC);
+						GeoWars::audio->Play(FIRE);
+						GeoWars::scene->Add(new Missile(), STATIC);
+					}
+					break;
+				default:
+					break;
 				}
 			}
+
 		}
 		else {
 			if (window->KeyDown('W'))
@@ -119,8 +164,18 @@ void Guns::Update() {
 					GeoWars::scene->Add(new Missile(), STATIC);
 				}
 			}
-		}		
+		}
+		if (window->KeyPress(VK_NUMPAD1)) {
+			activeGun = 1;
+		}
+		if (window->KeyPress(VK_NUMPAD0)) {
+			activeGun = 0;
+		}
+		if (window->KeyPress(VK_NUMPAD2)) {
+			activeGun = 2;
+		}
 	}
+
 }
 
 inline void Guns::Draw()

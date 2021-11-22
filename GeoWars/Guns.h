@@ -28,7 +28,7 @@ public:
 
     bool AxisTimed(int axisX, int axisY, float time);
     bool KeysTimed(float time);
-
+    uint activeGun;
     Guns();                         // construtor
     ~Guns();                        // destrutor
 
