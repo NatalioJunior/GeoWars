@@ -32,13 +32,13 @@ private:
     bool motor = true;
     Timer timer;
 
-
 public:
     static Controller* gamepad;                // controle de jogo
     static bool ControllerOn;
     static uint XboxPlayer;
     static bool defeat;
     static int score;
+    static int currentLife;
 
     Guns * gun = nullptr;               // referência à arma atual do player
     Vector * speed;                     // velocidade e direção
@@ -46,6 +46,7 @@ public:
     Player();                           // construtor
     ~Player();                          // destrutor
     
+    void Reset();
     void OnCollision(Object* obj);             // resolução da colisão
     void Move(Vector && v);             // movimenta jogador
     void Update();                      // atualização

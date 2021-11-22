@@ -34,9 +34,7 @@ Delay::Delay() : randomX(480.0f, 2512.0f), randomY(270.0f, 1588.0f)
     posX = randomX.Rand();
     posY = randomY.Rand();
 
-    GeoWars::player->defeat = false;
-    GeoWars::player->score = 0;
-    GeoWars::player->MoveTo(game->CenterX(), game->CenterY());
+    GeoWars::player->Reset();
     GeoWars::scene->Add(GeoWars::player, MOVING);
     GeoWars::scene->Add(GeoWars::gun, STATIC);
 }
@@ -51,14 +49,14 @@ Delay::~Delay()
 
 void Delay::Update()
 {
-    if (notPlayed && timer.Elapsed(2.0f))
+    if (notPlayed && timer.Elapsed(0.3f))
     {
         // toca áudio de introdução
         GeoWars::audio->Play(START);
         notPlayed = false;
     }
 
-    if (timer.Elapsed(4.0f))
+    if (timer.Elapsed(7.1f))
     {
         // toca música do jogo
         GeoWars::audio->Play(THEME, true);
@@ -91,7 +89,7 @@ void Delay::Update()
         GeoWars::scene->Add(new Soldier(2400,1500, GeoWars::player), MOVING);
         GeoWars::scene->Add(new SpawnerA(230,230,0,2), MOVING);
         GeoWars::scene->Add(new SpawnerB(2000,230,180,2), MOVING);
-        GeoWars::scene->Add(new SpawnerB(230,1600,0,2), MOVING);
+        GeoWars::scene->Add(new SpawnerC(230,1600,0,2), MOVING);
         GeoWars::scene->Add(new SpawnerD(2000,1500,180,2), MOVING);
         GeoWars::scene->Add(new Orange(2400,1500,179), MOVING);
 

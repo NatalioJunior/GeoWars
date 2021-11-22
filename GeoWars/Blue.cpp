@@ -49,6 +49,7 @@ Blue::~Blue()
 void Blue::OnCollision(Object* obj)
 {
 	if (obj->Type() == MISSILE ){
+		GeoWars::player->score += 10;
 		GeoWars::scene->Delete(this, MOVING);
 		GeoWars::scene->Delete(obj, STATIC);
 		GeoWars::scene->Add(new EnemyHit(x, y), STATIC);
@@ -56,7 +57,6 @@ void Blue::OnCollision(Object* obj)
 	else if (obj->Type() == PLAYER) {
 		GeoWars::scene->Delete(this, MOVING);
 		GeoWars::scene->Add(new EnemyHit(x, y), STATIC);
-
 	}
 	if (obj->Type() == BLUE || obj->Type() == SOLDIER || obj->Type() == SPAWNER) {
 		Vector target = Vector(Line::Angle(Point(x, y), Point(obj->X(), obj->Y())), 120.0f * gameTime);
@@ -81,8 +81,8 @@ void Blue::Update()
 
 	// limita a magnitude da velocidade para impedir 
 	// que ela cresça indefinidamente pelo soma vetorial
-	if (speed->Magnitude() > 2.5f)
-		speed->ScaleTo(2.5f);
+	if (speed->Magnitude() > 3.5f)
+		speed->ScaleTo(3.5f);
 
 	// move o objeto pelo seu vetor velocidade
 	//Translate(speed->XComponent() * 50.0f * gameTime, -speed->YComponent() * 50.0f * gameTime);
@@ -114,7 +114,7 @@ void Blue::Update()
 	if (y > game->Height() - 50)
 		MoveTo(x, game->Height() - 50);
 
-	if (timer.Elapsed() >= 9.0f) {
+	if (timer.Elapsed() >= 8.0f) {
 
 		GeoWars::scene->Add(new EnemyProjectile(x, y), STATIC);
 		GeoWars::scene->Add(new Light(x + (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians()))), STATIC);

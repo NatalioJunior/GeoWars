@@ -49,7 +49,7 @@ Green::~Green()
 void Green::OnCollision(Object* obj)
 {
 	if (obj->Type() == MISSILE) {
-
+		GeoWars::player->score += 25;
 		GeoWars::scene->Delete(obj, STATIC);
 		GeoWars::scene->Add(new Explosion(x, y), STATIC);
 		GeoWars::scene->Delete(this, MOVING);

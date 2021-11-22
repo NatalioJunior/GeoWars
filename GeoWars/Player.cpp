@@ -13,6 +13,9 @@
 #include "GeoWars.h"
 #include "Missile.h"
 #include "Hud.h"
+#include "Light.h"
+#include "Explosion.h"
+
 
 // -------------------------------------------------------------------------------
 
@@ -21,6 +24,7 @@ bool Player::ControllerOn = false;
 uint Player::XboxPlayer = PLAYER1;
 bool Player::defeat = false;
 int Player::score = 0;
+int Player::currentLife = 100;
 
 Player::Player()
 {
@@ -67,9 +71,11 @@ Player::~Player()
 
 
 void Player::OnCollision(Object* obj) {
-        //if (obj->Type() == ORANGE) {
-        //    defeat = true;
-        //}
+        if (obj->Type() == ORANGE) {
+            currentLife -= 10;
+            GeoWars::scene->Add(new Explosion(obj->X(), obj->Y()), STATIC);
+            GeoWars::scene->Delete(obj, MOVING);
+        }
         if (obj->Type() == SPAWNER) {
             motor = false;
             speed->RotateTo(speed->Angle() + 180);
@@ -80,6 +86,12 @@ void Player::OnCollision(Object* obj) {
             if (speed->Magnitude() > 0.1f) {
                 speed->Rotate(300 * gameTime);
             }
+        }
+
+        if (obj->Type() == ENMEY_PROJECTILE) {
+            currentLife -= 1;
+            GeoWars::scene->Add(new Light(obj->X(), obj->Y()), STATIC);
+            GeoWars::scene->Delete(obj, STATIC);
         }
 }
 // -------------------------------------------------------------------------------
@@ -94,6 +106,15 @@ void Player::Move(Vector && v)
 
 }
 
+
+void Player::Reset() {
+    defeat = false;
+    score = 0;
+    MoveTo(game->CenterX(), game->CenterY());
+    currentLife = 100;
+    speed->Rotate(0);
+    speed->ScaleTo(0);
+}
 // -------------------------------------------------------------------------------
 
 void Player::Update()
@@ -182,6 +203,8 @@ void Player::Update()
 
     //Rotaciona o object para que seu bbox use o angulo calculado
     RotateTo(-speed->Angle() + 90.0f);
+
+    if (currentLife < 10) defeat = true;
 }
 
 // ---------------------------------------------------------------------------------

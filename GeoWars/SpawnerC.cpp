@@ -9,7 +9,7 @@
 
 SpawnerC::SpawnerC(float poX, float poY, float angleSpawn, float scale) :secs(2.0f, 4.0f)
 {
-    sprite = new Sprite("Resources/Player.png");
+    sprite = new Sprite("Resources/SpawnerD.png");
     // posição dos inimigos
     pX = poX;
     pY = poY;
@@ -57,6 +57,7 @@ void SpawnerC::OnCollision(Object* obj) {
         GeoWars::scene->Delete(obj, STATIC);
         currentLife -= 10;
         if (currentLife <= 0) {
+            GeoWars::player->score += 300;
             Vector speed = Vector(angle, 1);
             GeoWars::scene->Add(new Explosion(x - 10 + (130 * cos(speed.Radians())), y - 14 - (130 * sin(speed.Radians()))), STATIC);
             GeoWars::scene->Add(new Explosion(x + 10, y), STATIC);

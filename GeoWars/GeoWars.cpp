@@ -30,13 +30,16 @@ void GeoWars::Init()
     audio = new Audio();
     audio->Add(THEME, "Resources/Theme.wav");
     audio->Add(FIRE, "Resources/Fire.wav", 18);
-    audio->Add(HITWALL, "Resources/Hitwall.wav");
+    audio->Add(HITWALL, "Resources/Hitwall.wav", 5);
     audio->Add(EXPLODE, "Resources/Explode.wav");
     audio->Add(START, "Resources/Start.wav");
     audio->Add(CURSOR, "Resources/CursorMove.wav", 7);
     audio->Add(CONFIRM, "Resources/Confirm.wav");
     audio->Add(CANCEL, "Resources/Cancel.wav");
     audio->Add(APPLY, "Resources/Apply.wav");
+    audio->Add(POP, "Resources/Pop.wav", 3);
+
+    audio->Volume(HITWALL, 0.25f);
 
     // carrega/incializa objetos
     backg   = new Background("Resources/Arena.jpg");
