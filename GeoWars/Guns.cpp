@@ -137,13 +137,13 @@ void Guns::Update() {
 					}
 					break;
 				case 2:
-					if (KeysTimed(0.1f)) {
+					if (KeysTimed(0.13f)) {
 						GeoWars::scene->Add(new Light(x, y), STATIC);
 						GeoWars::audio->Play(FIRE);
 						GeoWars::scene->Add(new MachineGunProjectile(x + 10 + (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
 							-speed->Angle() - 180, .3f),
 							STATIC);
-						GeoWars::audio->Play(FIRE);
+						//GeoWars::audio->Play(FIRE);
 						GeoWars::scene->Add(new MachineGunProjectile(x - 10 + (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
 							-speed->Angle() - 180, .3f),
 							STATIC);
