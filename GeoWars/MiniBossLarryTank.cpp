@@ -22,7 +22,7 @@ MiniBossLarryTank::MiniBossLarryTank(Instruction* vet, int tam, float pX, float 
 	: angle(-8, 8), magnitude(1, 8)
 {
 
-	sprite = new Sprite("Resources/Player.png");
+	sprite = new Sprite("Resources/tank_huge.png");
 	speed = new Vector(90.0f, 0.0f);
 	// tipo do alien
 	type = MINI_BOSS;

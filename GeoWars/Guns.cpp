@@ -4,6 +4,7 @@
 #include "Projectile.h"
 #include "PlasmaBall.h"
 #include "Light.h"
+#include "MachinegunProjectile.h"
 int Guns::ammo = -1;
 bool Guns::mouseOn = true;
 
@@ -133,15 +134,19 @@ void Guns::Update() {
 								-speed->Angle() - 190, 2.0f),
 							STATIC);
 
-
-
 					}
 					break;
 				case 2:
-					if (KeysTimed(0.25f)) {
+					if (KeysTimed(0.1f)) {
 						GeoWars::scene->Add(new Light(x, y), STATIC);
 						GeoWars::audio->Play(FIRE);
-						GeoWars::scene->Add(new Missile(), STATIC);
+						GeoWars::scene->Add(new MachineGunProjectile(x + 10 + (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
+							-speed->Angle() - 180, .3f),
+							STATIC);
+						GeoWars::audio->Play(FIRE);
+						GeoWars::scene->Add(new MachineGunProjectile(x - 10 + (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
+							-speed->Angle() - 180, .3f),
+							STATIC);
 					}
 					break;
 				default:
