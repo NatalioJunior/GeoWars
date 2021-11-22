@@ -16,10 +16,11 @@
 #include "Light.h"
 #include "EnemyProjectile.h"
 #include "EnemyHit.h"
+#include "Itens.h"
 
 // ---------------------------------------------------------------------------------
 
-Soldier::Soldier(float pX, float pY, Player* p)
+Soldier::Soldier(float pX, float pY, Player* p) : weapon(0.0f,100.0f)
 {
 	player = p;
 	sprite = new Sprite("Resources/Magenta.png");
@@ -47,11 +48,14 @@ void Soldier::OnCollision(Object* obj)
 {
 	if (obj->Type() == MISSILE)
 	{
+		if (weapon.Rand() < 0.25f) {
+			GeoWars::scene->Add(new Itens(HEAVY, x, y), STATIC);
+		}
 		GeoWars::player->score += 5;
 		GeoWars::scene->Delete(obj, STATIC);
-		GeoWars::scene->Delete(this, MOVING);
 		GeoWars::scene->Add(new EnemyHit(x, y), STATIC);
 		GeoWars::nSoldier -= 1;
+		GeoWars::scene->Delete(this, MOVING);
 	}
 	else if (obj->Type() == PLAYER) {
 		GeoWars::scene->Delete(this, MOVING);

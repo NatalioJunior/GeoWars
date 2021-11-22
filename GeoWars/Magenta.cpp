@@ -13,6 +13,7 @@
 #include "Magenta.h"
 #include "Random.h" 
 #include "Explosion.h"
+#include "Itens.h"
 
 // ---------------------------------------------------------------------------------
 
@@ -60,7 +61,12 @@ void Magenta::NewDirection()
 
 void Magenta::OnCollision(Object * obj)
 {
+    RandF weapon = RandF(0, 100);
+
     if (obj->Type() == MISSILE) {
+        if (weapon.Rand() < 0.35f) {
+            GeoWars::scene->Add(new Itens(SHOTGUN, x, y), STATIC);
+        }
         GeoWars::scene->Delete(obj, STATIC);
         GeoWars::scene->Add(new Explosion(x, y), STATIC);
         GeoWars::scene->Delete(this, MOVING);

@@ -20,6 +20,7 @@
 #include "Vector.h"
 #include "Player.h"
 #include "Timer.h"
+#include "Random.h"
 // ---------------------------------------------------------------------------------
 
 class Soldier : public Object
@@ -29,6 +30,8 @@ private:
     Player* player;                            // ponteiro para jogador
     Vector * speed;                               // velocidade e direção
     Timer timer;
+    RandF weapon;
+
 public:
     Soldier(float pX, float pY, Player* p);    // construtor
     ~Soldier();                                 // destrutor

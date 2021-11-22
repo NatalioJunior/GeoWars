@@ -89,6 +89,58 @@ void Guns::Update() {
 		if (mag > 0.1f)
 			Move(Vector(ang, 0));
 
+		switch (activeGun)
+		{
+		case 0:
+			if (AxisTimed(ThumbRX, ThumbRY, 0.5f))
+			{
+				GeoWars::scene->Add(new Light(x, y), STATIC);
+				GeoWars::audio->Play(FIRE);
+				GeoWars::scene->Add(new Missile(), STATIC);
+
+			}
+			break;
+		case 1:
+			if (AxisTimed(ThumbRX, ThumbRY, 0.9f))
+			{
+				GeoWars::audio->Play(FIRE);
+				GeoWars::scene->Add(new Light(x - (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians()))), STATIC);
+				GeoWars::scene->Add(
+					new PlasmaBall(
+						x - (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
+						-speed->Angle() - 170, 2.0f),
+					STATIC);
+				GeoWars::scene->Add(
+					new PlasmaBall(
+						x - (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
+						-speed->Angle() - 180, 2.0f),
+					STATIC);
+				GeoWars::scene->Add(
+					new PlasmaBall(
+						x - (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
+						-speed->Angle() - 190, 2.0f),
+					STATIC);
+				ammo -= 3;
+
+			}
+			break;
+		case 2:
+			if (AxisTimed(ThumbRX, ThumbRY, 0.13f))
+			{
+				GeoWars::scene->Add(new Light(x - (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians()))), STATIC);
+				GeoWars::audio->Play(FIRE);
+				GeoWars::scene->Add(new MachineGunProjectile(x + 10 - (45 * cos(speed->Radians())), y + (cos(-speed->Angle() - 180) * 10) - (45 * sin(speed->Radians())),
+					-speed->Angle() - 180, 0.3f),
+					STATIC);
+				GeoWars::scene->Add(new MachineGunProjectile(x - 10 - (45 * cos(speed->Radians())), y - (cos(-speed->Angle() - 180) * 10) - (45 * sin(speed->Radians())),
+					-speed->Angle() - 180, 0.3f),
+					STATIC);
+				ammo -= 2;
+
+			}
+			break;
+		}
+
 		//Controla a frequência de disparos
 		if (AxisTimed(ThumbRX, ThumbRY, 0.5f))
 		{
@@ -150,8 +202,6 @@ void Guns::Update() {
 						ammo -= 2;
 					}
 					break;
-				default:
-					break;
 				}
 			}
 
@@ -165,25 +215,57 @@ void Guns::Update() {
 			// dispara míssil
 			if (window->KeyDown(VK_SPACE))
 			{
-				if (KeysTimed(0.5f)) {
-					GeoWars::audio->Play(FIRE);
-					GeoWars::scene->Add(new Missile(), STATIC);
+				switch (activeGun)
+				{
+				case 0:
+					if (KeysTimed(0.5f)) {
+						GeoWars::scene->Add(new Light(x, y), STATIC);
+						GeoWars::audio->Play(FIRE);
+						GeoWars::scene->Add(new Missile(), STATIC);
+					}
+					break;
+				case 1:
+					if (KeysTimed(0.9f)) {
+						GeoWars::audio->Play(FIRE);
+						GeoWars::scene->Add(new Light(x - (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians()))), STATIC);
+						GeoWars::scene->Add(
+							new PlasmaBall(
+								x - (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
+								-speed->Angle() - 170, 2.0f),
+							STATIC);
+						GeoWars::scene->Add(
+							new PlasmaBall(
+								x - (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
+								-speed->Angle() - 180, 2.0f),
+							STATIC);
+						GeoWars::scene->Add(
+							new PlasmaBall(
+								x - (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians())),
+								-speed->Angle() - 190, 2.0f),
+							STATIC);
+						ammo -= 3;
+
+					}
+					break;
+				case 2:
+					if (KeysTimed(0.13f)) {
+						GeoWars::scene->Add(new Light(x - (45 * cos(speed->Radians())), y - (45 * sin(speed->Radians()))), STATIC);
+						GeoWars::audio->Play(FIRE);
+						GeoWars::scene->Add(new MachineGunProjectile(x + 10 - (45 * cos(speed->Radians())), y + (cos(-speed->Angle() - 180) * 10) - (45 * sin(speed->Radians())),
+							-speed->Angle() - 180, 0.3f),
+							STATIC);
+						GeoWars::scene->Add(new MachineGunProjectile(x - 10 - (45 * cos(speed->Radians())), y - (cos(-speed->Angle() - 180) * 10) - (45 * sin(speed->Radians())),
+							-speed->Angle() - 180, 0.3f),
+							STATIC);
+						ammo -= 2;
+					}
+					break;
 				}
 			}
 		}
-		if (window->KeyPress(VK_NUMPAD1)) {
-			activeGun = 1;
-			ammo += 60;
-		}
-		if (window->KeyPress(VK_NUMPAD0)) {
-			activeGun = 0;
-		}
-		if (window->KeyPress(VK_NUMPAD2)) {
-			activeGun = 2;
-			ammo += 100;
-		}
 		if (ammo <= 0) {
 			activeGun = 0;
+			ammo = -1;
 		}
 	}
 

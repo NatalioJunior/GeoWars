@@ -15,6 +15,7 @@
 #include "EnemyHit.h"
 #include "EnemyProjectile.h"
 #include "Light.h"
+#include "Itens.h"
 // ---------------------------------------------------------------------------------
 
 Blue::Blue(float pX, float pY, Player* p)
@@ -50,12 +51,16 @@ Blue::~Blue()
 
 void Blue::OnCollision(Object* obj)
 {
+	RandF weapon = RandF(0, 100);
 	if (obj->Type() == MISSILE) {
+		if (weapon.Rand() > 0.05f) {
+			GeoWars::scene->Add(new Itens(HEAVY, x, y), STATIC);
+		}
 		GeoWars::player->score += 10;
-		GeoWars::scene->Delete(this, MOVING);
 		GeoWars::scene->Delete(obj, STATIC);
 		GeoWars::scene->Add(new EnemyHit(x, y), STATIC);
 		GeoWars::nBlue -= 1;
+		GeoWars::scene->Delete(this, MOVING);
 	}
 	else if (obj->Type() == PLAYER) {
 		GeoWars::scene->Delete(this, MOVING);

@@ -93,6 +93,21 @@ void Player::OnCollision(Object* obj) {
             GeoWars::scene->Add(new Light(obj->X(), obj->Y()), STATIC);
             GeoWars::scene->Delete(obj, STATIC);
         }
+
+        if (obj->Type() == HEAVYITEM) {
+            GeoWars::audio->Play(HEAVY);
+            gun->activeGun = 2;
+            gun->ammo = 60;
+            GeoWars::scene->Delete(obj, STATIC);
+        }
+
+        if (obj->Type() == SHOTGUNITEM) {
+            GeoWars::audio->Play(SHOTGUN);
+            gun->activeGun = 1;
+            gun->ammo = 90;
+            GeoWars::scene->Delete(obj, STATIC);
+        }
+
 }
 // -------------------------------------------------------------------------------
 
@@ -114,6 +129,7 @@ void Player::Reset() {
     currentLife = 100;
     speed->Rotate(0);
     speed->ScaleTo(0);
+    gun->activeGun = 0;
 }
 // -------------------------------------------------------------------------------
 

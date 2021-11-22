@@ -47,6 +47,8 @@ void GeoWars::Init()
 	audio->Add(CANCEL, "Resources/Cancel.wav");
 	audio->Add(APPLY, "Resources/Apply.wav");
 	audio->Add(POP, "Resources/Pop.wav", 3);
+	audio->Add(HEAVY, "Resources/HeavyMachineGun.wav");
+	audio->Add(SHOTGUN, "Resources/Shotgun.wav");
 
 	audio->Volume(HITWALL, 0.25f);
 

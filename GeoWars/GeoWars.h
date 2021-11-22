@@ -24,11 +24,14 @@
 
 // ------------------------------------------------------------------------------
 
-enum ObjectIds { PLAYER, MISSILE, BLUE, GREEN, MAGENTA, ORANGE, WALLHIT, SOLDIER, MINI_BOSS, SPAWNER, HIT, ENMEY_PROJECTILE, OIL };
+enum ObjectIds { PLAYER, MISSILE, BLUE, GREEN, 
+				MAGENTA, ORANGE, WALLHIT, SOLDIER, 
+				MINI_BOSS, SPAWNER, HIT, ENMEY_PROJECTILE, 
+				OIL, HEAVYITEM, SHOTGUNITEM};
 
 // ------------------------------------------------------------------------------
 
-enum SoundIds { THEME, START, FIRE, EXPLODE, HITWALL, CURSOR, CONFIRM, CANCEL, APPLY, POP };
+enum SoundIds { THEME, START, FIRE, EXPLODE, HITWALL, CURSOR, CONFIRM, CANCEL, APPLY, POP, HEAVY, SHOTGUN };
 
 // ------------------------------------------------------------------------------
 

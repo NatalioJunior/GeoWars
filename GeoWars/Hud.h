@@ -29,7 +29,6 @@ private:
     enum { MENUSTART, OPTIONS, DEFEAT, GAME};
     enum { SELECTED, UNSELECTED, CHECKSELECTED, UNCHECKSELECTED, CHECKUNSELECTED, UNCHECKUNSELECTED };
 
-    Font * font = nullptr;                  // fonte para exibição normal
     Font * bold = nullptr;                  // fonte para exibição negrito
 
     Sprite * menuStart  = nullptr;          // pop-up do menu start

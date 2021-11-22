@@ -20,8 +20,6 @@
 Hud::Hud()
 {
     // cria fonte para exibição de texto
-    font = new Font("Resources/Tahoma14.png");
-    font->Spacing("Resources/Tahoma14.dat");
     bold = new Font("Resources/Rubik15.png");
     bold->Spacing("Resources/Rubik15.dat");
 
@@ -100,7 +98,6 @@ Hud::Hud()
 
 Hud::~Hud()
 {
-    delete font;
     delete bold;
     delete infoBox;
     delete keyMap;
