@@ -16,14 +16,14 @@ class LevelControll : public Object
 private:
 	Timer timer;
 
-	RandI spawnerApX;
-	RandI spawnerApY;
-	RandI spawnerBpX;
-	RandI spawnerBpY;
-	RandI spawnerCpX;
-	RandI spawnerCpY;
-	RandI spawnerDpX;
-	RandI spawnerDpY;
+	RandF spawnerApX;
+	RandF spawnerApY;
+	RandF spawnerBpX;
+	RandF spawnerBpY;
+	RandF spawnerCpX;
+	RandF spawnerCpY;
+	RandF spawnerDpX;
+	RandF spawnerDpY;
 public:
 	LevelControll();        // construtor
 	~LevelControll();                         // destrutor
