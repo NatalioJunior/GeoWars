@@ -20,12 +20,14 @@ SpawnerD::SpawnerD(float poX, float poY, float angleSpawn, float scale) : positi
 
 	angle = angleSpawn;
 	scaleF = scale;
-	sprite = new Sprite("Resources/Player.png");
-	BBox(new Rect(-75.0f, -70.0f, 75.0f, 70.0f));
+	sprite = new Sprite("Resources/SpawnerD.png");
+	BBox(new Circle(70.0f));
 	MoveTo(pX, pY);
 	// não enviar nova onda agora
 	newWave = true;
 	waveDelay = delay.Rand();
+
+	type = SPAWNER;
 }
 
 // ------------------------------------------------------------------------------
@@ -128,7 +130,7 @@ void SpawnerD::Update()
 
 void SpawnerD::Draw()
 {
-	sprite->Draw(x, y, Layer::LOWER, scaleF * scale, 0, Color(1, 0.66, 0.0f, 1));
+	sprite->Draw(x, y, Layer::LOWER, scaleF * scale, 0.0f, Color(1.0f, 0.66f, 0.0f, 1.0f));
 }
 
 // -------------------------------------------------------------------------------

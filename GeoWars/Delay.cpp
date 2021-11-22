@@ -23,12 +23,16 @@
 #include "SpawnerB.h"
 #include "SpawnerC.h"
 #include "SpawnerD.h"
+#include "Oil.h"
 // ------------------------------------------------------------------------------
 
-Delay::Delay()
+Delay::Delay() : randomX(480.0f, 2512.0f), randomY(270.0f, 1588.0f)
 {
     timer.Start();
     notPlayed = true;
+
+    posX = randomX.Rand();
+    posY = randomY.Rand();
 
     GeoWars::player->defeat = false;
     GeoWars::player->score = 0;
@@ -58,6 +62,21 @@ void Delay::Update()
     {
         // toca música do jogo
         GeoWars::audio->Play(THEME, true);
+
+        for (int i = 0; i < 8; ++i)
+        {
+            GeoWars::scene->Add(new Oil(posX, posY), STATIC);
+
+            float oldX = posX;
+            float oldY = posY;
+
+            while (abs(posX - oldX) < 200 || abs(posY - oldY) < 200)
+            {
+                posX = randomX.Rand();
+                posY = randomY.Rand();
+            }
+            
+        }
 
         //adiciona objetos na cena
         GeoWars::scene->Add(new Magenta(500,200,GeoWars::player), MOVING);

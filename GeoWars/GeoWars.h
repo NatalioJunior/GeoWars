@@ -24,7 +24,7 @@
 
 // ------------------------------------------------------------------------------
 
-enum ObjectIds { PLAYER, MISSILE, BLUE, GREEN, MAGENTA, ORANGE, WALLHIT, SOLDIER, MINI_BOSS, SPAWNER, HIT, ENMEY_PROJECTILE };
+enum ObjectIds { PLAYER, MISSILE, BLUE, GREEN, MAGENTA, ORANGE, WALLHIT, SOLDIER, MINI_BOSS, SPAWNER, HIT, ENMEY_PROJECTILE, OIL };
 
 // ------------------------------------------------------------------------------
 

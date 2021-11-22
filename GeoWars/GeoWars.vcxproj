@@ -174,6 +174,7 @@
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="MachinegunProjectile.cpp" />
+    <ClCompile Include="Oil.cpp" />
     <ClCompile Include="PlasmaBall.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Geometry.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="Font.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="MachinegunProjectile.h" />
+    <ClInclude Include="Oil.h" />
     <ClInclude Include="PlasmaBall.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Geometry.h" />

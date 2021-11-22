@@ -17,6 +17,7 @@
 #include "Object.h"
 #include "Sprite.h"
 #include "Timer.h"
+#include "Random.h"
 
 // --------------------------------------------------------------------------------
 
@@ -25,6 +26,10 @@ class Delay : public Object
 private:
     Timer timer;            // medidor de tempo
     bool notPlayed;         // intro não tocada ainda
+
+    RandF randomX;
+    RandF randomY;
+    float posX, posY;
 
 public:
     Delay();                // construtor
