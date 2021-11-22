@@ -44,17 +44,14 @@ void Soldier::OnCollision(Object* obj)
 {
 	if (obj->Type() == MISSILE )
 	{
+		GeoWars::player->score += 5;
 		GeoWars::scene->Delete(obj, STATIC);
 		GeoWars::scene->Delete(this, MOVING);
 		GeoWars::scene->Add(new EnemyHit(x, y), STATIC);	
-		//GeoWars::scene->Delete(obj, STATIC);
-		//GeoWars::scene->Delete(this, MOVING);
-		//GeoWars::scene->Play(EXPLODE);
 	}
 	else if (obj->Type() == PLAYER) {
 		GeoWars::scene->Delete(this, MOVING);
 		GeoWars::scene->Add(new EnemyHit(x, y), STATIC);
-
 	}
 	if (obj->Type() == SOLDIER || obj->Type() == BLUE || obj->Type() == SPAWNER) {
 		Vector target = Vector(Line::Angle(Point(x, y), Point(obj->X(), obj->Y())), 120.0f * gameTime);
@@ -75,8 +72,8 @@ void Soldier::Update()
 
 	speed->Add(target);
 
-	if (speed->Magnitude() > 2.5f)
-		speed->ScaleTo(2.5f);
+	if (speed->Magnitude() > 4.0f)
+		speed->ScaleTo(4.0f);
 
 	if (Point::Distance(Point(x, y), Point(player->X(), player->Y())) > 200) {
 		// movimenta objeto pelo seu vetor velocidade

@@ -41,6 +41,7 @@ private:
     Sprite * infinity   = nullptr;          // simbolo do infinito
     Sprite * slider     = nullptr;          // slider do menu
     Sprite * star       = nullptr;
+    Sprite * life       = nullptr;
 
     TileSet * btnStart      = nullptr;
     TileSet * btnOptions    = nullptr;

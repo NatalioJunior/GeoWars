@@ -43,6 +43,7 @@ void SpawnerD::OnCollision(Object* obj) {
 		GeoWars::scene->Delete(obj, STATIC);
 		currentLife -= 10;
 		if (currentLife <= 0) {
+			GeoWars::player->score += 300;
 			Vector speed = Vector(angle, 1);
 			GeoWars::scene->Add(new Explosion(x - 10 + (130 * cos(speed.Radians())), y - 14 - (130 * sin(speed.Radians()))), STATIC);
 			GeoWars::scene->Add(new Explosion(x + 10, y), STATIC);

@@ -69,6 +69,7 @@ Orange::~Orange()
 void Orange::OnCollision(Object* obj)
 {
 	if (obj->Type() == MISSILE) {
+		GeoWars::player->score += 20;
 		GeoWars::scene->Delete(obj, STATIC);
 		GeoWars::scene->Add(new Explosion(x, y), STATIC);
 		GeoWars::scene->Delete(this, MOVING);

@@ -35,6 +35,7 @@ Hud::Hud()
     infinity = new Sprite("Resources/Infinity.png");
     slider = new Sprite("Resources/Slider.jpg");
     star = new Sprite("Resources/Star.png");
+    life = new Sprite("Resources/Life.png");
 
     btnStart = new TileSet("Resources/Startbtn.png", 334, 54, 1, 2);
     anim1 = new Animation(btnStart, 0.1f, true);
@@ -107,6 +108,7 @@ Hud::~Hud()
     delete infinity;
     delete slider;
     delete star;
+    delete life;
     delete menuStart;
     delete menuOption;
     delete menuDefeat;
@@ -381,21 +383,25 @@ void Hud::Update()
                 Player::gamepad->XboxUpdateState(Player::XboxPlayer);
 
                 if (KeysTimed(DpadLeft)) {
+                    GeoWars::audio->Play(POP);
                     posX -= 53.2f;
                     if (posX < 1813.0f) posX = 1813.0f;
                 }
 
                 if (KeysTimed(DpadRight)) {
+                    GeoWars::audio->Play(POP);
                     posX += 53.2f;
                     if (posX > 2026.0f) posX = 2026.0f;
                 }
             }
             else {
                 if (window->KeyPress(VK_RIGHT)) {
+                    GeoWars::audio->Play(POP);
                     posX += 53.2f;
                     if (posX > 2026.0f) posX = 2026.0f;
                 }
                 if (window->KeyPress(VK_LEFT)) {
+                    GeoWars::audio->Play(POP);
                     posX -= 53.2f;
                     if (posX < 1813.0f) posX = 1813.0f;
                 }
@@ -419,7 +425,7 @@ void Hud::Update()
                     applyPos = posX;
                     GeoWars::audio->Volume(THEME, (posX - 1813.0f) / 216.0f);
                     GeoWars::audio->Volume(FIRE, (posX - 1813.0f) / 216.0f);
-                    GeoWars::audio->Volume(HITWALL, (posX - 1813.0f) / 216.0f);
+                    GeoWars::audio->Volume(HITWALL, ((posX - 1813.0f) / 216.0f) - 0.45f);
                     GeoWars::audio->Volume(EXPLODE, (posX - 1813.0f) / 216.0f);
                     GeoWars::audio->Volume(START, (posX - 1813.0f) / 216.0f);
                 }
@@ -488,6 +494,11 @@ void Hud::Draw()
                 text.str("");
                 text << Guns::ammo;
                 bold->Draw(95, 35, text.str(), textColor);
+            }
+
+            int l = Player::currentLife / 10;
+            for (int i = 0; i < l; i++) {
+                life->Draw(game->viewport.left + 1105.0f - 20.0f * i, game->viewport.top + 35.0f, Layer::FRONT);
             }
         }       
         break;
