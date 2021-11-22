@@ -10,7 +10,7 @@
 
 SpawnerA::SpawnerA(float posX, float posY, float angleSpawn, float scale) : posX(50, window->Width() - 120), posY(50, window->Height() - 120), secs(9.0f, 14.0f)
 {
-	sprite = new Sprite("Resources/Player.png");
+	sprite = new Sprite("Resources/SpawnerA.png");
 	// posição dos inimigos
 	pX = posX;
 	pY = posY;
@@ -19,7 +19,7 @@ SpawnerA::SpawnerA(float posX, float posY, float angleSpawn, float scale) : posX
 	// atraso para a próxima onda 
 	delay = secs.Rand();
 
-	BBox(new Rect(-75.0f, -70.0f, 75.0f, 70.0f));
+	BBox(new Circle(70.0f));
 	MoveTo(pX, pY);
 	type = SPAWNER;
 }

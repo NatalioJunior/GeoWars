@@ -32,10 +32,6 @@ Player::Player()
     sprite = new Sprite("Resources/Player.png");
     speed  = new Vector(90.0f, 0.0f);
 
-    Point vertex[4] =
-    {
-        Point(-37.5f,-35.0f), Point(37.5f,-35.0f), Point(37.5f,35.0f), Point(-37.0f, 35.0f)
-    };
     BBox(new Rect(-37.5f, -35.0f, 37.5f, 35.0f));
 
     MoveTo(game->CenterX(), game->CenterY());
@@ -79,6 +75,11 @@ void Player::OnCollision(Object* obj) {
             speed->RotateTo(speed->Angle() + 180);
             speed->ScaleTo(10.0f);
             timer.Start();
+        }
+        if (obj->Type() == OIL) {
+            if (speed->Magnitude() > 0.1f) {
+                speed->Rotate(300 * gameTime);
+            }
         }
 }
 // -------------------------------------------------------------------------------

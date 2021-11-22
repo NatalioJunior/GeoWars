@@ -21,12 +21,13 @@ SpawnerB::SpawnerB(float posX, float posY, float angleSpawn, float scale) : secs
 {
     // atraso para a próxima onda 
     delay = secs.Rand();
-    sprite = new Sprite("Resources/Player.png");
+    sprite = new Sprite("Resources/SpawnerB.png");
     // posição dos inimigos
 
     angle = angleSpawn;
     scaleF = scale;
-    BBox(new Rect(-75.0f, -70.0f, 75.0f, 70.0f));
+
+    BBox(new Circle(70.0f));
     MoveTo(posX, posY);
     type = SPAWNER;
 }
