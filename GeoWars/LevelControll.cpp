@@ -57,10 +57,10 @@ void LevelControll::Update()
 		*/
 		GeoWars::worldDifficulty += 1;
 
-		GeoWars::scene->Add(new SpawnerA(spawnerApX.Rand(), spawnerApY.Rand(), 0, 2), MOVING);
-		GeoWars::scene->Add(new SpawnerB(spawnerBpX.Rand(), spawnerBpY.Rand(), 180, 2), MOVING);
-		GeoWars::scene->Add(new SpawnerC(spawnerCpX.Rand(), spawnerCpY.Rand(), 0, 2), MOVING);
-		GeoWars::scene->Add(new SpawnerD(spawnerDpX.Rand(), spawnerDpY.Rand(), 180, 2), MOVING);
+		GeoWars::scene->Add(new SpawnerA(spawnerApX.Rand(), spawnerApY.Rand(), 0.0f, 2.0f), MOVING);
+		GeoWars::scene->Add(new SpawnerB(spawnerBpX.Rand(), spawnerBpY.Rand(), 180.0f, 2.0f), MOVING);
+		GeoWars::scene->Add(new SpawnerC(spawnerCpX.Rand(), spawnerCpY.Rand(), 0.0f, 2.0f), MOVING);
+		GeoWars::scene->Add(new SpawnerD(spawnerDpX.Rand(), spawnerDpY.Rand(), 180.0f, 2.0f), MOVING);
 		timer.Reset();
 		timer.Stop();
 		
