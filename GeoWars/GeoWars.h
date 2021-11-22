@@ -45,6 +45,14 @@ public:
 	static Player	* player;			// nave controlada pela jogador
 	static Audio	* audio;			// sitema de áudio
 	static Scene	* scene;			// cena do jogo
+	static int nSoldier;
+	static int nBlue;
+	static int nOrange;
+	static int nMagenta;
+	static int nGreen;
+	static int nMiniboss;
+	static int nSpawners;
+	static int worldDifficulty;
 
 	void Init();                    // inicialização
 	void Update();                  // atualização

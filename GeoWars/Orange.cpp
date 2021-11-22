@@ -52,6 +52,8 @@ Orange::Orange(float pX, float pY, float ang)
 
 	// cria sistema de partículas
 	tail = new Particles(emitter);
+
+	GeoWars::nOrange += 1;
 }
 
 // ---------------------------------------------------------------------------------
@@ -73,6 +75,7 @@ void Orange::OnCollision(Object* obj)
 		GeoWars::scene->Delete(obj, STATIC);
 		GeoWars::scene->Add(new Explosion(x, y), STATIC);
 		GeoWars::scene->Delete(this, MOVING);
+		GeoWars::nOrange -= 1;
 	}
 	//GeoWars::scene->Delete(this, MOVING);
 }

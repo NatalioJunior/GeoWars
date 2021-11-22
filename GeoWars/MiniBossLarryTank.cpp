@@ -49,7 +49,7 @@ MiniBossLarryTank::MiniBossLarryTank(Instruction* vet, int tam, float pX, float 
 	duration = script[index].duration;
 	timer.Start();
 
-
+	GeoWars::nMiniboss += 1;
 }
 
 // ---------------------------------------------------------------------------------
@@ -77,6 +77,7 @@ void MiniBossLarryTank::OnCollision(Object* obj)
 		if (currentLife <= 0) {
 			GeoWars::scene->Add(new Explosion(x, y), STATIC);
 			GeoWars::scene->Delete(this, MOVING);
+			GeoWars::nMiniboss -= 1;
 		}
 	}
 }

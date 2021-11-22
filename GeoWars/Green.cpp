@@ -34,6 +34,9 @@ Green::Green(float posX, float posY, Player* p) : player(p)
 	MoveTo(pX, pY);
 
 	type = GREEN;
+
+	//Incrementa numero de inimigos verdes no contados
+	GeoWars::nGreen += 1;
 }
 
 // ---------------------------------------------------------------------------------
@@ -53,6 +56,7 @@ void Green::OnCollision(Object* obj)
 		GeoWars::scene->Delete(obj, STATIC);
 		GeoWars::scene->Add(new Explosion(x, y), STATIC);
 		GeoWars::scene->Delete(this, MOVING);
+		GeoWars::nGreen -= 1;
 	}
 }
 

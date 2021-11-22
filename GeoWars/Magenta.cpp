@@ -30,6 +30,9 @@ Magenta::Magenta(float pX,float pY,Player * p) : magnitude(1, 4), angle(0, 359),
     MoveTo(pX, pY);
 
     type = MAGENTA;
+
+    //Adiciona magenta ao contator
+    GeoWars::nMagenta += 1;
 }
 
 // ---------------------------------------------------------------------------------
@@ -61,6 +64,7 @@ void Magenta::OnCollision(Object * obj)
         GeoWars::scene->Delete(obj, STATIC);
         GeoWars::scene->Add(new Explosion(x, y), STATIC);
         GeoWars::scene->Delete(this, MOVING);
+        GeoWars::nMagenta -= 1;
     }
 }
 

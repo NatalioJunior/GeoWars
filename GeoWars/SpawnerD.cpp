@@ -9,8 +9,8 @@
 SpawnerD::SpawnerD(float poX, float poY, float angleSpawn, float scale) : position(0, 3), delay(1.0f, 5.0f)
 {
 	// número de inimigos na horizontal (X) e na vertical (Y)
-	numX = 8;
-	numY = 8;
+	numX = 2 + GeoWars::worldDifficulty ;
+	numY = 2 + GeoWars::worldDifficulty;
 
 	// posição dos inimigos
 	posX = 0;
@@ -24,10 +24,11 @@ SpawnerD::SpawnerD(float poX, float poY, float angleSpawn, float scale) : positi
 	BBox(new Circle(70.0f));
 	MoveTo(pX, pY);
 	// não enviar nova onda agora
-	newWave = true;
+	newWave = false;
 	waveDelay = delay.Rand();
 
 	type = SPAWNER;
+	GeoWars::nSpawners += 1;
 }
 
 // ------------------------------------------------------------------------------
@@ -50,7 +51,7 @@ void SpawnerD::OnCollision(Object* obj) {
 			GeoWars::scene->Add(new Explosion(x - 24, y), STATIC);
 			GeoWars::scene->Add(new Explosion(x + (40 * cos(speed.Radians())), 14 + y - (15 * sin(speed.Radians()))), STATIC);
 			GeoWars::scene->Delete(this, MOVING);
-
+			GeoWars::nSpawners -= 1;
 		}
 	}
 }
@@ -115,14 +116,14 @@ void SpawnerD::Update()
 	else
 	{
 		// solicita nova onda se existirem poucos inimigos
-	   /*
-		if (Hud::oranges < 10)
+	   
+		if (GeoWars::nOrange < 2 + GeoWars::worldDifficulty)
 		{
 			waveDelay = delay.Rand();
 			timer.Start();
 			newWave = true;
 		}
-	   */
+	   
 	}
 }
 

@@ -8,7 +8,7 @@
 #include "Explosion.h"
 // ------------------------------------------------------------------------------
 
-SpawnerA::SpawnerA(float posX, float posY, float angleSpawn, float scale) : posX(50, window->Width() - 120), posY(50, window->Height() - 120), secs(9.0f, 14.0f)
+SpawnerA::SpawnerA(float posX, float posY, float angleSpawn, float scale) :  secs(9.0f, 14.0f)
 {
 	sprite = new Sprite("Resources/SpawnerA.png");
 	// posição dos inimigos
@@ -22,6 +22,8 @@ SpawnerA::SpawnerA(float posX, float posY, float angleSpawn, float scale) : posX
 	BBox(new Circle(70.0f));
 	MoveTo(pX, pY);
 	type = SPAWNER;
+
+	GeoWars::nSpawners += 1;
 }
 
 
@@ -37,7 +39,7 @@ SpawnerA::~SpawnerA()
 void SpawnerA::Update()
 {
 	// contador de inimigos
-	static uint counter = 4;
+	static uint counter = 1 + GeoWars::worldDifficulty;
 
 	// se passou o tempo de atraso
 	//if (timer.Elapsed(delay) && Hud::blues < 15)
@@ -61,11 +63,11 @@ void SpawnerA::Update()
 		else
 		{
 			// nova posição do inimigo
-			pX = posX.Rand();
-			pY = posY.Rand();
+			//pX = posX.Rand();
+			//pY = posY.Rand();
 
 			// nova onda
-			counter = 4;
+			counter = 1 + GeoWars::worldDifficulty;
 			delay = secs.Rand();
 			timer.Start();
 		}
@@ -87,7 +89,7 @@ void SpawnerA::OnCollision(Object* obj) {
 			GeoWars::scene->Add(new Explosion(x - 24, y), STATIC);
 			GeoWars::scene->Add(new Explosion(x + (40 * cos(speed.Radians())), 14 + y - (15 * sin(speed.Radians()))), STATIC);
 			GeoWars::scene->Delete(this, MOVING);
-
+			GeoWars::nSpawners -= 1;
 		}
 	}
 }

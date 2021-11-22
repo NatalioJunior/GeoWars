@@ -34,6 +34,8 @@ Blue::Blue(float pX, float pY, Player* p)
 	type = BLUE;
 
 	timer.Start();
+
+	GeoWars::nBlue += 1;
 }
 
 // ---------------------------------------------------------------------------------
@@ -48,22 +50,24 @@ Blue::~Blue()
 
 void Blue::OnCollision(Object* obj)
 {
-	if (obj->Type() == MISSILE ){
+	if (obj->Type() == MISSILE) {
 		GeoWars::player->score += 10;
 		GeoWars::scene->Delete(this, MOVING);
 		GeoWars::scene->Delete(obj, STATIC);
 		GeoWars::scene->Add(new EnemyHit(x, y), STATIC);
+		GeoWars::nBlue -= 1;
 	}
 	else if (obj->Type() == PLAYER) {
 		GeoWars::scene->Delete(this, MOVING);
 		GeoWars::scene->Add(new EnemyHit(x, y), STATIC);
+		GeoWars::nBlue -= 1;
 	}
 	if (obj->Type() == BLUE || obj->Type() == SOLDIER || obj->Type() == SPAWNER) {
 		Vector target = Vector(Line::Angle(Point(x, y), Point(obj->X(), obj->Y())), 120.0f * gameTime);
 		target.Rotate(180.0f);
 		speed->Add(target);
 	}
-	
+
 }
 
 // -------------------------------------------------------------------------------

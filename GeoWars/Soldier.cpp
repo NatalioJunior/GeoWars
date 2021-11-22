@@ -30,6 +30,9 @@ Soldier::Soldier(float pX, float pY, Player* p)
 	type = SOLDIER;
 
 	timer.Start();
+
+	//inicia contador de sodlados
+	GeoWars::nSoldier += 1;
 }
 // ---------------------------------------------------------------------------------
 
@@ -42,16 +45,18 @@ Soldier::~Soldier()
 
 void Soldier::OnCollision(Object* obj)
 {
-	if (obj->Type() == MISSILE )
+	if (obj->Type() == MISSILE)
 	{
 		GeoWars::player->score += 5;
 		GeoWars::scene->Delete(obj, STATIC);
 		GeoWars::scene->Delete(this, MOVING);
-		GeoWars::scene->Add(new EnemyHit(x, y), STATIC);	
+		GeoWars::scene->Add(new EnemyHit(x, y), STATIC);
+		GeoWars::nSoldier -= 1;
 	}
 	else if (obj->Type() == PLAYER) {
 		GeoWars::scene->Delete(this, MOVING);
 		GeoWars::scene->Add(new EnemyHit(x, y), STATIC);
+		GeoWars::nSoldier -= 1;
 	}
 	if (obj->Type() == SOLDIER || obj->Type() == BLUE || obj->Type() == SPAWNER) {
 		Vector target = Vector(Line::Angle(Point(x, y), Point(obj->X(), obj->Y())), 120.0f * gameTime);

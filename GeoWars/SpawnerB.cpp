@@ -30,6 +30,7 @@ SpawnerB::SpawnerB(float posX, float posY, float angleSpawn, float scale) : secs
     BBox(new Circle(70.0f));
     MoveTo(posX, posY);
     type = SPAWNER;
+    GeoWars::nSpawners += 1;
 }
 
 // ------------------------------------------------------------------------------
@@ -44,7 +45,7 @@ SpawnerB::~SpawnerB()
 void SpawnerB::Update()
 {
     // contador de inimigos
-    static uint counter = 2;
+    static uint counter = 1 + GeoWars::worldDifficulty;
 
     // se passou o tempo de atraso
     if (timer.Elapsed(delay))
@@ -69,7 +70,7 @@ void SpawnerB::Update()
         else
         {
             // nova onda
-            counter = 2;
+            counter = 1 + GeoWars::worldDifficulty;
             delay = secs.Rand();
             timer.Start();
         }
@@ -89,7 +90,7 @@ void SpawnerB::OnCollision(Object* obj) {
             GeoWars::scene->Add(new Explosion(x - 24, y), STATIC);
             GeoWars::scene->Add(new Explosion(x + (40 * cos(speed.Radians())), 14 + y - (15 * sin(speed.Radians()))), STATIC);
             GeoWars::scene->Delete(this, MOVING);
-
+            GeoWars::nSpawners -= 1;
         }
     }
 }

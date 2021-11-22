@@ -15,8 +15,6 @@ class SpawnerA : public Object
 private:
     Sprite* sprite;
     float pX, pY;
-    RandF posX;
-    RandF posY;
     RandF secs;
     Timer timer;
     float delay;
