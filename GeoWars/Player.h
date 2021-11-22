@@ -20,6 +20,7 @@
 #include "Particles.h"                    // sistema de partículas
 #include "Guns.h"
 #include "Controller.h"
+#include "Timer.h"
 
 // ---------------------------------------------------------------------------------
 
@@ -28,6 +29,8 @@ class Player : public Object
 private:
     Sprite * sprite;                    // sprite do objeto
     Particles * tail;                   // calda do jogador
+    bool motor = true;
+    Timer timer;
 
 
 public:

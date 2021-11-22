@@ -58,11 +58,12 @@ void Blue::OnCollision(Object* obj)
 		GeoWars::scene->Add(new EnemyHit(x, y), STATIC);
 
 	}
-	else {
+	if (obj->Type() == BLUE || obj->Type() == SOLDIER || obj->Type() == SPAWNER) {
 		Vector target = Vector(Line::Angle(Point(x, y), Point(obj->X(), obj->Y())), 120.0f * gameTime);
 		target.Rotate(180.0f);
 		speed->Add(target);
 	}
+	
 }
 
 // -------------------------------------------------------------------------------
@@ -85,9 +86,6 @@ void Blue::Update()
 
 	// move o objeto pelo seu vetor velocidade
 	//Translate(speed->XComponent() * 50.0f * gameTime, -speed->YComponent() * 50.0f * gameTime);
-
-
-
 
 	//RotateTo(speed->Angle() +90);
 	//rotation = speed->Angle();

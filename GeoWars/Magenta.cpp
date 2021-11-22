@@ -12,13 +12,14 @@
 #include "GeoWars.h"
 #include "Magenta.h"
 #include "Random.h" 
+#include "Explosion.h"
 
 // ---------------------------------------------------------------------------------
 
 Magenta::Magenta(float pX,float pY,Player * p) : magnitude(1, 4), angle(0, 359), secs(0.3f, 1.5f)
 {
     player = p;
-    sprite = new Sprite("Resources/Magenta.png");
+    sprite = new Sprite("Resources/Drone.png");
     speed  = new Vector(0, 2.0f);
     NewDirection();
     BBox(new Circle(18.0f));
@@ -27,7 +28,6 @@ Magenta::Magenta(float pX,float pY,Player * p) : magnitude(1, 4), angle(0, 359),
     RandF posX{ 300, 400 };
     RandF posY{ game->Height() - 400, game->Height() - 300 };
     MoveTo(pX, pY);
-    ScaleTo(0.25f);
 
     type = MAGENTA;
 }
@@ -57,8 +57,11 @@ void Magenta::NewDirection()
 
 void Magenta::OnCollision(Object * obj)
 {
-    if (obj->Type() == MISSILE)
+    if (obj->Type() == MISSILE) {
+        GeoWars::scene->Delete(obj, STATIC);
+        GeoWars::scene->Add(new Explosion(x, y), STATIC);
         GeoWars::scene->Delete(this, MOVING);
+    }
 }
 
 // -------------------------------------------------------------------------------

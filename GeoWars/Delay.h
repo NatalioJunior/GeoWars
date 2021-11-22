@@ -23,7 +23,6 @@
 class Delay : public Object
 {
 private:
-    Sprite * logo;          // logotipo do jogo
     Timer timer;            // medidor de tempo
     bool notPlayed;         // intro não tocada ainda
 

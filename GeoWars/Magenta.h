@@ -48,7 +48,9 @@ public:
 // ---------------------------------------------------------------------------------
 
 inline void Magenta::Draw()
-{ sprite->Draw(x, y, Layer::LOWER, scale, rotation); }
+{
+    sprite->Draw(x, y, Layer::UPPER, scale, rotation, Color{ 0.5f,0.5f,0.5f,1.0f });
+}
 
 // ---------------------------------------------------------------------------------
 

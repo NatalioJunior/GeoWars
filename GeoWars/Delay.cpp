@@ -27,12 +27,12 @@
 
 Delay::Delay()
 {
-    logo = new Sprite("Resources/Logo.png");
     timer.Start();
     notPlayed = true;
 
     GeoWars::player->defeat = false;
     GeoWars::player->score = 0;
+    GeoWars::player->MoveTo(game->CenterX(), game->CenterY());
     GeoWars::scene->Add(GeoWars::player, MOVING);
     GeoWars::scene->Add(GeoWars::gun, STATIC);
 }
@@ -41,7 +41,6 @@ Delay::Delay()
 
 Delay::~Delay()
 {
-    delete logo;
 }
 
 // -------------------------------------------------------------------------------
@@ -55,7 +54,7 @@ void Delay::Update()
         notPlayed = false;
     }
 
-    if (timer.Elapsed(6.0f))
+    if (timer.Elapsed(4.0f))
     {
         // toca música do jogo
         GeoWars::audio->Play(THEME, true);
@@ -101,7 +100,6 @@ void Delay::Update()
 
 void Delay::Draw()
 {
-    logo->Draw(game->viewport.left + window->CenterX() , game->viewport.top + window->CenterY(), Layer::FRONT);
 }
 
 // -------------------------------------------------------------------------------

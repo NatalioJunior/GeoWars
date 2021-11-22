@@ -18,11 +18,8 @@ SpawnerA::SpawnerA(float posX, float posY, float angleSpawn, float scale) : posX
 	scaleF = scale;
 	// atraso para a próxima onda 
 	delay = secs.Rand();
-	Point vertex[4] =
-	{
-		Point(-75.0f,-70.0f), Point(75.0f,-70.0f), Point(75.0f,70.0f), Point(-75.0f, 70.0f)
-	};
-	BBox(new Poly(vertex, 4));
+
+	BBox(new Rect(-75.0f, -70.0f, 75.0f, 70.0f));
 	MoveTo(pX, pY);
 	type = SPAWNER;
 }
