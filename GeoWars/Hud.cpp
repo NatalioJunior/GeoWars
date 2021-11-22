@@ -495,7 +495,7 @@ void Hud::Draw()
 
             int l = Player::currentLife / 10;
             for (int i = 0; i < l; i++) {
-                life->Draw(game->viewport.left + 1105.0f - 20.0f * i, game->viewport.top + 35.0f, Layer::FRONT);
+                life->Draw(game->viewport.left + 1505.0f - 20.0f * i, game->viewport.top + 35.0f, Layer::FRONT);
             }
         }       
         break;
