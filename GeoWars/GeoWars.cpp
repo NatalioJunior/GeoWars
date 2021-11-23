@@ -198,9 +198,9 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	Engine* engine = new Engine();
 
 	// configura motor
-	engine->window->Mode(WINDOWED);
-	engine->window->Size(1728, 972);
-	//engine->window->Mode(BORDERLESS);
+	//engine->window->Mode(WINDOWED);
+	//engine->window->Size(1728, 972);
+	engine->window->Mode(BORDERLESS);
 	engine->window->Color(0, 0, 0);
 	engine->window->Title("GeoWars");
 	engine->window->Icon(IDI_ICON);
