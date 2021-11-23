@@ -24,6 +24,8 @@ private:
 	RandF spawnerCpY;
 	RandF spawnerDpX;
 	RandF spawnerDpY;
+
+	RandI bossScript;
 public:
 	LevelControll();        // construtor
 	~LevelControll();                         // destrutor

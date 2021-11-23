@@ -65,6 +65,7 @@ private:
     RandF magnitude;                    // valor aleatório para magnitude
 
     RandF weapon;
+   
 public:
     MiniBossLarryTank(Instruction* vet, int tam, float pX, float pY);
     ~MiniBossLarryTank();

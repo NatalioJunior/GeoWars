@@ -7,7 +7,8 @@
 #include "SpawnerD.h"
 // ------------------------------------------------------------------------------
 
-LevelControll::LevelControll() :spawnerApX(230, 799), spawnerApY(230, 500), spawnerBpX(1800, 2300), spawnerBpY(230, 500), spawnerCpX(230, 799), spawnerCpY(1400, 1600), spawnerDpX(1800, 2300), spawnerDpY(1400, 1600)
+LevelControll::LevelControll() :spawnerApX(230, 799), spawnerApY(230, 500), spawnerBpX(1800, 2300), spawnerBpY(230, 500), spawnerCpX(230, 799), spawnerCpY(1400, 1600), spawnerDpX(1800, 2300), spawnerDpY(1400, 1600),
+bossScript(1, 2)
 {
 	//spawnerApX
 	//spawnerApY
@@ -46,23 +47,53 @@ void LevelControll::Update()
 		//timer.Start();
 
 
-		const int size1 = 11;
+		const int size1 = 12;
 		Instruction larryScriptTest1[size1] =
 		{
 		{ MOVETO, 500.0f, 300.0f, 5.0f },
-		{ MOVETO, 1000.0f, 1320.0f, 5.0f },
+		{ MOVETO, 1000.0f, 420.0f, 5.0f },
 		{ SHOOT_THREE, 0.0f, 0.0f,0.0f},
 		{ ROTATE, 5.0f, 8.0f, 0.8f },
 		{ MOVE, 60.0f, 40.0f, 1.5f },
-		{ MOVETO, 500.0f, 500.0f, 5.0f },
+		{ MOVETO, GeoWars::player->X(), GeoWars::player->Y(), 5.0f },
 		{ MOVE, 270.0f, 0.0f, 1.0f },
 		{ SLIDE, 180.0f, 0.5f, 5.0f },
 		{ SHOOT_THREE, 0.0f, 0.0f, 0.0f},
 		{ SLIDE, 0.0f, 0.5f, 5.0f },
+		{ MOVETO, GeoWars::player->X(), GeoWars::player->Y(), 5.0f },
 		{ JUMP, 6.0f, 0.0f, 0.0f }
 		};
-		GeoWars::scene->Add(new MiniBossLarryTank(larryScriptTest1, size1, 1500, 1500), MOVING);
+		const int size2 = 12;
+		Instruction script2[size2] =
+		{
+		{ MOVETO, 1000.0f, 1200.0f, 5.0f },
+		{ MOVETO, 3000.0f, 420.0f, 5.0f },
+		{ SHOOT_THREE, 0.0f, 0.0f,0.0f},
+		{ ROTATE, 5.0f, 8.0f, 0.8f },
+		{ MOVE, 50.0f, 40.0f, 1.5f },
+		{ MOVETO, GeoWars::player->X(), GeoWars::player->Y(), 5.0f },
+		{ MOVE, 270.0f, 0.0f, 1.0f },
+		{ SLIDE, 180.0f, 0.5f, 5.0f },
+		{ SHOOT_THREE, 0.0f, 0.0f, 0.0f},
+		{ SLIDE, 0.0f, 0.5f, 5.0f },
+		{ MOVETO, GeoWars::player->X(), GeoWars::player->Y(), 5.0f },
+		{ JUMP, 6.0f, 0.0f, 0.0f }
+		};
+		//GeoWars::scene->Add(new MiniBossLarryTank(larryScriptTest1, size1, 1500, 1500), MOVING);
 
+		switch (bossScript.Rand())
+		{
+		case 1 :
+			GeoWars::scene->Add(new MiniBossLarryTank(larryScriptTest1, size1, 1500, 1500), MOVING);
+			break;
+
+		case 2:
+			GeoWars::scene->Add(new MiniBossLarryTank(script2, size2, 1500, 1500), MOVING);
+			break;
+		default:
+			GeoWars::scene->Add(new MiniBossLarryTank(larryScriptTest1, size1, 1500, 1500), MOVING);
+			break;
+		}
 
 		//timer.Stop();
 
