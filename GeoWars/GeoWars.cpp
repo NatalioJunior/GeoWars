@@ -30,7 +30,7 @@ int GeoWars::nGreen = 0;
 int GeoWars::nMiniboss = 0;
 int GeoWars::nSpawners = 0;
 
-int GeoWars::worldDifficulty = 1;
+int GeoWars::worldDifficulty = 15;
 // ------------------------------------------------------------------------------
 
 void GeoWars::Init()
@@ -195,9 +195,9 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	Engine* engine = new Engine();
 
 	// configura motor
-	//engine->window->Mode(WINDOWED);
-	//engine->window->Size(1152, 648);
-	engine->window->Mode(BORDERLESS);
+	engine->window->Mode(WINDOWED);
+	engine->window->Size(1728, 972);
+	//engine->window->Mode(BORDERLESS);
 	engine->window->Color(0, 0, 0);
 	engine->window->Title("GeoWars");
 	engine->window->Icon(IDI_ICON);

@@ -72,7 +72,7 @@ Player::~Player()
 
 void Player::OnCollision(Object* obj) {
         if (obj->Type() == ORANGE) {
-            currentLife -= 10;
+            currentLife -= 20;
             GeoWars::scene->Add(new Explosion(obj->X(), obj->Y()), STATIC);
             GeoWars::scene->Delete(obj, MOVING);
         }
@@ -89,7 +89,7 @@ void Player::OnCollision(Object* obj) {
         }
 
         if (obj->Type() == ENMEY_PROJECTILE) {
-            currentLife -= 1;
+            currentLife -= 10;
             GeoWars::scene->Add(new Light(obj->X(), obj->Y()), STATIC);
             GeoWars::scene->Delete(obj, STATIC);
         }
