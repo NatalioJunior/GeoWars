@@ -82,6 +82,14 @@ void Player::OnCollision(Object* obj) {
             speed->ScaleTo(10.0f);
             timer.Start();
         }
+        if (obj->Type() == MINI_BOSS) {
+            motor = false;
+            speed->RotateTo(speed->Angle() + 180);
+            speed->ScaleTo(10.0f);
+            timer.Start();
+            GeoWars::scene->Add(new Explosion(y, x), STATIC);
+            currentLife -= 20;
+        }
         if (obj->Type() == OIL) {
             if (speed->Magnitude() > 0.1f) {
                 speed->Rotate(300 * gameTime);

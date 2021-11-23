@@ -31,6 +31,6 @@ void Explosion::Update()
 }
 
 void Explosion::Draw() {
-	anim->Draw(x, y, Layer::LOWER, scale, rotation - 90.0f);
+	anim->Draw(x, y, 0.97f, scale, rotation - 90.0f);
 }
 // -------------------------------------------------------------------------------

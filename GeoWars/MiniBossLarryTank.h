@@ -64,12 +64,13 @@ private:
     RandF angle;                        // valor aleatório para ângulo
     RandF magnitude;                    // valor aleatório para magnitude
 
+    RandF weapon;
 public:
     MiniBossLarryTank(Instruction* vet, int tam, float pX, float pY);
     ~MiniBossLarryTank();
 
-    int life = 100;
-    int currentLife = life;
+    int life;
+    int currentLife;
     void OnCollision(Object* obj);     // resolução da colisão
     void Update();                      // atualização
     void Draw();                        // desenho

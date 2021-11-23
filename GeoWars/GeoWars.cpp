@@ -30,7 +30,10 @@ int GeoWars::nGreen = 0;
 int GeoWars::nMiniboss = 0;
 int GeoWars::nSpawners = 0;
 
-int GeoWars::worldDifficulty = 15;
+bool GeoWars::bossOn = 0;
+bool GeoWars::spawnOn = 1;
+
+int GeoWars::worldDifficulty = 1;
 // ------------------------------------------------------------------------------
 
 void GeoWars::Init()

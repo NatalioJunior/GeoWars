@@ -16,10 +16,11 @@
 #include "Explosion.h"
 #include "Projectile.h"
 #include "EnemyHit.h"
+#include "Itens.h"
 // ---------------------------------------------------------------------------------
 
 MiniBossLarryTank::MiniBossLarryTank(Instruction* vet, int tam, float pX, float pY)
-	: angle(-8, 8), magnitude(1, 8)
+	: angle(-8, 8), magnitude(1, 8),weapon(0.0f,1.0f)
 {
 
 	sprite = new Sprite("Resources/tank_huge.png");
@@ -39,7 +40,8 @@ MiniBossLarryTank::MiniBossLarryTank(Instruction* vet, int tam, float pX, float 
 	{
 		Point(-37.5f,-35.0f), Point(37.5f,-35.0f), Point(37.5f,35.0f), Point(-37.0f, 35.0f)
 	};
-	BBox(new Poly(vertex, 4));
+	//BBox(new Poly(vertex, 4));
+	BBox(new Circle(70.0f));
 	MoveTo(pX, pY);
 	//speed = { 0.0f, 0.0f };
 
@@ -48,6 +50,9 @@ MiniBossLarryTank::MiniBossLarryTank(Instruction* vet, int tam, float pX, float 
 	end = tam - 1;
 	duration = script[index].duration;
 	timer.Start();
+
+	life = 200 + 10 * GeoWars::worldDifficulty;
+	currentLife = life;
 
 	GeoWars::nMiniboss += 1;
 }
@@ -74,6 +79,12 @@ void MiniBossLarryTank::OnCollision(Object* obj)
 		GeoWars::scene->Add(new EnemyHit(obj->X(), obj->Y()), STATIC);
 		GeoWars::audio->Play(HITWALL);
 		currentLife -= 10;
+		if (weapon.Rand() < 0.10f) {
+			GeoWars::scene->Add(new Itens(HEAVY, x, y), STATIC);
+		}
+		if (weapon.Rand() > 0.90f) {
+			GeoWars::scene->Add(new Itens(SHOTGUN, x, y), STATIC);
+		}
 		if (currentLife <= 0) {
 			GeoWars::scene->Add(new Explosion(x, y), STATIC);
 			GeoWars::scene->Delete(this, MOVING);

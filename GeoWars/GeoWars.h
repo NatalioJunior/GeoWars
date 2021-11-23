@@ -56,6 +56,8 @@ public:
 	static int nMiniboss;
 	static int nSpawners;
 	static int worldDifficulty;
+	static bool bossOn;
+	static bool spawnOn;
 
 	void Init();                    // inicialização
 	void Update();                  // atualização
