@@ -7,7 +7,7 @@
 #include "SpawnerD.h"
 // ------------------------------------------------------------------------------
 
-LevelControll::LevelControll() :spawnerApX(230, 799), spawnerApY(230, 500), spawnerBpX(1800, 2300), spawnerBpY(230, 500), spawnerCpX(230, 799), spawnerCpY(1400, 1600), spawnerDpX(1800, 2300), spawnerDpY(1400, 1600),
+LevelControll::LevelControll() :spawnerApX(230, 799), spawnerApY(230, 500), spawnerBpX(3000, 3600), spawnerBpY(230, 500), spawnerCpX(230, 799), spawnerCpY(1400, 1600), spawnerDpX(3000, 3600), spawnerDpY(1400, 1600),
 bossScript(1, 2)
 {
 	//spawnerApX

@@ -89,9 +89,9 @@ void Delay::Update()
 		//GeoWars::scene->Add(new Soldier(2400,1500, GeoWars::player), MOVING);
 		//GeoWars::scene->Add(new Soldier(2400,1500, GeoWars::player), MOVING);
 		GeoWars::scene->Add(new SpawnerA(230, 230, 0, 2), MOVING);
-		GeoWars::scene->Add(new SpawnerB(2000, 230, 180, 2), MOVING);
+		GeoWars::scene->Add(new SpawnerB(3200, 230, 180, 2), MOVING);
 		GeoWars::scene->Add(new SpawnerC(230, 1600, 0, 2), MOVING);
-		GeoWars::scene->Add(new SpawnerD(2000, 1500, 180, 2), MOVING);
+		GeoWars::scene->Add(new SpawnerD(3200, 1500, 180, 2), MOVING);
 		//GeoWars::scene->Add(new Orange(2400,1500,179), MOVING);
 
 		
